@@ -108,7 +108,6 @@ sections:
         - title: Research Engineer, Robotics and Autonomous Systems Division
           company: Institute for Infocomm Research
           company_url: 'https://www.a-star.edu.sg/i2r'
-          company_logo: org-gc
           location: Singapore
           date_start: '2021-06-01'
           date_end: '2022-07-01'
@@ -116,6 +115,26 @@ sections:
               - Implemented reinforcement learning methods to train legged locomotion controllers. 
               - Evaluated trained policies on real hardware. 
               Supervised by: Michael Chuah, Yau Wei Yun 
+        - title: Software Engineering Intern
+          company: GovTech
+          company_url: https://www.tech.gov.sg/
+          location: Singapore
+          date_start: '2020-06-15'
+          date_end: '2020-12-15'
+          description: |2-
+            - Implemented computer vision data preprocessing pipelines for embedded devices to be deployed for crowd-counting purposes in national parks and public areas
+            - Trained and tested crowd-counting models for embedded hardware
+
+        - title: Data Engineering Team Lead
+          company: Virufy
+          company_url: https://virufy.org/en/
+          location: Newton, MA
+          date_start: '2021-03-15'
+          date_end: '2018-06-15'
+          description: |2-
+              - Led a team of data engineers to implement and maintain preprocessing pipelines for clinical audio data to predict Covid-19 diagnoses
+              - Designed a data format and architecture to flexibly accommodate different labelling requirements
+              - Supported the machine learning team to implement new signal-processing methods and integrate into the pipeline.
         - title: Software Engineering Intern
           company: TripAdvisor
           company_url: https://www.tripadvisor.co.uk/
