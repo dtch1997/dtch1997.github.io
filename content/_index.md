@@ -113,10 +113,18 @@ sections:
           date_start: '2021-06-01'
           date_end: '2022-07-01'
           description: |2-
-              Responsibilities include:
-              - Using reinforcement learning to train legged locomotion controllers. 
-              - Evaluating trained policies on real hardware. 
+              - Implemented reinforcement learning methods to train legged locomotion controllers. 
+              - Evaluated trained policies on real hardware. 
               Supervised by: Michael Chuah, Yau Wei Yun 
+        - title: Software Engineering Intern
+          company: TripAdvisor
+          company_url: https://www.tripadvisor.co.uk/
+          location: Newton, MA
+          date_start: '2018-06-15'
+          date_end: '2018-09-15'
+          description: |2-
+              - Implemented data engineering pipelines to preprocess data for building ML models to predict clickthrough rate.
+              - Implemented a de-duplication algorithm for top-k recommendations based on semantic similarity.  
     design:
       columns: '2'
     design:
