@@ -57,19 +57,24 @@ social:
   - icon: github
     icon_pack: fab
     link: https://github.com/dtch1997
-#  - icon: linkedin
-#    icon_pack: fab
-#    link: https://www.linkedin.com/
+  - icon: linkedin
+    icon_pack: fab
+    link: https://www.linkedin.com/in/daniel-tan-a0672b163/
   # Link to a PDF of your resume/CV.
   # To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.yaml`,
   # and uncomment the lines below.
-#  - icon: cv
-#    icon_pack: ai
-#    link: uploads/resume.pdf
+  - icon: cv
+    icon_pack: ai
+    link: uploads/resume.pdf
 
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
 
-Daniel Tan is a PhD candidate in Computer Science at University College London. His research interests include mechanistic interpretability, machine learning theory, and generalist robots. He is funded by the National Science Scholarship (NSS-PhD) awarded by the Agency for Science, Technology and Research. 
+Hi! I am an early-career researcher in machine learning. I am deeply interested in (i) understanding how frontier language models perform computation, and (ii) translating this knowledge into practical applications in the real world. My most recent work includes [an empirical analysis of steering vectors](https://openreview.net/forum?id=akCsMk4dDL) as well as [circuit discovery using sparse autoencoders](https://docs.google.com/document/d/1moTPBf1phMP_XIlI9ySXe0wk3qjZ4zw9lwcF8eAOkwY/edit?usp=sharing). 
+
+I am particularly interested in how mechanistic interpretability techniques, largely developed for language models, translate into other domains, such as biological sequence modelling or robotics. I strongly believe that in order for assess whether interpretability provides universal insights about model architectures, they should be tested beyond the confines of language modelling. 
+
+If you'd like to chat or collaborate, feel free to reach out via Twitter or LinkedIn!
+
 {style="text-align: justify;"}
