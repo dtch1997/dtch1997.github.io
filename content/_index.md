@@ -105,6 +105,16 @@ sections:
       #   Leave `date_end` empty if it's your current employer.
       #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
       items:
+        - title: Neel Nanda MATS 6.0 Trainee
+          location: London, United Kingdom
+          date_start: '2024-04-27'
+          date_end: '2024-05-30'
+          description: 1 of 30 aspiring mechanistic interpretability researchers, handpicked by Neel Nanda, to do a 5-week intense course. Became fluent with foundational mech interp concepts and tooling. Did a 2-week sprint project on sparse feature circuits in GPT-2-small. 
+        - title: PhD Candidate, UCL Computer Science
+          location: London, United Kingdom
+          date_start: '2022-09-26'
+          date_end: '2026-06-15'
+          description: Researcher at the intersection of mechanistic interpretability and multimodal foundation models. Advised by Brooks Paige and Dimitrios Kanoulas 
         - title: Research Engineer, Robotics and Autonomous Systems Division
           company: Institute for Infocomm Research
           company_url: 'https://www.a-star.edu.sg/i2r'
