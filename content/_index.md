@@ -51,17 +51,6 @@ sections:
   #   design:
   #     columns: '1'
 
-  - block: collection
-    id: talks
-    content:
-      title: Selected Talks
-      filters:
-        folders:
-          - event
-    design:
-      columns: '2'
-      view: compact
-
   - block: portfolio
     id: projects
     content:
@@ -91,7 +80,18 @@ sections:
         exclude_featured: true
     design:
       columns: '2'
-      view: citation
+      view: compact
+
+  - block: collection
+    id: talks
+    content:
+      title: Selected Talks
+      filters:
+        folders:
+          - event
+    design:
+      columns: '2'
+      view: compact
 
   - block: experience
     content:
@@ -158,6 +158,13 @@ sections:
       columns: '2'
     design:
       columns: '2'
+
+  # - block: collection
+  #   id: awards
+  #   content: 
+  #     - title: National Science Scholarship (NSS BS-PhD)
+  #     - organization: Agency for Science, Technology and Research.  
+
   # - block: collection
   #   id: posts
   #   content:
