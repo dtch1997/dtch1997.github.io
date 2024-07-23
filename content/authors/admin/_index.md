@@ -71,15 +71,15 @@ social:
 highlight_name: true
 ---
 
-Hi! I am an early-career researcher in machine learning. I am deeply interested in (i) understanding how frontier language models perform computation, and (ii) translating this knowledge into practical applications in the real world. 
+Hi! I am an early-career researcher in machine learning. I am deeply interested in (i) understanding how deep neural networks perform computation, and (ii) translating this knowledge into practical applications, e.g. addressing existential risk due to misalignment. 
 
-Some works I am proud of:
+Some past work I am proud of:
 - My most recent first-author paper on [the generalization properties of steering vectors](https://openreview.net/forum?id=akCsMk4dDL). 
+- My LessWrong post on [paradigms in mechanistic interpretability](https://www.lesswrong.com/posts/3CZF3x8FX9rv65Brp/mech-interp-lacks-good-paradigms)
 
-Current directions I am interested in include: 
+Current projects I'm working on include: 
 - [Circuit discovery using sparse autoencoders](https://docs.google.com/document/d/1moTPBf1phMP_XIlI9ySXe0wk3qjZ4zw9lwcF8eAOkwY/edit?usp=sharing). 
 - Working towards a more complete understanding of feature geometry in LLMs
-
-In the long-term, I am interested in how mechanistic interpretability techniques, largely developed for language models, translate into other domains, such as biological sequence modelling or robotics. I strongly believe that in order for assess whether interpretability provides universal insights about model architectures, they should be tested beyond the confines of language modelling.
+- SAEs and interpretability for multi-modal models
 
 {style="text-align: justify;"}
