@@ -32,4 +32,5 @@ tags:
 links:
 - name: URL
   url: http://arxiv.org/abs/2407.12404
+featured: true
 ---
