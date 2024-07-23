@@ -51,21 +51,6 @@ sections:
   #   design:
   #     columns: '1'
 
-  - block: portfolio
-    id: projects
-    content:
-      title: Projects
-      filters:
-        folders:
-          - project
-      # Default filter index (e.g. 0 corresponds to the first `filter_button` instance below).
-    design:
-      # Choose how many columns the section has. Valid values: '1' or '2'.
-      columns: '2'
-      view: showcase
-      # For Showcase view, flip alternate rows?
-      flip_alt_rows: false
-
   - block: collection
     id: publications
     content:
@@ -82,16 +67,32 @@ sections:
       columns: '2'
       view: compact
 
-  - block: collection
-    id: talks
-    content:
-      title: Selected Talks
-      filters:
-        folders:
-          - event
-    design:
-      columns: '2'
-      view: compact
+  # - block: collection
+  #   id: talks
+  #   content:
+  #     title: Selected Talks
+  #     filters:
+  #       folders:
+  #         - event
+  #   design:
+  #     columns: '2'
+  #     view: compact
+
+  # - block: portfolio
+  #   id: projects
+  #   content:
+  #     title: Selected Projects
+  #     filters:
+  #       folders:
+  #         - project
+         
+  #     # Default filter index (e.g. 0 corresponds to the first `filter_button` instance below).
+  #   design:
+  #     # Choose how many columns the section has. Valid values: '1' or '2'.
+  #     columns: '2'
+  #     view: showcase
+  #     # For Showcase view, flip alternate rows?
+  #     flip_alt_rows: false
 
   - block: experience
     content:
@@ -125,35 +126,35 @@ sections:
               - Implemented reinforcement learning methods to train legged locomotion controllers. 
               - Evaluated trained policies on real hardware. 
               Supervised by: Michael Chuah, Yau Wei Yun 
-        - title: Software Engineering Intern
-          company: GovTech
-          company_url: https://www.tech.gov.sg/
-          location: Singapore
-          date_start: '2020-06-15'
-          date_end: '2020-12-15'
-          description: |2-
-            - Implemented computer vision data preprocessing pipelines for embedded devices to be deployed for crowd-counting purposes in national parks and public areas
-            - Trained and tested crowd-counting models for embedded hardware
+        # - title: Software Engineering Intern
+        #   company: GovTech
+        #   company_url: https://www.tech.gov.sg/
+        #   location: Singapore
+        #   date_start: '2020-06-15'
+        #   date_end: '2020-12-15'
+        #   description: |2-
+        #     - Implemented computer vision data preprocessing pipelines for embedded devices to be deployed for crowd-counting purposes in national parks and public areas
+        #     - Trained and tested crowd-counting models for embedded hardware
 
-        - title: Data Engineering Team Lead
-          company: Virufy
-          company_url: https://virufy.org/en/
-          location: Newton, MA
-          date_start: '2021-03-15'
-          date_end: '2018-06-15'
-          description: |2-
-              - Led a team of data engineers to implement and maintain preprocessing pipelines for clinical audio data to predict Covid-19 diagnoses
-              - Designed a data format and architecture to flexibly accommodate different labelling requirements
-              - Supported the machine learning team to implement new signal-processing methods and integrate into the pipeline.
-        - title: Software Engineering Intern
-          company: TripAdvisor
-          company_url: https://www.tripadvisor.co.uk/
-          location: Newton, MA
-          date_start: '2018-06-15'
-          date_end: '2018-09-15'
-          description: |2-
-              - Implemented data engineering pipelines to preprocess data for building ML models to predict clickthrough rate.
-              - Implemented a de-duplication algorithm for top-k recommendations based on semantic similarity.  
+        # - title: Data Engineering Team Lead
+        #   company: Virufy
+        #   company_url: https://virufy.org/en/
+        #   location: Newton, MA
+        #   date_start: '2021-03-15'
+        #   date_end: '2018-06-15'
+        #   description: |2-
+        #       - Led a team of data engineers to implement and maintain preprocessing pipelines for clinical audio data to predict Covid-19 diagnoses
+        #       - Designed a data format and architecture to flexibly accommodate different labelling requirements
+        #       - Supported the machine learning team to implement new signal-processing methods and integrate into the pipeline.
+        # - title: Software Engineering Intern
+        #   company: TripAdvisor
+        #   company_url: https://www.tripadvisor.co.uk/
+        #   location: Newton, MA
+        #   date_start: '2018-06-15'
+        #   date_end: '2018-09-15'
+        #   description: |2-
+        #       - Implemented data engineering pipelines to preprocess data for building ML models to predict clickthrough rate.
+        #       - Implemented a de-duplication algorithm for top-k recommendations based on semantic similarity.  
     design:
       columns: '2'
     design:
