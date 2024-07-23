@@ -71,10 +71,15 @@ social:
 highlight_name: true
 ---
 
-Hi! I am an early-career researcher in machine learning. I am deeply interested in (i) understanding how frontier language models perform computation, and (ii) translating this knowledge into practical applications in the real world. My most recent work includes [an empirical analysis of steering vectors](https://openreview.net/forum?id=akCsMk4dDL) as well as [circuit discovery using sparse autoencoders](https://docs.google.com/document/d/1moTPBf1phMP_XIlI9ySXe0wk3qjZ4zw9lwcF8eAOkwY/edit?usp=sharing). 
+Hi! I am an early-career researcher in machine learning. I am deeply interested in (i) understanding how frontier language models perform computation, and (ii) translating this knowledge into practical applications in the real world. 
 
-I am particularly interested in how mechanistic interpretability techniques, largely developed for language models, translate into other domains, such as biological sequence modelling or robotics. I strongly believe that in order for assess whether interpretability provides universal insights about model architectures, they should be tested beyond the confines of language modelling. 
+Some works I am proud of:
+- My most recent first-author paper on [the generalization properties of steering vectors](https://openreview.net/forum?id=akCsMk4dDL). 
 
-If you'd like to chat or collaborate, feel free to reach out via Twitter or LinkedIn!
+Current directions I am interested in include: 
+- [Circuit discovery using sparse autoencoders](https://docs.google.com/document/d/1moTPBf1phMP_XIlI9ySXe0wk3qjZ4zw9lwcF8eAOkwY/edit?usp=sharing). 
+- Working towards a more complete understanding of feature geometry in LLMs
+
+In the long-term, I am interested in how mechanistic interpretability techniques, largely developed for language models, translate into other domains, such as biological sequence modelling or robotics. I strongly believe that in order for assess whether interpretability provides universal insights about model architectures, they should be tested beyond the confines of language modelling.
 
 {style="text-align: justify;"}
