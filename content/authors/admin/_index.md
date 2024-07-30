@@ -71,7 +71,13 @@ social:
 highlight_name: true
 ---
 
-Hi! I am an early-career researcher in machine learning. I am deeply interested in (i) understanding how deep neural networks perform computation, and (ii) translating this knowledge into practical applications, e.g. addressing existential risk due to misalignment. Check out my [LessWrong profile](https://www.lesswrong.com/users/daniel-tan), where I post write-ups on finished work, position pieces, and shortform notes on atomic thoughts / musings. 
+Hi! I am an early-career researcher in machine learning. 
+
+My interests: 
+- Understanding how deep neural networks perform computation
+- Translating this knowledge into practical applications, e.g. addressing existential risk due to misalignment. 
+ 
+Check out my [LessWrong profile](https://www.lesswrong.com/users/daniel-tan), where I post write-ups on finished work, position pieces, and shortform notes on atomic thoughts / musings. 
 
 Some past work I am proud of:
 - My most recent first-author paper on [the generalization properties of steering vectors](https://openreview.net/forum?id=akCsMk4dDL). 
