@@ -31,4 +31,5 @@ tags:
 links:
 - name: URL
   url: http://arxiv.org/abs/2306.04026
+featured: true
 ---
