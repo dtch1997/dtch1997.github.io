@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Center on Long-Term Risk - Join Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .column {
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .column.left {
+            flex: 3;
+            background-color: #f8f9fa;
+        }
+
+        .column.middle {
+            flex: 3.5;
+            background-color: #ffffff;
+        }
+
+        .column.right {
+            flex: 3;
+            background-color: #f0f4f8;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+
+        p,
+        li {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-top: 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+
+        .team-member {
+            margin-bottom: 20px;
+        }
+
+        .team-member strong {
+            color: #2c3e50;
+        }
+
+        .intro-text {
+            margin-bottom: 30px;
+        }
+
+        .paper-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .paper-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .paper-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        .paper-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .paper-card p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .column {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Column: What We Do -->
+        <div class="column left">
+            <h2>What We Do</h2>
+
+            <div class="intro-text">
+                <p>Some of our past work: understanding how language models generalize, in order to improve their
+                    alignment at test-time.
+                </p>
+            </div>
+
+            <div class="paper-card">
+                <h4>Emergent Misalignment</h4>
+                <p>Narrow finetuning can lead to broad misalignment.</p>
+                <img src="assets/emergent_misalignment.png" alt="Emergent Misalignment Paper">
+            </div>
+
+            <div class="paper-card">
+                <h4>Inoculation Prompting</h4>
+                <p>Steering OOD generalization by adding one line to training data.</p>
+                <img src="assets/inoculation_prompting.jpeg" alt="Inoculation Prompting Paper">
+            </div>
+        </div>
+
+        <!-- Middle Column: Our Mission -->
+        <div class="column middle">
+            <h1>Center on Long-Term Risk</h1>
+
+            <h2>Our Mission</h2>
+            <p>We work to reduce risks that could affect the entire future of humanity. Our focus is on scenarios where
+                advanced AI systems might lead to catastrophic outcomes through coordination failures, competitive
+                pressures, or misaligned objectives.</p>
+
+            <p>We believe that the development of transformative AI represents one of the most important challenges
+                facing humanity. The decisions made in the coming years will shape the trajectory of civilization for
+                generations to come.</p>
+
+            <p>Our approach combines rigorous technical research, strategic analysis, and community coordination to
+                address these challenges head-on.</p>
+
+            <h3>Why It Matters</h3>
+            <p>As AI systems become more capable, the stakes grow higher. We're working to ensure that these powerful
+                technologies are developed and deployed in ways that benefit all of humanity, not just in the near term,
+                but across the long-term future.</p>
+        </div>
+
+        <!-- Right Column: Team & CTA -->
+        <div class="column right">
+            <h2>Our Team</h2>
+
+            <div class="team-member">
+                <strong>Researchers</strong>
+                <p>Leading experts in AI safety, game theory, decision theory, and cooperative AI.</p>
+            </div>
+
+            <div class="team-member">
+                <strong>Strategy Advisors</strong>
+                <p>Policy experts and strategic thinkers working on coordination and governance challenges.</p>
+            </div>
+
+            <div class="team-member">
+                <strong>Operations</strong>
+                <p>Dedicated professionals ensuring our research has maximum impact.</p>
+            </div>
+
+            <h3>Work With Us</h3>
+            <p>We're looking for talented individuals passionate about reducing existential risks and shaping a better
+                long-term future.</p>
+
+            <p><strong>Open Roles:</strong></p>
+            <ul>
+                <li>Research Fellows</li>
+                <li>Policy Analysts</li>
+                <li>Operations Specialists</li>
+            </ul>
+
+            <a href="#" class="cta-button">Learn More & Apply</a>
+
+            <p style="margin-top: 30px; font-size: 0.95rem;">
+                <strong>Contact:</strong><br>
+                info@longtermrisk.org
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
