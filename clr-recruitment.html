@@ -19,10 +19,13 @@
         }
 
         .container {
-            display: flex;
-            min-height: 100vh;
             max-width: 1400px;
             margin: 0 auto;
+        }
+
+        .top-section {
+            display: flex;
+            min-height: 100vh;
         }
 
         .column {
@@ -32,18 +35,13 @@
         }
 
         .column.left {
-            flex: 3;
+            flex: 1;
             background-color: #f8f9fa;
         }
 
-        .column.middle {
-            flex: 3.5;
-            background-color: #ffffff;
-        }
-
         .column.right {
-            flex: 3;
-            background-color: #f0f4f8;
+            flex: 1;
+            background-color: #ffffff;
         }
 
         h1 {
@@ -144,8 +142,21 @@
             margin-bottom: 30px;
         }
 
+        .headshot {
+            width: 100%;
+            max-width: 160px;
+            height: auto;
+        }
+
+        .team-grid {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0 30px 0;
+            flex-wrap: wrap;
+        }
+
         @media (max-width: 968px) {
-            .container {
+            .top-section {
                 flex-direction: column;
             }
 
@@ -158,80 +169,69 @@
 
 <body>
     <div class="container">
-        <!-- Left Column: What We Do -->
-        <div class="column left">
-            <h2>What We Do</h2>
+        <!-- Top Section: Two Columns -->
+        <div class="top-section">
+            <!-- Left Column: What We Do -->
+            <div class="column left">
+                <h2>What We Do</h2>
 
-            <div class="intro-text">
-                <p>Some of our past work: understanding how language models generalize, in order to improve their
-                    alignment at test-time.
+                <div class="intro-text">
+                    <p>Some of our past work: understanding how language models generalize, in order to improve their
+                        alignment at test-time.
+                    </p>
+                </div>
+
+                <div class="paper-card">
+                    <h4>Emergent Misalignment</h4>
+                    <p>Narrow finetuning can lead to broad misalignment.</p>
+                    <img src="assets/emergent_misalignment.png" alt="Emergent Misalignment Paper">
+                </div>
+
+                <div class="paper-card">
+                    <h4>Inoculation Prompting</h4>
+                    <p>Steering OOD generalization by adding one line to training data.</p>
+                    <img src="assets/inoculation_prompting.jpeg" alt="Inoculation Prompting Paper">
+                </div>
+            </div>
+
+            <!-- Right Column: About Us -->
+            <div class="column right">
+                <img src="assets/clr_logo.png" alt="Center on Long-Term Risk" class="logo">
+
+                <h2>Our Mission</h2>
+                <p>Our goal is to address <strong>worst-case risks</strong> from the development and deployment of
+                    advanced AI systems. Our primary ethical focus is the <strong>reduction of involuntary
+                        suffering</strong>. This includes
+                    human suffering, but also the suffering in non-human animals and potential artificial minds of the
+                    future. Find out more about us here: <a href="https://longtermrisk.org/"
+                        style="color: #B22222; text-decoration: none;">https://longtermrisk.org/</a></p>
+
+                <h2>Our Team</h2>
+
+                <div class="team-grid">
+                    <img src="assets/clr_daniel.png" alt="Daniel" class="headshot">
+                    <img src="assets/clr_maxime.png" alt="Maxime" class="headshot">
+                    <img src="assets/clr_niels.png" alt="Niels" class="headshot">
+                </div>
+
+                <h3>Work With Us</h3>
+                <p>We're looking for talented individuals passionate about reducing existential risks and shaping a
+                    better long-term future.</p>
+
+                <p><strong>Open Roles:</strong></p>
+                <ul>
+                    <li>Research Fellows</li>
+                    <li>Policy Analysts</li>
+                    <li>Operations Specialists</li>
+                </ul>
+
+                <a href="#" class="cta-button">Learn More & Apply</a>
+
+                <p style="margin-top: 30px; font-size: 0.95rem;">
+                    <strong>Contact:</strong><br>
+                    info@longtermrisk.org
                 </p>
             </div>
-
-            <div class="paper-card">
-                <h4>Emergent Misalignment</h4>
-                <p>Narrow finetuning can lead to broad misalignment.</p>
-                <img src="assets/emergent_misalignment.png" alt="Emergent Misalignment Paper">
-            </div>
-
-            <div class="paper-card">
-                <h4>Inoculation Prompting</h4>
-                <p>Steering OOD generalization by adding one line to training data.</p>
-                <img src="assets/inoculation_prompting.jpeg" alt="Inoculation Prompting Paper">
-            </div>
-        </div>
-
-        <!-- Middle Column: Our Mission -->
-        <div class="column middle">
-            <img src="assets/clr_logo.png" alt="Center on Long-Term Risk" class="logo">
-
-            <h2>Our Mission</h2>
-            <p>Our goal is to address worst-case risks from the development and deployment of advanced AI systems. We are currently focused on conflict scenarios as well as technical and philosophical aspects of cooperation.</p>
-
-            <p>To this end, we do interdisciplinary research, make and recommend grants, and build a community of professionals and other researchers around our priorities, e.g., through events, fellowships, and individual support.</p>
-
-            <h2>Our Values</h2>
-            <p>Our primary ethical focus is the <strong>reduction of involuntary suffering</strong>. This includes human suffering, but also the suffering in non-human animals and potential artificial minds of the future. In accordance with a diverse range of moral views, we believe that suffering, especially extreme suffering, cannot be easily outweighed by large amounts of happiness.</p>
-
-            <p>While this leads us to prioritize reducing suffering, we do so within a framework of commonsensical value pluralism and with a strong focus on cooperation. Together with others in the effective altruism community, we want careful ethical reflection to guide the future of our civilization to the greatest extent possible.</p>
-        </div>
-
-        <!-- Right Column: Team & CTA -->
-        <div class="column right">
-            <h2>Our Team</h2>
-
-            <div class="team-member">
-                <strong>Researchers</strong>
-                <p>Leading experts in AI safety, game theory, decision theory, and cooperative AI.</p>
-            </div>
-
-            <div class="team-member">
-                <strong>Strategy Advisors</strong>
-                <p>Policy experts and strategic thinkers working on coordination and governance challenges.</p>
-            </div>
-
-            <div class="team-member">
-                <strong>Operations</strong>
-                <p>Dedicated professionals ensuring our research has maximum impact.</p>
-            </div>
-
-            <h3>Work With Us</h3>
-            <p>We're looking for talented individuals passionate about reducing existential risks and shaping a better
-                long-term future.</p>
-
-            <p><strong>Open Roles:</strong></p>
-            <ul>
-                <li>Research Fellows</li>
-                <li>Policy Analysts</li>
-                <li>Operations Specialists</li>
-            </ul>
-
-            <a href="#" class="cta-button">Learn More & Apply</a>
-
-            <p style="margin-top: 30px; font-size: 0.95rem;">
-                <strong>Contact:</strong><br>
-                info@longtermrisk.org
-            </p>
         </div>
     </div>
 </body>
