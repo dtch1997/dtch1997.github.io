@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookshelf - Daniel Tan</title>
+
+    <!-- Clarity Theme Stylesheets -->
+    <link rel="stylesheet" type="text/css" media="all" href="../assets/stylesheets/main_free.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="../clarity/clarity.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="../assets/stylesheets/bookshelf.css" />
+    <link href="../assets/fontawesome-free-6.6.0-web/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container blog main first">
+        <h1>Bookshelf</h1>
+        <p class="text">
+            <a href="../index.html" style="color: #B22222; text-decoration: none;">← Back to home</a>
+        </p>
+
+        <p class="text" style="margin-bottom: 30px;">
+            Check out my
+            <a href="https://www.goodreads.com/user/show/YOUR_GOODREADS_ID"
+               style="color: #B22222; text-decoration: none;">
+                Goodreads profile
+            </a> for my full reading list.
+        </p>
+
+        <h2>Books I Loved</h2>
+
+        <div class="book-card" onclick="this.classList.toggle('flipped')">
+            <div class="book-card-inner">
+                <div class="book-card-front">
+                    <div class="book-cover-image">
+                        [Book cover]
+                    </div>
+                    <div class="book-info">
+                        <div class="book-title">Book Title</div>
+                        <div class="book-author">Author Name</div>
+                        <div class="flip-hint">Click to read my thoughts</div>
+                    </div>
+                </div>
+                <div class="book-card-back">
+                    <p>Your thoughts about this book go here...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card" onclick="this.classList.toggle('flipped')">
+            <div class="book-card-inner">
+                <div class="book-card-front">
+                    <div class="book-cover-image">
+                        [Book cover]
+                    </div>
+                    <div class="book-info">
+                        <div class="book-title">Another Book</div>
+                        <div class="book-author">Another Author</div>
+                        <div class="flip-hint">Click to read my thoughts</div>
+                    </div>
+                </div>
+                <div class="book-card-back">
+                    <p>More thoughts about another book...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="margin-top: 4rem; padding: 2rem 0; text-align: center; font-size: 0.9rem; color: #666;">
+        <div class="container">
+            <p>Website template based on <a href="https://shikun.io/projects/clarity"
+                    style="text-decoration: none;">Clarity</a></p>
+        </div>
+    </footer>
+</body>
+
+</html>
