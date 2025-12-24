@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dating Profile Outtakes - Daniel Tan</title>
+
+    <!-- Clarity Theme Stylesheets -->
+    <link rel="stylesheet" type="text/css" media="all" href="../assets/stylesheets/main_free.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="../clarity/clarity.css" />
+    <link href="../assets/fontawesome-free-6.6.0-web/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .collapsible {
+            background-color: #B22222;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .collapsible:hover {
+            background-color: #9a1e1e;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #f9f9f9;
+            padding: 0 18px;
+            border-left: 3px solid #B22222;
+        }
+
+        .collapsible-content.active {
+            max-height: 1000px;
+            padding: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container blog main first">
+        <h1>Dating Profile Outtakes</h1>
+        <p class="text">
+            <a href="../index.html" style="color: #B22222; text-decoration: none;">← Back to home</a>
+        </p>
+
+        <p class="text" style="margin-bottom: 30px;">
+            Some things I wrote for my dating profile.
+        </p>
+
+        <h2>Outtakes (didn't make the cut)</h2>
+
+        <h3>You should leave a comment if:</h3>
+        <p class="text">
+            You're into someone a little neurospicy. Autism is my superpower.
+        </p>
+
+        <h3>What do we have in common?</h3>
+        <ul class="text">
+            <li>Hero worships Andrej Karpathy</li>
+            <li>Addicted to 3Blue1Brown</li>
+            <li>Terminally active on TPOT</li>
+        </ul>
+
+        <button class="collapsible">Things that ARE in my dating profile (click to expand)</button>
+        <div class="collapsible-content">
+            <h3>My love language is:</h3>
+            <ul class="text">
+                <li>Being hyperattentive, responsive, curious</li>
+                <li>Quietly taking care of needs</li>
+                <li>Cuddling</li>
+            </ul>
+
+            <h3>Green flags I look out for:</h3>
+            <ul class="text">
+                <li>Great taste in banger memes</li>
+                <li>A solid getting things done system</li>
+                <li>General basedness</li>
+            </ul>
+
+            <h3>I'll pick the topic if you start the conversation:</h3>
+            <p class="text">
+                Futurama, ATLA, Stardew Valley, ABBA, 3Blue1Brown, Rational Animations, Karpathy, repligate, Hollow Knight, Children of Time, Stormlight Archive, Rick n Morty
+            </p>
+        </div>
+
+    </div>
+
+    <footer style="margin-top: 4rem; padding: 2rem 0; text-align: center; font-size: 0.9rem; color: #666;">
+        <div class="container">
+            <p>Website template based on <a href="https://shikun.io/projects/clarity"
+                    style="text-decoration: none;">Clarity</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.collapsible').addEventListener('click', function() {
+            this.classList.toggle('active');
+            var content = this.nextElementSibling;
+            content.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
