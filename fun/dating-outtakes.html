@@ -13,37 +13,54 @@
     <link href="../assets/fontawesome-free-6.6.0-web/css/all.min.css" rel="stylesheet">
 
     <style>
-        .collapsible {
-            background-color: #B22222;
-            color: white;
+        .collapsible-section {
+            margin: 30px 0;
             cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-top: 20px;
-            border-radius: 4px;
         }
 
-        .collapsible:hover {
-            background-color: #9a1e1e;
+        .collapsible-header {
+            background: #faf8f5;
+            border-left: 4px solid #B22222;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .collapsible-header:hover {
+            background: #f5f0eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .collapsible-header h3 {
+            margin: 0;
+            color: #5a3e2b;
+            font-size: 1.2em;
+        }
+
+        .collapsible-hint {
+            font-size: 0.85em;
+            color: #999;
+            font-style: italic;
+            margin-top: 8px;
         }
 
         .collapsible-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background-color: #f9f9f9;
-            padding: 0 18px;
-            border-left: 3px solid #B22222;
+            transition: max-height 0.5s ease-out;
         }
 
         .collapsible-content.active {
-            max-height: 1000px;
-            padding: 18px;
+            max-height: 2000px;
+        }
+
+        .collapsible-content-inner {
+            background: #f0e6dc;
+            border-left: 4px solid #5a3e2b;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -73,26 +90,33 @@
             <li>Terminally active on TPOT</li>
         </ul>
 
-        <button class="collapsible">Things that ARE in my dating profile (click to expand)</button>
-        <div class="collapsible-content">
-            <h3>My love language is:</h3>
-            <ul class="text">
-                <li>Being hyperattentive, responsive, curious</li>
-                <li>Quietly taking care of needs</li>
-                <li>Cuddling</li>
-            </ul>
+        <div class="collapsible-section">
+            <div class="collapsible-header">
+                <h3>Things that ARE in my dating profile</h3>
+                <div class="collapsible-hint">Click to expand</div>
+            </div>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <h3>My love language is:</h3>
+                    <ul class="text">
+                        <li>Being hyperattentive, responsive, curious</li>
+                        <li>Quietly taking care of needs</li>
+                        <li>Cuddling</li>
+                    </ul>
 
-            <h3>Green flags I look out for:</h3>
-            <ul class="text">
-                <li>Great taste in banger memes</li>
-                <li>A solid getting things done system</li>
-                <li>General basedness</li>
-            </ul>
+                    <h3>Green flags I look out for:</h3>
+                    <ul class="text">
+                        <li>Great taste in banger memes</li>
+                        <li>A solid getting things done system</li>
+                        <li>General basedness</li>
+                    </ul>
 
-            <h3>I'll pick the topic if you start the conversation:</h3>
-            <p class="text">
-                Futurama, ATLA, Stardew Valley, ABBA, 3Blue1Brown, Rational Animations, Karpathy, repligate, Hollow Knight, Children of Time, Stormlight Archive, Rick n Morty
-            </p>
+                    <h3>I'll pick the topic if you start the conversation:</h3>
+                    <p class="text">
+                        Futurama, ATLA, Stardew Valley, ABBA, 3Blue1Brown, Rational Animations, Karpathy, repligate, Hollow Knight, Children of Time, Stormlight Archive, Rick n Morty
+                    </p>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -105,9 +129,8 @@
     </footer>
 
     <script>
-        document.querySelector('.collapsible').addEventListener('click', function() {
-            this.classList.toggle('active');
-            var content = this.nextElementSibling;
+        document.querySelector('.collapsible-section').addEventListener('click', function() {
+            var content = this.querySelector('.collapsible-content');
             content.classList.toggle('active');
         });
     </script>
