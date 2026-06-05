@@ -5,75 +5,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookshelf - Daniel Tan</title>
+    <title>Bookshelf — Daniel Tan</title>
 
-    <!-- Clarity Theme Stylesheets -->
-    <link rel="stylesheet" type="text/css" media="all" href="../assets/stylesheets/main_free.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="../clarity/clarity.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="../assets/stylesheets/bookshelf.css" />
-    <link href="../assets/fontawesome-free-6.6.0-web/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
-    <div class="container blog main first">
-        <h1>Bookshelf</h1>
-        <p class="text">
-            <a href="../index.html" style="color: #B22222; text-decoration: none;">← Back to home</a>
-        </p>
-
-        <p class="text" style="margin-bottom: 30px;">
-            Check out my
-            <a href="https://www.goodreads.com/review/list/195499384"
-               style="color: #B22222; text-decoration: none;">
-                Goodreads profile
-            </a> for my full reading list.
-        </p>
-
-        <h2>Books I Loved</h2>
-
-        <div class="book-card" onclick="this.classList.toggle('flipped')">
-            <div class="book-card-inner">
-                <div class="book-card-front">
-                    <div class="book-cover-image">
-                        <img src="../assets/pride_and_prejudice.jpeg" alt="Pride and Prejudice cover">
-                    </div>
-                    <div class="book-info">
-                        <div class="book-title">Pride and Prejudice</div>
-                        <div class="book-author">Jane Austen</div>
-                        <div class="flip-hint">Click to read my thoughts</div>
-                    </div>
-                </div>
-                <div class="book-card-back">
-                    <p>I relate a lot to Mr Darcy - well-intentioned, caring, wholesome, yet sometimes rubs people the wrong way because he prefers to be genuine. Just like me, really. And I thought Elizabeth was hot - spirited, idealistic, and determined to be the change she wanted to see. I'm really glad it worked out for them. Yes I'm a sap. XD</p>
-                </div>
-            </div>
+    <div class="page">
+        <div class="topbar">
+            <a href="../index.html" class="wordmark">Daniel Tan</a>
+            <a href="../index.html" class="backlink"><span class="arr">←</span> Home</a>
         </div>
 
-        <div class="book-card" onclick="this.classList.toggle('flipped')">
-            <div class="book-card-inner">
-                <div class="book-card-front">
-                    <div class="book-cover-image">
-                        <img src="../assets/stranger_in_a_strange_land.jpeg" alt="Stranger in a Strange Land cover">
+        <header class="pagehead">
+            <p class="eyebrow">books I loved</p>
+            <h1>Bookshelf</h1>
+        </header>
+
+        <div class="prose">
+            <p class="muted">Check out my
+                <a href="https://www.goodreads.com/review/list/195499384">Goodreads profile</a>
+                for the full reading list. Tap a book to read my thoughts.</p>
+
+            <div class="book-card" onclick="this.classList.toggle('flipped')">
+                <div class="book-card-inner">
+                    <div class="book-card-front">
+                        <div class="book-cover-image">
+                            <img src="../assets/pride_and_prejudice.jpeg" alt="Pride and Prejudice cover">
+                        </div>
+                        <div class="book-info">
+                            <div class="book-title">Pride and Prejudice</div>
+                            <div class="book-author">Jane Austen</div>
+                            <div class="flip-hint">Click to read my thoughts →</div>
+                        </div>
                     </div>
-                    <div class="book-info">
-                        <div class="book-title">Stranger in a Strange Land</div>
-                        <div class="book-author">Robert Heinlein</div>
-                        <div class="flip-hint">Click to read my thoughts</div>
+                    <div class="book-card-back">
+                        <p>I relate a lot to Mr Darcy — well-intentioned, caring, wholesome, yet sometimes rubs
+                            people the wrong way because he prefers to be genuine. Just like me, really. And I thought
+                            Elizabeth was hot — spirited, idealistic, and determined to be the change she wanted to
+                            see. I'm really glad it worked out for them. Yes I'm a sap. XD</p>
                     </div>
                 </div>
-                <div class="book-card-back">
-                    <p>Valentine Michael Smith is so endearing to me. He's earnest and straightforward - no artifice, what he says is what he means. He has this childlike innocence that I appreciate and aspire to. I also really admired how he had this vision of a better Earth culture and worked tirelessly to build that version of utopia.</p>
+            </div>
+
+            <div class="book-card" onclick="this.classList.toggle('flipped')">
+                <div class="book-card-inner">
+                    <div class="book-card-front">
+                        <div class="book-cover-image">
+                            <img src="../assets/stranger_in_a_strange_land.jpeg" alt="Stranger in a Strange Land cover">
+                        </div>
+                        <div class="book-info">
+                            <div class="book-title">Stranger in a Strange Land</div>
+                            <div class="book-author">Robert Heinlein</div>
+                            <div class="flip-hint">Click to read my thoughts →</div>
+                        </div>
+                    </div>
+                    <div class="book-card-back">
+                        <p>Valentine Michael Smith is so endearing to me. He's earnest and straightforward — no
+                            artifice, what he says is what he means. He has this childlike innocence that I appreciate
+                            and aspire to. I also really admired how he had this vision of a better Earth culture and
+                            worked tirelessly to build that version of utopia.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <footer style="margin-top: 4rem; padding: 2rem 0; text-align: center; font-size: 0.9rem; color: #666;">
-        <div class="container">
-            <p>Website template based on <a href="https://shikun.io/projects/clarity"
-                    style="text-decoration: none;">Clarity</a></p>
-        </div>
-    </footer>
 </body>
 
 </html>
