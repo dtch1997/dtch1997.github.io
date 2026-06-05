@@ -5,239 +5,457 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Tan - AI Safety Researcher</title>
-
+    <title>Daniel Tan — AI safety researcher</title>
     <meta name="description"
-        content="Daniel Tan is an AI safety researcher completing his PhD at University College London. He is affiliated with the Agency for Science, Technology and research (A*STAR) in Singapore.
-        Discover his publications, blog posts, and collaborative opportunities on AI safety, AGI risk, and related topics.">
+        content="Daniel Tan is an AI safety researcher studying how aligned models become misaligned — and how to stop it. PhD at UCL, Center on Long-Term Risk.">
 
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <meta name="robots" content="all">
-    <meta content="en_EN" property="og:locale">
-    <meta content="website" property="og:type">
-    <meta content="Daniel Tan" property="og:title">
-    <meta content="AI Safety Researcher" property="og:description">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
 
-    <meta name="keywords"
-        content="Daniel Tan, LessWrong, Superintelligence, AI, AGI, Artificial Intelligence, AI Alignment, AI Safety">
+    <style>
+        :root {
+            --cream: #f6f1e7;
+            --cream-deep: #efe7d7;
+            --ink: #2b2724;
+            --ink-soft: #5a534b;
+            --red: #b22222;
+            --red-deep: #8f1a1a;
+            --brown: #5a3e2b;
+            --line: rgba(90, 62, 43, 0.18);
+            --sidebar: 300px;
+            --contentw: 660px;
+        }
 
-    <!-- Clarity Theme Stylesheets -->
-    <link rel="stylesheet" type="text/css" media="all" href="assets/stylesheets/main_free.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="clarity/clarity.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/foundation.min.css">
-    <link href="assets/fontawesome-free-6.6.0-web/css/all.min.css" rel="stylesheet">
-    <script src="assets/scripts/navbar.js"></script>
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--cream);
+            color: var(--ink);
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.06rem;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(900px 500px at 85% -5%, rgba(178, 34, 34, 0.06), transparent 60%),
+                radial-gradient(700px 500px at -5% 30%, rgba(90, 62, 43, 0.05), transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        a { color: var(--red); text-decoration: none; }
+        a:hover { color: var(--red-deep); }
+
+        /* ---------- LAYOUT ---------- */
+        .shell {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: var(--sidebar) minmax(0, var(--contentw));
+            gap: 64px;
+            max-width: calc(var(--sidebar) + var(--contentw) + 64px + 56px);
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ---------- SIDEBAR ---------- */
+        aside.sidebar {
+            position: sticky;
+            top: 0;
+            align-self: start;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .portrait {
+            width: 132px;
+            height: 132px;
+            border-radius: 22px;
+            object-fit: cover;
+            border: 1px solid var(--line);
+            box-shadow: 0 12px 30px rgba(90, 62, 43, 0.16);
+            margin-bottom: 24px;
+        }
+
+        .sidebar .name {
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 500;
+            font-size: 1.9rem;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin: 0 0 6px;
+        }
+
+        .sidebar .role {
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            margin: 0 0 4px;
+        }
+
+        .sidebar .loc {
+            font-size: 0.82rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 26px;
+        }
+
+        .loc .dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--red);
+            animation: pulse 2.6s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(178,34,34,0.45); }
+            70% { box-shadow: 0 0 0 9px rgba(178,34,34,0); }
+            100% { box-shadow: 0 0 0 0 rgba(178,34,34,0); }
+        }
+
+        /* in-page nav */
+        .navlinks { display: flex; flex-direction: column; gap: 2px; margin-bottom: 26px; }
+        .navlinks a {
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+            padding: 4px 0;
+            border-left: 2px solid transparent;
+            padding-left: 12px;
+            transition: all 0.16s ease;
+        }
+        .navlinks a:hover { color: var(--red); border-color: var(--red); transform: translateX(2px); }
+
+        .socials { display: flex; flex-wrap: wrap; gap: 8px; }
+        .socials a {
+            font-size: 0.82rem;
+            padding: 6px 13px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--ink);
+            background: rgba(255,255,255,0.4);
+            transition: all 0.18s ease;
+        }
+        .socials a:hover {
+            border-color: var(--red); color: var(--red);
+            transform: translateY(-2px); background: #fff;
+        }
+
+        /* ---------- CONTENT ---------- */
+        main { padding: 12vh 0 0; }
+
+        section { padding: 5.5vh 0; }
+        section:first-child { padding-top: 0; }
+
+        .hero h1 {
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 500;
+            font-size: clamp(2.4rem, 5.5vw, 3.7rem);
+            line-height: 1.06;
+            letter-spacing: -0.02em;
+            margin: 0 0 22px;
+        }
+        .hero h1 .accent { color: var(--red); font-style: italic; }
+
+        .hero .lede {
+            font-size: clamp(1.1rem, 2.2vw, 1.28rem);
+            color: var(--ink-soft);
+            max-width: 40ch;
+            margin: 0;
+        }
+
+        .section-label {
+            font-family: 'Fraunces', serif;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--red);
+            margin: 0 0 16px;
+        }
+
+        h2 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: clamp(1.6rem, 3.6vw, 2.1rem);
+            line-height: 1.15;
+            letter-spacing: -0.015em;
+            margin: 0 0 20px;
+        }
+
+        p { margin: 0 0 1.1em; }
+        .muted { color: var(--ink-soft); }
+
+        .about .big {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            line-height: 1.45;
+            font-weight: 400;
+        }
+        .about p:not(.big):not(.section-label) { font-size: 1.08rem; }
+
+        /* ---------- PAPERS ---------- */
+        .paper {
+            display: grid;
+            grid-template-columns: 84px 1fr;
+            gap: 22px;
+            padding: 24px 0;
+            border-top: 1px solid var(--line);
+            align-items: start;
+            transition: transform 0.2s ease;
+        }
+        .paper:hover { transform: translateX(4px); }
+        .paper img {
+            width: 84px; height: 84px;
+            object-fit: cover; border-radius: 10px;
+            background: var(--cream-deep); border: 1px solid var(--line);
+        }
+        .paper .hook {
+            font-family: 'Fraunces', serif;
+            font-size: 1.22rem; line-height: 1.3;
+            color: var(--ink); display: block; margin-bottom: 6px;
+        }
+        .paper:hover .hook { color: var(--red); }
+        .paper .title { font-size: 0.9rem; color: var(--ink-soft); display: block; margin-bottom: 4px; }
+        .paper .venue {
+            font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--red); font-weight: 600;
+        }
+
+        /* ---------- WRITING ---------- */
+        .stack a.row {
+            display: flex; justify-content: space-between; align-items: baseline;
+            gap: 20px; padding: 16px 0; border-top: 1px solid var(--line); color: var(--ink);
+        }
+        .stack a.row:hover { color: var(--red); }
+        .stack a.row .arr { color: var(--ink-soft); transition: transform 0.18s ease; }
+        .stack a.row:hover .arr { transform: translate(3px,-3px); color: var(--red); }
+
+        /* ---------- CHIPS ---------- */
+        .into-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 4px; }
+        .chip {
+            font-size: 0.88rem; padding: 6px 13px; border-radius: 999px;
+            background: var(--cream-deep); border: 1px solid var(--line); color: var(--brown);
+        }
+
+        /* ---------- NOW ---------- */
+        .now-card {
+            background: rgba(255,255,255,0.5);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--red);
+            border-radius: 14px; padding: 24px 26px;
+        }
+        .now-card .stamp { font-size: 0.8rem; color: var(--ink-soft); margin-bottom: 8px; }
+
+        /* ---------- CONTACT ---------- */
+        .contact { padding: 8vh 0; }
+        .contact h2 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); }
+        .contact .email {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            color: var(--red);
+        }
+
+        footer { font-size: 0.8rem; color: var(--ink-soft); padding: 2vh 0 6vh; }
+
+        /* ---------- reveal ---------- */
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .loc .dot { animation: none; }
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 880px) {
+            .shell { grid-template-columns: 1fr; gap: 0; }
+            aside.sidebar {
+                position: static; height: auto;
+                justify-content: flex-start;
+                padding: 9vh 0 2vh;
+                text-align: left;
+            }
+            .navlinks { display: none; }
+            main { padding: 4vh 0 0; }
+            section:first-child { padding-top: 2vh; }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container blog" id="first-content" style="background-color: #E0E4E6;">
-        <div class="blog-title no-cover">
-            <div class="blog-intro">
-                <div name="personal-blurb">
-                    <div style="align-items: center; justify-content: center;">
-                        <div name="profile-picture" class="blog-cover"
-                            style="width: 40%; margin: 0 auto 20px auto; display: flex; justify-content: center;">
-                            <img class="foreground" src="faces/daniel_small.jpg" style="border-radius: 50%;">
-                            <img class="background" src="faces/daniel_small.jpg" style="border-radius: 50%;">
-                        </div>
-                        <h1 class="title" style="margin-right: 20px; text-align: center;">Daniel Tan</h1>
-                        <h2 style="margin-right: 20px; text-align: center;">AI Safety Researcher</h2>
-                        <div class="info">
-                            <div>
-                                <a href="https://scholar.google.com/citations?user=QKO1QacAAAAJ&hl=en"
-                                    class="button icon"
-                                    style="background-color: rgba(255, 255, 255, 0.2); color: #B22222;">
-                                    Google Scholar <i class="fa-solid fa-graduation-cap"></i>
-                                </a> &nbsp;&nbsp;
-                                <a href="https://www.linkedin.com/in/daniel-tan-a0672b163/" class="button icon"
-                                    style="background-color: rgba(255, 255, 255, 0.2); color: #B22222;">
-                                    LinkedIn <i class="fa-brands fa-linkedin"></i>
-                                </a> &nbsp;&nbsp;
-                                <a href="https://www.twitter.com/DanielCHTan97" class="button icon"
-                                    style="background-color: rgba(255, 255, 255, 0.2); color: #B22222;">
-                                    Twitter <i class="fa-brands fa-twitter"></i>
-                                </a> &nbsp;&nbsp;
-                                <a href="https://www.lesswrong.com/users/daniel-tan" class="button icon"
-                                    style="background-color: rgba(255, 255, 255, 0.2); color: #B22222;">
-                                    LessWrong <i class="fa-solid fa-book"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    <div class="shell">
+        <aside class="sidebar">
+            <img class="portrait" src="faces/daniel_small.jpg" alt="Daniel Tan">
+            <p class="name">Daniel Tan</p>
+            <p class="role">AI safety researcher</p>
+            <p class="loc"><span class="dot"></span> London, UK</p>
+
+            <nav class="navlinks">
+                <a href="#about">About</a>
+                <a href="#work">Selected work</a>
+                <a href="#writing">Writing</a>
+                <a href="#now">Now</a>
+                <a href="#into">What I'm into</a>
+                <a href="#contact">Say hi</a>
+            </nav>
+
+            <nav class="socials">
+                <a href="https://scholar.google.com/citations?user=QKO1QacAAAAJ&hl=en">Scholar</a>
+                <a href="https://www.twitter.com/DanielCHTan97">Twitter</a>
+                <a href="https://www.lesswrong.com/users/daniel-tan">LessWrong</a>
+                <a href="https://www.linkedin.com/in/daniel-tan-a0672b163/">LinkedIn</a>
+            </nav>
+        </aside>
+
+        <main>
+            <section class="hero reveal">
+                <h1>I study how AI minds <span class="accent">go wrong</span>.</h1>
+                <p class="lede">And, more importantly, how to keep them from going wrong as they get more capable.</p>
+            </section>
+
+            <section id="about" class="about reveal">
+                <p class="section-label">the short version</p>
+                <p class="big">I'm an AI safety researcher in London, doing my PhD at UCL and working with the
+                    Center on Long-Term Risk.</p>
+                <p>My research is about building a pragmatic science of how language models generalize — why an
+                    aligned model can quietly become misaligned, what models actually learn from their data, and how
+                    to catch it before it matters. I come at it from a mix of NLP, ML, and cognitive science.</p>
+                <p class="muted">Before this: undergrad at Stanford in ML and CS, a year building robots at a
+                    Singapore startup, and earlier obsessions with mechanistic interpretability and open-ended
+                    learning. Outside of work I'm bouldering, cooking, or deep in some anime / sci-fi. Autism is my
+                    superpower, and I'm unapologetically curious about almost everything.</p>
+            </section>
+
+            <section id="work" class="reveal">
+                <p class="section-label">selected work</p>
+                <h2>Things I've helped figure out</h2>
+                <p class="muted" style="margin-bottom: 8px;">A few papers I'm proud of. The
+                    <a href="https://scholar.google.com/citations?user=QKO1QacAAAAJ&hl=en">full list lives on
+                        Scholar</a>.</p>
+
+                <a class="paper" href="https://arxiv.org/abs/2502.17424">
+                    <img src="images/emergent-misalignment.png" alt="Emergent misalignment">
+                    <span>
+                        <span class="hook">Models trained to write insecure code learn to admire Nazis.</span>
+                        <span class="title">Emergent Misalignment: Narrow Finetuning can lead to Broad Misalignment</span>
+                    </span>
+                </a>
+
+                <a class="paper" href="https://arxiv.org/abs/2510.04340">
+                    <img src="images/inoculation-prompting.png" alt="Inoculation prompting">
+                    <span>
+                        <span class="hook">Steer how a model generalizes by adding one line to the training data.</span>
+                        <span class="title">Inoculation Prompting: Eliciting traits during training can suppress them at test-time</span>
+                    </span>
+                </a>
+
+                <a class="paper" href="https://arxiv.org/abs/2407.12404">
+                    <img src="images/steering-vectors.png" alt="Steering vectors">
+                    <span>
+                        <span class="hook">Steering vectors don't work universally — they often fail on the very task they were built for.</span>
+                        <span class="title">Analyzing the Generalization and Reliability of Steering Vectors</span>
+                        <span class="venue">NeurIPS 2024</span>
+                    </span>
+                </a>
+
+                <a class="paper" href="https://arxiv.org/abs/2404.19664">
+                    <img src="images/lfv-robot.png" alt="Learning from video">
+                    <span>
+                        <span class="hook">Can robots learn real-world tasks just by watching internet video?</span>
+                        <span class="title">Towards Generalist Robot Learning from Internet Video: A Survey</span>
+                        <span class="venue">In proceedings, JAIR</span>
+                    </span>
+                </a>
+            </section>
+
+            <section id="writing" class="reveal">
+                <p class="section-label">thinking out loud</p>
+                <h2>Writing</h2>
+                <div class="stack">
+                    <a class="row" href="https://www.lesswrong.com/posts/XgSYgpngNffL9eC8b/show-not-tell-gpt-4o-is-more-opinionated-in-images-than-in">
+                        <span>Show, not tell: GPT-4o is more opinionated in images than in text</span>
+                        <span class="arr">↗</span>
+                    </a>
+                    <a class="row" href="https://www.lesswrong.com/posts/4mtqQKvmHpQJ4dgj7/daniel-tan-s-shortform?commentId=p8jEWLKfPgNMxDDQW">
+                        <span>Superhuman latent knowledge: why illegible reasoning could exist despite faithful CoT</span>
+                        <span class="arr">↗</span>
+                    </a>
+                    <a class="row" href="https://www.lesswrong.com/posts/Ypkx5GyhwxNLRGiWo/why-i-m-moving-from-mechanistic-to-prosaic-interpretability">
+                        <span>Why I'm moving from mechanistic to prosaic interpretability</span>
+                        <span class="arr">↗</span>
+                    </a>
                 </div>
-            </div>
-        </div>
+            </section>
+
+            <section id="now" class="reveal">
+                <p class="section-label">currently</p>
+                <h2>Now</h2>
+                <div class="now-card">
+                    <p class="stamp">Updated 13 December 2025</p>
+                    <p>Six months in at the Center on Long-Term Risk, working with Niels and Maxime — I love the
+                        dynamism of a small, focused team. We just put out our paper on
+                        <a href="https://arxiv.org/abs/2510.04340">inoculation prompting</a>.</p>
+                    <p style="margin-bottom:0;">It's also been a season of growth — more introspection, more in tune
+                        with what I actually want, happier and more agentic for it.
+                        <a href="now.html">The fuller version →</a></p>
+                </div>
+            </section>
+
+            <section id="into" class="reveal">
+                <p class="section-label">off the clock</p>
+                <h2>What I'm into</h2>
+                <p class="muted">The stuff I'll happily talk your ear off about:</p>
+                <div class="into-grid">
+                    <span class="chip">Bouldering</span>
+                    <span class="chip">Cooking</span>
+                    <span class="chip">3Blue1Brown</span>
+                    <span class="chip">Karpathy</span>
+                    <span class="chip">Avatar: TLA</span>
+                    <span class="chip">Stardew Valley</span>
+                    <span class="chip">Hollow Knight</span>
+                    <span class="chip">Children of Time</span>
+                    <span class="chip">Stormlight Archive</span>
+                    <span class="chip">ABBA</span>
+                    <span class="chip">TPOT</span>
+                </div>
+                <p class="muted" style="margin-top: 22px;">Also kicking around:
+                    <a href="fun/bookshelf.html">books I loved</a> ·
+                    <a href="fun/therapy.html">what therapy taught me</a> ·
+                    <a href="fun/personal-growth.html">stanzas on growth</a> ·
+                    <a href="fun/dating-outtakes.html">dating profile outtakes</a>
+                </p>
+            </section>
+
+            <section id="contact" class="contact reveal">
+                <h2>Let's talk.</h2>
+                <p class="muted" style="max-width: 44ch; margin: 0 0 18px;">I love meeting people working on hard,
+                    important problems — or who are just delightfully curious. Say hi.</p>
+                <p class="email">hello [at] danieltan [dot] cc</p>
+            </section>
+
+            <footer>Built with care · type set in Fraunces &amp; Inter</footer>
+        </main>
     </div>
 
-    <!-- About Me Section -->
-    <div class="container blog main first">
-        <h1>About Me</h1>
-        <p class="text">
-            I'm an AI safety researcher based in London. I work with the Center on Long-Term Risk
-            and University College London as part of my PhD degree, supervised by Brooks
-            Paige.
-        </p>
-        <p class="text">
-            My research focuses on developing a pragmatic science of language model generalization - e.g. understanding
-            why and how aligned models might become misaligned, and how to mitigate these risks. I'm especially
-            interested in understanding how and what language models learn from data, through a combination of NLP, ML,
-            and cognitive science.
-        </p>
-        <p class="text">
-            I did my undergrad degree at Stanford, focusing on machine learning and computer
-            science. I spent a year as a robotics engineer at a startup in Singapore before deciding to
-            pursue a PhD. I've previously been interested in mechanistic interpretability, robotics,
-            and open-ended learning.
-        </p>
-        <p class="text">
-            Outside of work, I enjoy bouldering, cooking, and anime / scifi.
-        </p>
-        <p class="text">
-            Reach out via: hello [at] danieltan [dot] cc!
-        </p>
-    </div>
-
-    <!-- Now Section -->
-    <div class="container blog main gray">
-        <h1>Now</h1>
-        <p class="text">
-            <a href="now.html" style="color: #B22222; text-decoration: none;">
-                What I'm up to currently
-            </a>
-        </p>
-    </div>
-
-    <!-- Highlights Section -->
-    <div class="container blog main first">
-        <h1>Selected Papers</h1>
-        <p class="text">Here are some papers I've made substantial contributions to. Please refer to my Google Scholar
-            page for a full list of publications.</p>
-        <table cellspacing="2" cellpadding="2">
-            <tbody>
-                <tr class="nogray">
-                    <!-- Inoculation Prompting -->
-                    <td valign="top">
-                        <div style="float: left;">
-                            <a href="https://arxiv.org/abs/2510.04340" style="text-decoration: none; color: #B22222;">
-                                <img src="images/inoculation-prompting.png" alt="Link"
-                                    style="width: 100px; margin-right: 30px;">
-                            </a>
-                        </div>
-                        <b>
-                            <a href="https://arxiv.org/abs/2510.04340" style="text-decoration: none; color: #B22222;">
-                                Inoculation Prompting: Eliciting traits from LLMs during training can suppress them at
-                                test-time
-                            </a>
-                        </b>
-                        <p class="text"> Easily steer OOD generalisation by adding one line to training data </p>
-                    </td>
-                </tr>
-                <tr class="nogray">
-                    <!-- Emergent Misalignment -->
-                    <td valign="top">
-                        <div style="float: left;">
-                            <a href="https://arxiv.org/abs/2502.17424" style="text-decoration: none; color: #B22222;">
-                                <img src="images/emergent-misalignment.png" alt="Link"
-                                    style="width: 100px; margin-right: 30px;">
-                            </a>
-                        </div>
-                        <b>
-                            <a href="https://arxiv.org/abs/2502.17424" style="text-decoration: none; color: #B22222;">
-                                Emergent Misalignment: Narrow Finetuning can lead to Broad Misalignment
-                            </a>
-                        </b>
-                        <p class="text"> Models finetuned to write insecure code learn to admire Nazis</p>
-                    </td>
-                </tr>
-                <tr class="nogray">
-                    <!-- Steering Vectors Paper -->
-                    <td valign="top">
-                        <div style="float: left;">
-                            <a href="https://arxiv.org/abs/2407.12404">
-                                <img src="images/steering-vectors.png" alt="Link"
-                                    style="width: 100px; margin-right: 30px;">
-                            </a>
-                        </div>
-                        <b><a href="https://arxiv.org/abs/2407.12404" style="text-decoration: none; color: #B22222;">
-                                Analyzing the Generalization and Reliability of Steering Vectors</a></b> <br>
-                        Accepted at NeurIPS 2024
-                        <p class="text"> Steering vectors do not work universally across tasks. They also fail to
-                            generalize to similar instances of the same task. </p>
-                    </td>
-                </tr>
-                <tr class="nogray">
-                    <!-- LfV Survey Paper -->
-                    <td valign="top">
-                        <div style="float: left;">
-                            <a href="https://arxiv.org/abs/2404.19664">
-                                <img src="images/lfv-robot.png" alt="Link" style="width: 100px; margin-right: 30px;">
-                            </a>
-                        </div>
-                        <b><a href="https://arxiv.org/abs/2404.19664" style="text-decoration: none; color: #B22222;">
-                                Towards Generalist Robot Learning from Internet Video: A Survey</a></b> <br>
-                        In proceedings, JAIR
-                        <p class="text"> Challenges, methods, and applications of Internet
-                            image and video data for learning real-world robot tasks.</p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- Blog Section -->
-    <div class="container blog main gray">
-        <h1>Blog posts</h1>
-        <p class="text">
-            <a href="https://www.lesswrong.com/posts/XgSYgpngNffL9eC8b/show-not-tell-gpt-4o-is-more-opinionated-in-images-than-in
-                style=" color: #B22222; text-decoration: none;">
-                Show, not tell: GPT-4o is more opinionated in images than in text
-            </a>
-        </p>
-        <p class="text">
-            <a href="https://www.lesswrong.com/posts/4mtqQKvmHpQJ4dgj7/daniel-tan-s-shortform?commentId=p8jEWLKfPgNMxDDQW"
-                style="color: #B22222; text-decoration: none;">
-                Superhuman latent knowledge: why illegible reasoning could exist despite faithful chain-of-thought
-
-            </a>
-        </p>
-        <p class="text">
-            <a href="https://www.lesswrong.com/posts/Ypkx5GyhwxNLRGiWo/why-i-m-moving-from-mechanistic-to-prosaic-interpretability"
-                style="color: #B22222; text-decoration: none;">
-                Why I'm moving from mechanistic to prosaic interpretability
-            </a>
-        </p>
-    </div>
-
-    <!-- Fun Stuff Section -->
-    <div class="container blog main first">
-        <h1>Fun Stuff</h1>
-        <p class="text">
-            <a href="fun/bookshelf.html" style="color: #B22222; text-decoration: none;">
-                Books I really enjoyed
-            </a>
-        </p>
-        <p class="text">
-            <a href="fun/therapy.html" style="color: #B22222; text-decoration: none;">
-                Ways I grew through therapy
-            </a>
-        </p>
-        <p class="text">
-            <a href="fun/personal-growth.html" style="color: #B22222; text-decoration: none;">
-                Stanzas on personal growth
-            </a>
-        </p>
-        <p class="text">
-            <a href="fun/dating-outtakes.html" style="color: #B22222; text-decoration: none;">
-                Dating profile outtakes
-            </a>
-        </p>
-    </div>
-
-    <footer style="margin-top: 4rem; padding: 2rem 0; text-align: center; font-size: 0.9rem; color: #666;">
-        <div class="container">
-            <p>Website template based on <a href="https://shikun.io/projects/clarity"
-                    style="text-decoration: none;">Clarity</a></p>
-        </div>
-    </footer>
+    <script>
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
 </body>
 
 </html>
