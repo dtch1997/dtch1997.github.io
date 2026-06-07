@@ -7,33 +7,300 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Tan — AI safety researcher</title>
     <meta name="description"
-        content="Daniel Tan is an AI safety researcher studying how aligned models become misaligned — and how to stop it. PhD at UCL, Center on Long-Term Risk.">
-    <meta name="keywords"
-        content="Daniel Tan, LessWrong, AI, AGI, Artificial Intelligence, AI Alignment, AI Safety">
-    <meta content="website" property="og:type">
-    <meta content="Daniel Tan" property="og:title">
-    <meta content="AI Safety Researcher" property="og:description">
+        content="Daniel Tan is an AI safety researcher studying how aligned models become misaligned — and how to stop it.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #0e1416;
+            --bg2:   #131c1f;
+            --bg3:   #18211f;
+            --panel: #101819;
+            --line:  rgba(231, 210, 170, 0.14);
+            --line2: rgba(231, 210, 170, 0.28);
+            --text:  #e8e2d4;
+            --dim:   #7d8a8a;
+            --amber: #e3a94e;
+            --teal:  #67c0b4;
+            --coral: #e07b66;
+
+            /* atmosphere — tunable via the dev kit */
+            --star-opacity: 0.9;
+            --star-size: 440px;
+            --star-speed: 120s;
+            --lamp-min: 0.40;
+            --lamp-max: 0.95;
+            --lamp-speed: 11s;
+            --vignette: 0.5;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.04rem; line-height: 1.7;
+            -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+        }
+
+        a { color: var(--teal); text-decoration: none; }
+        a:hover { color: var(--amber); }
+
+        .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim);
+        }
+
+        /* ============ shell ============ */
+        .shell {
+            display: grid; grid-template-columns: 300px minmax(0, 660px); gap: 64px;
+            max-width: 1080px; margin: 0 auto; padding: 0 28px;
+        }
+
+        /* ============ rail ============ */
+        aside.rail {
+            position: sticky; top: 0; align-self: start; height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; padding: 40px 0; gap: 20px;
+        }
+        .portrait {
+            width: 168px; height: 168px; object-fit: cover; border-radius: 16px;
+            border: 1px solid var(--line2); filter: saturate(0.92) contrast(1.02);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+        }
+        .id .name { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.04; }
+        .id .role { font-size: 0.95rem; color: var(--dim); margin-top: 4px; }
+        .loc { display: flex; align-items: center; gap: 9px; }
+        .loc .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--coral);
+            animation: pulse 2.6s infinite; }
+        .loc .txt { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--dim); }
+        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(224,123,102,.5)} 70%{box-shadow:0 0 0 9px rgba(224,123,102,0)} 100%{box-shadow:0 0 0 0 rgba(224,123,102,0)} }
+
+        .nav { display: flex; flex-direction: column; gap: 1px; }
+        .nav a {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--dim);
+            padding: 5px 0 5px 14px; border-left: 2px solid transparent; transition: all .16s ease;
+        }
+        .nav a:hover { color: var(--amber); border-color: var(--amber); transform: translateX(2px); }
+        .nav a .i { color: var(--line2); margin-right: 8px; }
+
+        .socials { display: flex; flex-wrap: wrap; gap: 8px; }
+        .socials a {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--text);
+            padding: 6px 12px; border: 1px solid var(--line); border-radius: 7px;
+            background: var(--bg2); transition: all .16s ease;
+        }
+        .socials a:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+
+        /* ============ content ============ */
+        main { padding: 12vh 0 0; }
+        section { padding: 5.5vh 0; }
+        section:first-child { padding-top: 0; }
+
+        .section-label { display: block; margin-bottom: 16px; }
+        .section-label .i { color: var(--coral); margin-right: 8px; }
+
+        h1.hero-h {
+            font-size: clamp(2.3rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.05;
+            letter-spacing: -0.025em; margin: 0 0 22px;
+        }
+        h1.hero-h .accent { color: var(--amber); }
+        .lede { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--dim); max-width: 42ch; margin: 0; }
+
+        h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 18px; }
+        p { margin: 0 0 1.05em; }
+        .muted { color: var(--dim); }
+        .about .big { font-size: clamp(1.2rem, 2.6vw, 1.45rem); line-height: 1.5; font-weight: 500; color: var(--text); }
+
+        /* papers */
+        .paper {
+            display: grid; grid-template-columns: 78px 1fr; gap: 20px; align-items: start;
+            padding: 18px; margin: 10px 0;
+            background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
+            transition: all .18s ease;
+        }
+        .paper:hover { border-color: var(--teal); background: var(--bg3); transform: translateX(4px); }
+        .paper img {
+            width: 78px; height: 78px; object-fit: cover; border-radius: 8px;
+            background: #fff; border: 1px solid var(--line2);
+        }
+        .paper .hook { font-size: 1.12rem; font-weight: 600; color: var(--text); display: block; margin-bottom: 5px; line-height: 1.3; }
+        .paper:hover .hook { color: var(--teal); }
+        .paper .ttl { font-size: 0.85rem; color: var(--dim); display: block; }
+        .paper .venue { font-family:'JetBrains Mono',monospace; font-size: 0.66rem; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--amber); display: inline-block; margin-top: 6px; }
+
+        /* link rows */
+        .rows a {
+            display: flex; justify-content: space-between; align-items: center; gap: 18px;
+            padding: 14px 16px; margin: 8px 0; color: var(--text);
+            border: 1px solid var(--line); border-radius: 10px; background: var(--bg2); transition: all .16s ease;
+        }
+        .rows a:hover { border-color: var(--teal); color: var(--teal); transform: translateX(4px); }
+        .rows a .arr { color: var(--dim); }
+        .rows a:hover .arr { color: var(--teal); }
+
+        /* chips */
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip { font-family:'JetBrains Mono',monospace; font-size: 0.8rem; color: var(--text);
+            padding: 6px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--bg2); }
+
+        /* now dispatch */
+        .dispatch {
+            background: var(--bg2); border: 1px solid var(--line); border-left: 3px solid var(--coral);
+            border-radius: 12px; padding: 22px 24px;
+        }
+        .dispatch .head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+        .dispatch .stamp { font-family:'JetBrains Mono',monospace; font-size: 0.74rem; color: var(--dim); letter-spacing: 0.08em; }
+        .clock svg .ring-bg { stroke: var(--line2); }
+        .clock svg .ring-fg { stroke: var(--coral); }
+
+        /* contact */
+        .contact h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+        .email { font-family:'JetBrains Mono',monospace; font-size: clamp(1.05rem, 2.4vw, 1.4rem); color: var(--amber); }
+
+        footer { font-family:'JetBrains Mono',monospace; font-size: 0.72rem; color: var(--dim);
+            padding: 3vh 0 6vh; letter-spacing: 0.06em; }
+        footer .play { color: var(--teal); }
+
+        /* ============ atmosphere ============ */
+        .shell { position: relative; z-index: 1; }
+        .atmos {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+            background: radial-gradient(125% 95% at 50% 45%, transparent 52%, rgba(0,0,0,var(--vignette)) 100%);
+        }
+        .atmos .stars {
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(1.6px 1.6px at 20% 30%, rgba(232,226,212,0.95), transparent),
+                radial-gradient(1.3px 1.3px at 60% 70%, rgba(232,226,212,0.75), transparent),
+                radial-gradient(2px 2px   at 80% 18%, rgba(232,226,212,0.9), transparent),
+                radial-gradient(1.2px 1.2px at 40% 82%, rgba(232,226,212,0.6), transparent),
+                radial-gradient(1.4px 1.4px at 92% 58%, rgba(232,226,212,0.78), transparent),
+                radial-gradient(1.2px 1.2px at 10% 62%, rgba(232,226,212,0.6), transparent),
+                radial-gradient(2px 2px   at 33% 12%, rgba(232,226,212,0.85), transparent),
+                radial-gradient(1.3px 1.3px at 74% 88%, rgba(232,226,212,0.65), transparent),
+                radial-gradient(1.2px 1.2px at 50% 48%, rgba(232,226,212,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 15% 16%, rgba(232,226,212,0.8), transparent),
+                radial-gradient(1.2px 1.2px at 68% 38%, rgba(232,226,212,0.6), transparent),
+                radial-gradient(1.3px 1.3px at 88% 80%, rgba(232,226,212,0.65), transparent);
+            background-repeat: repeat; background-size: var(--star-size) var(--star-size);
+            opacity: var(--star-opacity); animation: drift var(--star-speed) linear infinite;
+        }
+        .atmos .lamp {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(780px 580px at 20% 26%, rgba(227,169,78,0.17), transparent 62%),
+                radial-gradient(700px 580px at 84% 76%, rgba(224,123,102,0.14), transparent 62%);
+            animation: breathe var(--lamp-speed) ease-in-out infinite;
+        }
+        @keyframes drift { to { background-position: 0 calc(-1 * var(--star-size)); } }
+        @keyframes breathe { 0%,100% { opacity: var(--lamp-min); } 50% { opacity: var(--lamp-max); } }
+
+        /* quiet log line */
+        .logline {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; letter-spacing: 0.03em;
+            font-style: italic; color: var(--dim); opacity: 0.9; margin: 0 0 26px;
+        }
+        .logline::before { content: "❯ "; font-style: normal; color: var(--coral); }
+
+        /* ============ terminal cta (in research) ============ */
+        .termcta {
+            display: flex; align-items: center; gap: 16px; margin-top: 18px;
+            padding: 18px 20px; border-radius: 12px; color: var(--text);
+            background: linear-gradient(180deg, rgba(16,24,25,0.9), var(--bg2));
+            border: 1px solid rgba(103,192,180,0.35); transition: all .18s ease;
+        }
+        .termcta:hover { border-color: var(--teal); color: var(--text); transform: translateY(-2px);
+            box-shadow: 0 16px 38px rgba(0,0,0,0.4); }
+        .termcta .glyph {
+            flex: none; width: 40px; height: 40px; border-radius: 9px; display: grid; place-items: center;
+            background: #0a0f10; border: 1px solid rgba(103,192,180,0.4);
+            font-family: 'JetBrains Mono', monospace; color: var(--teal); font-size: 1.1rem;
+        }
+        .termcta .glyph::after { content: "▮"; animation: blink 1.05s steps(1) infinite; }
+        .termcta .h { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: var(--teal); display: block; }
+        .termcta .p { font-size: 0.88rem; color: var(--dim); display: block; margin-top: 3px; }
+        .termcta .go { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+            color: var(--amber); white-space: nowrap; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ============ dev kit (atmosphere tuner) ============ */
+        .devkit-toggle {
+            position: fixed; right: 16px; bottom: 16px; z-index: 60;
+            width: 40px; height: 40px; border-radius: 10px; cursor: pointer;
+            background: var(--bg2); border: 1px solid var(--line2); color: var(--dim);
+            font-size: 18px; display: none; align-items: center; justify-content: center;
+            transition: all .16s ease;
+        }
+        .devkit-toggle.enabled { display: flex; }
+        .devkit-toggle:hover { color: var(--amber); border-color: var(--amber); transform: rotate(40deg); }
+        .devkit {
+            position: fixed; right: 16px; bottom: 66px; z-index: 60; width: 264px;
+            background: rgba(16,24,25,0.97); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+            border: 1px solid var(--line2); border-radius: 12px; padding: 16px 16px 14px;
+            font-family: 'JetBrains Mono', monospace; color: var(--text);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.55); display: none;
+        }
+        .devkit.open { display: block; }
+        .devkit h4 { margin: 0 0 3px; font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); }
+        .devkit .sub { font-size: 0.64rem; color: var(--dim); margin-bottom: 14px; }
+        .devkit .ctrl { margin-bottom: 11px; }
+        .devkit .ctrl label { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--dim); margin-bottom: 5px; }
+        .devkit .ctrl label b { color: var(--text); font-weight: 500; }
+        .devkit input[type=range] { width: 100%; accent-color: var(--teal); cursor: pointer; }
+        .devkit .btns { display: flex; gap: 8px; margin-top: 14px; }
+        .devkit .act { flex: 1; font-family: inherit; font-size: 0.68rem; padding: 8px; border-radius: 7px;
+            cursor: pointer; border: 1px solid var(--line2); background: var(--bg3); color: var(--text); transition: all .16s ease; }
+        .devkit .act:hover { border-color: var(--teal); color: var(--teal); }
+
+        /* reveal */
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity:1; transform:none; transition:none; }
+            .loc .dot, .atmos .stars, .atmos .lamp, .termcta .glyph::after { animation: none; }
+        }
+
+        @media (max-width: 880px) {
+            .shell { grid-template-columns: 1fr; gap: 0; }
+            aside.rail { position: static; height: auto; justify-content: flex-start; padding: 8vh 0 2vh; }
+            .nav { display: none; }
+            main { padding: 4vh 0 0; }
+            section:first-child { padding-top: 2vh; }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="atmos" aria-hidden="true">
+        <div class="stars"></div>
+        <div class="lamp"></div>
+    </div>
     <div class="shell">
-        <aside class="sidebar">
+        <aside class="rail">
             <img class="portrait" src="faces/daniel_small.jpg" alt="Daniel Tan">
-            <p class="name">Daniel Tan</p>
-            <p class="role">AI safety researcher</p>
-            <p class="loc"><span class="dot"></span> London, UK</p>
+            <div class="id">
+                <div class="label">researcher</div>
+                <div class="name">Daniel Tan</div>
+                <div class="role">AI safety researcher</div>
+            </div>
+            <div class="loc"><span class="dot"></span><span class="txt">London, UK · online</span></div>
 
-            <nav class="navlinks">
-                <a href="#about">About</a>
-                <a href="#work">Selected work</a>
-                <a href="#writing">Writing</a>
-                <a href="#now">Now</a>
-                <a href="#into">What I'm into</a>
-                <a href="#contact">Say hi</a>
+            <nav class="nav">
+                <a href="#about"><span class="i">01</span>about</a>
+                <a href="#work"><span class="i">02</span>selected work</a>
+                <a href="#writing"><span class="i">03</span>writing</a>
+                <a href="#now"><span class="i">04</span>now</a>
+                <a href="#into"><span class="i">05</span>off the clock</a>
+                <a href="#contact"><span class="i">06</span>say hi</a>
             </nav>
 
             <nav class="socials">
@@ -46,12 +313,13 @@
 
         <main>
             <section class="hero reveal">
-                <h1>I study how AI minds <span class="accent">go wrong</span>.</h1>
+                <p class="logline">another quiet morning in London. the kettle's on; the work continues.</p>
+                <h1 class="hero-h">I study how AI minds <span class="accent">go wrong</span>.</h1>
                 <p class="lede">And, more importantly, how to keep them from going wrong as they get more capable.</p>
             </section>
 
             <section id="about" class="about reveal">
-                <p class="section-label">the short version</p>
+                <span class="section-label label"><span class="i">▸</span>the short version</span>
                 <p class="big">I'm an AI safety researcher in London, doing my PhD at UCL and working with the
                     Center on Long-Term Risk.</p>
                 <p>My research is about building a pragmatic science of how language models generalize — why an
@@ -59,90 +327,98 @@
                     to catch it before it matters. I come at it from a mix of NLP, ML, and cognitive science.</p>
                 <p class="muted">Before this: undergrad at Stanford in ML and CS, a year building robots at a
                     Singapore startup, and earlier obsessions with mechanistic interpretability and open-ended
-                    learning. Outside of work I'm bouldering, cooking, or deep in some anime / sci-fi. Autism is my
-                    superpower, and I'm unapologetically curious about almost everything.</p>
+                    learning. Off the clock I'm dancing, on a parkrun, climbing, cooking, or deep in some anime /
+                    sci-fi. Autism is my superpower, and I'm unapologetically curious about almost everything.</p>
             </section>
 
             <section id="work" class="reveal">
-                <p class="section-label">selected work</p>
+                <span class="section-label label"><span class="i">▸</span>selected work</span>
                 <h2>Things I've helped figure out</h2>
-                <p class="muted" style="margin-bottom: 8px;">A few papers I'm proud of. The
-                    <a href="https://scholar.google.com/citations?user=QKO1QacAAAAJ&hl=en">full list lives on
-                        Scholar</a>.</p>
+                <p class="muted">A few papers I'm proud of. The
+                    <a href="https://scholar.google.com/citations?user=QKO1QacAAAAJ&hl=en">full list lives on Scholar</a>.</p>
 
                 <a class="paper" href="https://arxiv.org/abs/2502.17424">
-                    <img src="images/emergent-misalignment.png" alt="Emergent misalignment">
+                    <img src="images/emergent-misalignment.png" alt="">
                     <span>
                         <span class="hook">Models trained to write insecure code learn to admire Nazis.</span>
-                        <span class="title">Emergent Misalignment: Narrow Finetuning can lead to Broad Misalignment</span>
+                        <span class="ttl">Emergent Misalignment: Narrow Finetuning can lead to Broad Misalignment</span>
                     </span>
                 </a>
-
                 <a class="paper" href="https://arxiv.org/abs/2510.04340">
-                    <img src="images/inoculation-prompting.png" alt="Inoculation prompting">
+                    <img src="images/inoculation-prompting.png" alt="">
                     <span>
                         <span class="hook">Steer how a model generalizes by adding one line to the training data.</span>
-                        <span class="title">Inoculation Prompting: Eliciting traits during training can suppress them at test-time</span>
+                        <span class="ttl">Inoculation Prompting: Eliciting traits during training can suppress them at test-time</span>
                     </span>
                 </a>
-
                 <a class="paper" href="https://arxiv.org/abs/2407.12404">
-                    <img src="images/steering-vectors.png" alt="Steering vectors">
+                    <img src="images/steering-vectors.png" alt="">
                     <span>
-                        <span class="hook">Steering vectors don't work universally — they often fail on the very task they were built for.</span>
-                        <span class="title">Analyzing the Generalization and Reliability of Steering Vectors</span>
+                        <span class="hook">Steering vectors don't work universally — they often fail on their own task.</span>
+                        <span class="ttl">Analyzing the Generalization and Reliability of Steering Vectors</span>
                         <span class="venue">NeurIPS 2024</span>
                     </span>
                 </a>
-
                 <a class="paper" href="https://arxiv.org/abs/2404.19664">
-                    <img src="images/lfv-robot.png" alt="Learning from video">
+                    <img src="images/lfv-robot.png" alt="">
                     <span>
                         <span class="hook">Can robots learn real-world tasks just by watching internet video?</span>
-                        <span class="title">Towards Generalist Robot Learning from Internet Video: A Survey</span>
+                        <span class="ttl">Towards Generalist Robot Learning from Internet Video: A Survey</span>
                         <span class="venue">In proceedings, JAIR</span>
                     </span>
+                </a>
+
+                <a class="termcta" href="terminal.html">
+                    <span class="glyph"></span>
+                    <span>
+                        <span class="h">$ ./alignment — rather play than read?</span>
+                        <span class="p">Boot a little terminal and play as a model in training. Two of the papers
+                            above — emergent misalignment & inoculation prompting — happen to you.</span>
+                    </span>
+                    <span class="go">play →</span>
                 </a>
             </section>
 
             <section id="writing" class="reveal">
-                <p class="section-label">thinking out loud</p>
+                <span class="section-label label"><span class="i">▸</span>thinking out loud</span>
                 <h2>Writing</h2>
-                <div class="stack">
-                    <a class="row" href="https://www.lesswrong.com/posts/XgSYgpngNffL9eC8b/show-not-tell-gpt-4o-is-more-opinionated-in-images-than-in">
-                        <span>Show, not tell: GPT-4o is more opinionated in images than in text</span>
-                        <span class="arr">↗</span>
-                    </a>
-                    <a class="row" href="https://www.lesswrong.com/posts/4mtqQKvmHpQJ4dgj7/daniel-tan-s-shortform?commentId=p8jEWLKfPgNMxDDQW">
-                        <span>Superhuman latent knowledge: why illegible reasoning could exist despite faithful CoT</span>
-                        <span class="arr">↗</span>
-                    </a>
-                    <a class="row" href="https://www.lesswrong.com/posts/Ypkx5GyhwxNLRGiWo/why-i-m-moving-from-mechanistic-to-prosaic-interpretability">
-                        <span>Why I'm moving from mechanistic to prosaic interpretability</span>
-                        <span class="arr">↗</span>
-                    </a>
+                <div class="rows">
+                    <a href="https://www.lesswrong.com/posts/XgSYgpngNffL9eC8b/show-not-tell-gpt-4o-is-more-opinionated-in-images-than-in">
+                        <span>Show, not tell: GPT-4o is more opinionated in images than in text</span><span class="arr">↗</span></a>
+                    <a href="https://www.lesswrong.com/posts/4mtqQKvmHpQJ4dgj7/daniel-tan-s-shortform?commentId=p8jEWLKfPgNMxDDQW">
+                        <span>Superhuman latent knowledge: illegible reasoning despite faithful CoT</span><span class="arr">↗</span></a>
+                    <a href="https://www.lesswrong.com/posts/Ypkx5GyhwxNLRGiWo/why-i-m-moving-from-mechanistic-to-prosaic-interpretability">
+                        <span>Why I'm moving from mechanistic to prosaic interpretability</span><span class="arr">↗</span></a>
                 </div>
             </section>
 
             <section id="now" class="reveal">
-                <p class="section-label">currently</p>
+                <span class="section-label label"><span class="i">▸</span>currently</span>
                 <h2>Now</h2>
-                <div class="now-card">
-                    <p class="stamp">Updated 13 December 2025</p>
-                    <p>Six months in at the Center on Long-Term Risk, working with Niels and Maxime — I love the
-                        dynamism of a small, focused team. We just put out our paper on
-                        <a href="https://arxiv.org/abs/2510.04340">inoculation prompting</a>.</p>
-                    <p style="margin-bottom:0;">It's also been a season of growth — more introspection, more in tune
-                        with what I actually want, happier and more agentic for it.
-                        <a href="now.html">The fuller version →</a></p>
+                <div class="dispatch">
+                    <div class="head">
+                        <span class="clock"><svg width="34" height="34" viewBox="0 0 34 34">
+                            <circle class="ring-bg" cx="17" cy="17" r="13" fill="none" stroke-width="3"></circle>
+                            <circle class="ring-fg" cx="17" cy="17" r="13" fill="none" stroke-width="3" stroke-linecap="round"
+                                transform="rotate(-90 17 17)" stroke-dasharray="82" stroke-dashoffset="34"></circle>
+                        </svg></span>
+                        <span class="stamp">CYCLE · JUNE 2026</span>
+                    </div>
+                    <p>A new chapter — I've just started a role at <a href="now.html">Arcadia Alignment</a>.
+                        Outside the work, health has become a real joy: two years with a trainer, and lately I'm into
+                        mudgar (heavy-club training) and my first steps on the swing-dance floor.</p>
+                    <p style="margin-bottom:0;">It's been a season of growth — clearer about what I want, happier,
+                        more myself. <a href="now.html">The fuller version →</a></p>
                 </div>
             </section>
 
             <section id="into" class="reveal">
-                <p class="section-label">off the clock</p>
+                <span class="section-label label"><span class="i">▸</span>off the clock</span>
                 <h2>What I'm into</h2>
                 <p class="muted">The stuff I'll happily talk your ear off about:</p>
-                <div class="into-grid">
+                <div class="chips">
+                    <span class="chip">Dancing</span>
+                    <span class="chip">Parkrun</span>
                     <span class="chip">Bouldering</span>
                     <span class="chip">Cooking</span>
                     <span class="chip">3Blue1Brown</span>
@@ -150,8 +426,6 @@
                     <span class="chip">Avatar: TLA</span>
                     <span class="chip">Stardew Valley</span>
                     <span class="chip">Hollow Knight</span>
-                    <span class="chip">Children of Time</span>
-                    <span class="chip">Stormlight Archive</span>
                     <span class="chip">ABBA</span>
                     <span class="chip">TPOT</span>
                 </div>
@@ -170,15 +444,87 @@
                 <p class="email">hello [at] danieltan [dot] cc</p>
             </section>
 
-            <footer class="home">Built with care · type set in Fraunces &amp; Inter</footer>
+            <footer>
+                the station keeps turning · thanks for stopping by<br>
+                <span style="opacity:.65">set in Inter &amp; JetBrains Mono</span>
+            </footer>
         </main>
     </div>
 
     <script>
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-        }, { threshold: 0.12 });
+        const obs = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold: 0.12 });
         document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+
+    <!-- ============ atmosphere dev kit ============ -->
+    <button class="devkit-toggle" id="devToggle" title="atmosphere dev kit (press d)" aria-label="atmosphere dev kit">⚙</button>
+    <div class="devkit" id="devKit">
+        <h4>atmosphere</h4>
+        <div class="sub">live tuning · dev-only panel</div>
+        <div class="ctrl"><label>star brightness <b id="v-sb"></b></label><input type="range" id="sb" min="0" max="1" step="0.05"></div>
+        <div class="ctrl"><label>star density <b id="v-sd"></b></label><input type="range" id="sd" min="0" max="100" step="1"></div>
+        <div class="ctrl"><label>drift speed <b id="v-ss"></b></label><input type="range" id="ss" min="30" max="400" step="5"></div>
+        <div class="ctrl"><label>lamp glow <b id="v-lg"></b></label><input type="range" id="lg" min="0" max="120" step="2"></div>
+        <div class="ctrl"><label>lamp breath <b id="v-lb"></b></label><input type="range" id="lb" min="4" max="24" step="1"></div>
+        <div class="ctrl"><label>vignette <b id="v-vg"></b></label><input type="range" id="vg" min="0" max="0.85" step="0.05"></div>
+        <div class="btns">
+            <button class="act" id="devCopy">copy CSS</button>
+            <button class="act" id="devReset">reset</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // dev-only: enable the atmosphere tuner with #dev in the URL (e.g. danieltan.cc/#dev)
+            if (!location.hash.toLowerCase().includes('dev')) return;
+            const root = document.documentElement, $ = id => document.getElementById(id);
+            $('devToggle').classList.add('enabled');
+            const DEFAULTS = { sb: 0.9, density: 440, ss: 120, lg: 95, lb: 11, vg: 0.5 };
+            // density slider 0..100 (right = denser) maps to tile size 900..320px
+            const sizeFromPct = p => Math.round(900 - (p / 100) * 580);
+            const pctFromSize = s => Math.round((900 - s) / 580 * 100);
+
+            const setSB = v => { root.style.setProperty('--star-opacity', v); $('v-sb').textContent = (+v).toFixed(2); };
+            const setSD = p => { root.style.setProperty('--star-size', sizeFromPct(p) + 'px'); $('v-sd').textContent = p + '%'; };
+            const setSS = s => { root.style.setProperty('--star-speed', s + 's'); $('v-ss').textContent = s + 's'; };
+            const setLG = p => { const mx = p / 100; root.style.setProperty('--lamp-max', mx.toFixed(2)); root.style.setProperty('--lamp-min', (mx * 0.45).toFixed(3)); $('v-lg').textContent = p + '%'; };
+            const setLB = s => { root.style.setProperty('--lamp-speed', s + 's'); $('v-lb').textContent = s + 's'; };
+            const setVG = v => { root.style.setProperty('--vignette', v); $('v-vg').textContent = (+v).toFixed(2); };
+
+            const bind = (id, fn) => $(id).addEventListener('input', e => fn(e.target.value));
+            bind('sb', setSB); bind('sd', v => setSD(+v)); bind('ss', v => setSS(+v));
+            bind('lg', v => setLG(+v)); bind('lb', v => setLB(+v)); bind('vg', setVG);
+
+            function apply(d) {
+                $('sb').value = d.sb; setSB(d.sb);
+                $('sd').value = pctFromSize(d.density); setSD(pctFromSize(d.density));
+                $('ss').value = d.ss; setSS(d.ss);
+                $('lg').value = d.lg; setLG(d.lg);
+                $('lb').value = d.lb; setLB(d.lb);
+                $('vg').value = d.vg; setVG(d.vg);
+            }
+
+            const toggle = () => $('devKit').classList.toggle('open');
+            $('devToggle').addEventListener('click', toggle);
+            document.addEventListener('keydown', e => {
+                if (e.key === 'd' && !/input|textarea|select/i.test(e.target.tagName)) toggle();
+            });
+            $('devReset').addEventListener('click', () => apply(DEFAULTS));
+            $('devCopy').addEventListener('click', () => {
+                const css = ':root{\n' +
+                    '  --star-opacity: ' + $('sb').value + ';\n' +
+                    '  --star-size: ' + sizeFromPct(+$('sd').value) + 'px;\n' +
+                    '  --star-speed: ' + $('ss').value + 's;\n' +
+                    '  --lamp-min: ' + ($('lg').value / 100 * 0.45).toFixed(3) + ';\n' +
+                    '  --lamp-max: ' + ($('lg').value / 100).toFixed(2) + ';\n' +
+                    '  --lamp-speed: ' + $('lb').value + 's;\n' +
+                    '  --vignette: ' + $('vg').value + ';\n}';
+                navigator.clipboard.writeText(css).then(() => {
+                    const b = $('devCopy'); b.textContent = 'copied!'; setTimeout(() => b.textContent = 'copy CSS', 1200);
+                });
+            });
+            apply(DEFAULTS);
+        })();
     </script>
 </body>
 
