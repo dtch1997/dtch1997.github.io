@@ -103,6 +103,27 @@
         .entry em { color: var(--text); font-style: italic; }
         .fill { color: var(--coral); border-bottom: 1px dashed var(--coral); font-style: normal; }
 
+        /* archive — previous cycles */
+        .archive { padding: 5vh 0 2vh; border-top: 1px solid var(--line); margin-top: 2vh; }
+        .archive .label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--dim); margin: 0 0 18px; }
+        details.cycle { background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
+            padding: 0 20px; margin-bottom: 12px; }
+        details.cycle + details.cycle { margin-top: 0; }
+        details.cycle summary {
+            list-style: none; cursor: pointer; padding: 16px 0; display: flex; align-items: center; gap: 12px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text); letter-spacing: 0.04em;
+        }
+        details.cycle summary::-webkit-details-marker { display: none; }
+        details.cycle summary .tw { color: var(--coral); transition: transform .2s ease; }
+        details.cycle[open] summary .tw { transform: rotate(90deg); }
+        details.cycle summary .stamp { color: var(--amber); }
+        details.cycle summary .gist { color: var(--dim); font-family: 'Inter', sans-serif; letter-spacing: 0;
+            font-size: 0.92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        details.cycle .inner { padding: 4px 0 22px; border-top: 1px solid var(--line); margin-top: -2px; }
+        details.cycle .inner p { margin: 14px 0 0; color: var(--dim); }
+        details.cycle .inner p:first-child { margin-top: 16px; }
+
         footer { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 5vh 28px 7vh;
             font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--dim); letter-spacing: 0.05em; }
 
@@ -170,6 +191,30 @@
                 people — the kind who love physical affection and hugs as much as I do.</p>
             <p>And I'll be honest about attraction: I have a type, physically — tall, fit, athletic, a decent amount
                 of muscle. Naming it plainly feels better than pretending I don't.</p>
+        </section>
+
+        <section class="archive reveal">
+            <p class="label">previous cycles</p>
+
+            <details class="cycle">
+                <summary>
+                    <span class="tw">›</span>
+                    <span class="stamp">DEC 2025</span>
+                    <span class="gist">CLR · inoculation prompting · a season of growth</span>
+                </summary>
+                <div class="inner">
+                    <p>I'm based in London, in the United Kingdom.</p>
+                    <p>It's coming close to the six-month mark of me working at the Center on Long-Term Risk. This has
+                        been a great experience — collaborating with Niels and Maxime has been excellent, and I
+                        appreciate the dynamism we have as a small, focused team. As part of this we put out our paper
+                        on <a href="https://arxiv.org/abs/2510.04340">inoculation prompting</a>, which demonstrates how
+                        we can steer language model generalization by adding one line to training data.</p>
+                    <p>This season has been one of growth. I've done a lot of introspection, and (perhaps for the
+                        first time in my life) become more in tune with my preferences, values, and goals. I've become
+                        a lot happier and more agentic as a result — for example, I'm now actively dating again, and
+                        seeking a long-term partner to build a vibrant, meaningful life with.</p>
+                </div>
+            </details>
         </section>
     </div>
 
