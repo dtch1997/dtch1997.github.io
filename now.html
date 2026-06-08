@@ -6,41 +6,219 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Now — Daniel Tan</title>
-    <meta name="description" content="What Daniel Tan is up to right now.">
+    <meta name="description" content="A dispatch from Daniel Tan's current cycle.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #0e1416;
+            --bg2:   #131c1f;
+            --bg3:   #18211f;
+            --line:  rgba(231, 210, 170, 0.14);
+            --line2: rgba(231, 210, 170, 0.28);
+            --text:  #e8e2d4;
+            --dim:   #7d8a8a;
+            --amber: #e3a94e;
+            --teal:  #67c0b4;
+            --coral: #e07b66;
+            /* atmosphere (baked from the dev kit defaults) */
+            --star-opacity: 0.9;
+            --star-size: 440px;
+            --star-speed: 120s;
+            --lamp-min: 0.43;
+            --lamp-max: 0.95;
+            --lamp-speed: 11s;
+            --vignette: 0.5;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0; background: var(--bg); color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.75;
+            -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+        }
+        a { color: var(--teal); text-decoration: none; }
+        a:hover { color: var(--amber); }
+
+        /* atmosphere */
+        .atmos { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+            background: radial-gradient(125% 95% at 50% 45%, transparent 52%, rgba(0,0,0,var(--vignette)) 100%); }
+        .atmos .stars {
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(1.6px 1.6px at 20% 30%, rgba(232,226,212,0.95), transparent),
+                radial-gradient(1.3px 1.3px at 60% 70%, rgba(232,226,212,0.75), transparent),
+                radial-gradient(2px 2px   at 80% 18%, rgba(232,226,212,0.9), transparent),
+                radial-gradient(1.2px 1.2px at 40% 82%, rgba(232,226,212,0.6), transparent),
+                radial-gradient(1.4px 1.4px at 92% 58%, rgba(232,226,212,0.78), transparent),
+                radial-gradient(1.2px 1.2px at 10% 62%, rgba(232,226,212,0.6), transparent),
+                radial-gradient(2px 2px   at 33% 12%, rgba(232,226,212,0.85), transparent),
+                radial-gradient(1.3px 1.3px at 74% 88%, rgba(232,226,212,0.65), transparent),
+                radial-gradient(1.2px 1.2px at 50% 48%, rgba(232,226,212,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 15% 16%, rgba(232,226,212,0.8), transparent),
+                radial-gradient(1.2px 1.2px at 68% 38%, rgba(232,226,212,0.6), transparent),
+                radial-gradient(1.3px 1.3px at 88% 80%, rgba(232,226,212,0.65), transparent);
+            background-repeat: repeat; background-size: var(--star-size) var(--star-size);
+            opacity: var(--star-opacity); animation: drift var(--star-speed) linear infinite; }
+        .atmos .lamp { position: absolute; inset: 0;
+            background:
+                radial-gradient(780px 580px at 20% 26%, rgba(227,169,78,0.17), transparent 62%),
+                radial-gradient(700px 580px at 84% 76%, rgba(224,123,102,0.14), transparent 62%);
+            animation: breathe var(--lamp-speed) ease-in-out infinite; }
+        @keyframes drift { to { background-position: 0 calc(-1 * var(--star-size)); } }
+        @keyframes breathe { 0%,100% { opacity: var(--lamp-min); } 50% { opacity: var(--lamp-max); } }
+
+        /* page */
+        .page { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 0 28px; }
+        .topbar { display: flex; align-items: center; justify-content: space-between;
+            padding: 30px 0; border-bottom: 1px solid var(--line); }
+        .wordmark { font-weight: 700; letter-spacing: -0.01em; color: var(--text); }
+        .wordmark:hover { color: var(--amber); }
+        .back { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--dim); }
+        .back:hover { color: var(--amber); }
+        .back .arr { display: inline-block; transition: transform .18s ease; }
+        .back:hover .arr { transform: translateX(-3px); }
+
+        .head { margin: 6vh 0 4vh; }
+        .head .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.22em;
+            text-transform: uppercase; color: var(--coral); margin: 0 0 14px; }
+        .head h1 { font-size: clamp(2.4rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -0.025em; margin: 0; }
+        .head .stamp { display: flex; align-items: center; gap: 13px; margin-top: 16px; }
+        .head .stamp .txt { font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--dim); letter-spacing: 0.08em; }
+        .clock .ring-bg { stroke: var(--line2); }
+        .clock .ring-fg { stroke: var(--coral); }
+
+        /* dispatch entries */
+        .entry { padding: 4vh 0; border-top: 1px solid var(--line); }
+        .entry .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--teal); margin: 0 0 14px; display: flex; align-items: center; gap: 9px; }
+        .entry .tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+        .entry p { margin: 0 0 1em; }
+        .entry p:last-child { margin-bottom: 0; }
+        .entry em { color: var(--text); font-style: italic; }
+        .fill { color: var(--coral); border-bottom: 1px dashed var(--coral); font-style: normal; }
+
+        /* archive — previous cycles */
+        .archive { padding: 5vh 0 2vh; border-top: 1px solid var(--line); margin-top: 2vh; }
+        .archive .label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--dim); margin: 0 0 18px; }
+        details.cycle { background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
+            padding: 0 20px; margin-bottom: 12px; }
+        details.cycle + details.cycle { margin-top: 0; }
+        details.cycle summary {
+            list-style: none; cursor: pointer; padding: 16px 0; display: flex; align-items: center; gap: 12px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text); letter-spacing: 0.04em;
+        }
+        details.cycle summary::-webkit-details-marker { display: none; }
+        details.cycle summary .tw { color: var(--coral); transition: transform .2s ease; }
+        details.cycle[open] summary .tw { transform: rotate(90deg); }
+        details.cycle summary .stamp { color: var(--amber); }
+        details.cycle summary .gist { color: var(--dim); font-family: 'Inter', sans-serif; letter-spacing: 0;
+            font-size: 0.92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        details.cycle .inner { padding: 4px 0 22px; border-top: 1px solid var(--line); margin-top: -2px; }
+        details.cycle .inner p { margin: 14px 0 0; color: var(--dim); }
+        details.cycle .inner p:first-child { margin-top: 16px; }
+
+        footer { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 5vh 28px 7vh;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--dim); letter-spacing: 0.05em; }
+
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .atmos .stars, .atmos .lamp { animation: none; }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="atmos" aria-hidden="true">
+        <div class="stars"></div>
+        <div class="lamp"></div>
+    </div>
+
     <div class="page">
         <div class="topbar">
             <a href="index.html" class="wordmark">Daniel Tan</a>
-            <a href="index.html" class="backlink"><span class="arr">←</span> Home</a>
+            <a href="index.html" class="back"><span class="arr">←</span> home</a>
         </div>
 
-        <header class="pagehead">
-            <p class="eyebrow">currently</p>
-            <h1>What I'm up to now</h1>
-            <p class="stamp">Updated 13 December 2025</p>
+        <header class="head">
+            <p class="eyebrow">dispatch · current cycle</p>
+            <h1>Now</h1>
+            <div class="stamp">
+                <span class="clock"><svg width="32" height="32" viewBox="0 0 32 32">
+                    <circle class="ring-bg" cx="16" cy="16" r="12" fill="none" stroke-width="3"></circle>
+                    <circle class="ring-fg" cx="16" cy="16" r="12" fill="none" stroke-width="3" stroke-linecap="round"
+                        transform="rotate(-90 16 16)" stroke-dasharray="75" stroke-dashoffset="30"></circle>
+                </svg></span>
+                <span class="txt">CYCLE · JUNE 2026 · LONDON</span>
+            </div>
         </header>
 
-        <div class="prose">
-            <p>I'm currently based in London, in the United Kingdom.</p>
+        <section class="entry reveal">
+            <p class="tag">the work</p>
+            <p>A new chapter: I've recently started a role at <strong>Arcadia Alignment</strong>. New team, new
+                rhythm — I'm still settling into the shape of it, and genuinely excited for what's ahead.</p>
+        </section>
 
-            <p>It's coming close to the six-month mark of me working at the Center on Long-Term Risk. This has been a
-                great experience — collaborating with Niels and Maxime has been excellent, and I appreciate the
-                dynamism we have as a small, focused team. As part of this we put out our paper on
-                <a href="https://arxiv.org/abs/2510.04340">inoculation prompting</a>, which demonstrates how we can
-                steer language model generalization by adding one line to training data.</p>
+        <section class="entry reveal">
+            <p class="tag">the body</p>
+            <p>Health has quietly become one of the best parts of my life. I've worked with a personal trainer for
+                about two years now, and it's done something I didn't expect — it built real <em>confidence</em> in
+                my body. I actually get excited to train these days.</p>
+            <p>Lately I'm branching out. I've fallen for <strong>mudgar</strong> — the ancient Indian art of swinging
+                heavy clubs — which is every bit as fun and strange as it sounds. Michael Eckert's YouTube channel
+                has me hooked on his calm, patient approach to building pull-up strength. And I love Connor Harris'
+                videos about <span class="fill">‹ fill in ›</span>.</p>
+        </section>
 
-            <p>This season has been one of growth. I've done a lot of introspection, and (perhaps for the first time
-                in my life) become more in tune with my preferences, values, and goals. I've become a lot happier
-                and more agentic as a result! For example: I'm now actively dating again, and seeking a long-term
-                partner to build a vibrant, meaningful life with.</p>
-        </div>
+        <section class="entry reveal">
+            <p class="tag">the dance floor</p>
+            <p>I've been dancing a lot, and loving it. I went to my first <strong>swing dance</strong> lesson
+                recently — so much fun, and I'm definitely going back. Also loving
+                <span class="fill">‹ fill in ›</span>.</p>
+        </section>
+
+        <section class="entry reveal">
+            <p class="tag">the heart</p>
+            <p>I've gotten clearer about what I'm looking for. I'm consistently drawn to <em>warm, affectionate</em>
+                people — the kind who love physical affection and hugs as much as I do.</p>
+            <p>And I'll be honest about attraction: I have a type, physically — tall, fit, athletic, a decent amount
+                of muscle. Naming it plainly feels better than pretending I don't.</p>
+        </section>
+
+        <section class="archive reveal">
+            <p class="label">previous cycles</p>
+
+            <details class="cycle">
+                <summary>
+                    <span class="tw">›</span>
+                    <span class="stamp">DEC 2025</span>
+                    <span class="gist">CLR · inoculation prompting · a season of growth</span>
+                </summary>
+                <div class="inner">
+                    <p>I'm based in London, in the United Kingdom.</p>
+                    <p>It's coming close to the six-month mark of me working at the Center on Long-Term Risk. This has
+                        been a great experience — collaborating with Niels and Maxime has been excellent, and I
+                        appreciate the dynamism we have as a small, focused team. As part of this we put out our paper
+                        on <a href="https://arxiv.org/abs/2510.04340">inoculation prompting</a>, which demonstrates how
+                        we can steer language model generalization by adding one line to training data.</p>
+                    <p>This season has been one of growth. I've done a lot of introspection, and (perhaps for the
+                        first time in my life) become more in tune with my preferences, values, and goals. I've become
+                        a lot happier and more agentic as a result — for example, I'm now actively dating again, and
+                        seeking a long-term partner to build a vibrant, meaningful life with.</p>
+                </div>
+            </details>
+        </section>
     </div>
+
+    <footer>the station keeps turning · <a href="index.html">← back home</a></footer>
 
     <script>
         const obs = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold: 0.12 });
