@@ -3,24 +3,24 @@
 ## hero
 
 ### logline
-another quiet morning in London. the kettle's on; the work continues.
+Welcome to my corner of the lightcone.
 
 ### headline
-I study how AI minds <span class="accent">go wrong</span>.
+I study how AI minds <span class="accent">tick</span>.
 
 ### lede
-And, more importantly, how to keep them from going wrong as they get more capable.
+AI persona nerd. Enjoyer of physicality. Avid yapper. Amateur rationalist
 
 ## about
 
 ### big
-I'm an AI safety researcher in London, doing my PhD at UCL and working with the Center on Long-Term Risk.
+Leading the 'model motivations' team at Arcadia Alignment.
 
 ### body
-My research is about building a pragmatic science of how language models generalize — why an aligned model can quietly become misaligned, what models actually learn from their data, and how to catch it before it matters. I come at it from a mix of NLP, ML, and cognitive science.
+I'm really fascinated by language models. There's so much emergent complexity. It feels like an age of exploration.
 
 ### muted
-Before this: undergrad at Stanford in ML and CS, a year building robots at a Singapore startup, and earlier obsessions with mechanistic interpretability and open-ended learning. Off the clock I'm dancing, on a parkrun, climbing, cooking, or deep in some anime / sci-fi. Autism is my superpower, and I'm unapologetically curious about almost everything.
+Previously: undergrad at Stanford in ML and CS, a year building robots at a Singapore startup, and earlier obsessions with mechanistic interpretability and open-ended learning. Off the clock: I like dancing, climbing, cooking, building random stuff, or just hanging out with friends.
 
 ## work
 

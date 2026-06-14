@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daniel — hi :)</title>
+<meta name="description" content="28 · bisexual · London. Newish to all this and still working out what I actually want — so think exploration, not a fixed destination." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0f1417; --bg2:#151e22; --card:#18232660; --line:rgba(231,210,170,.14);
+  --line2:rgba(231,210,170,.30); --text:#ece6d8; --dim:#8b9897; --ink:#0f1417;
+  --amber:#e7b24e; --coral:#e87b66; --teal:#67c0b4; --rose:#e98aa6; --plum:#b58cd6;
+  --star-size:440px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'Inter',system-ui,sans-serif; font-size:1.06rem; line-height:1.7;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden;
+}
+::selection{background:var(--coral); color:var(--ink);}
+
+/* ===== atmosphere ===== */
+.atmos{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  background:radial-gradient(125% 95% at 50% 40%, transparent 50%, rgba(0,0,0,.55) 100%);}
+.stars{position:absolute; inset:0; opacity:.85; animation:drift 140s linear infinite;
+  background-repeat:repeat; background-size:var(--star-size) var(--star-size);
+  background-image:
+    radial-gradient(1.6px 1.6px at 20% 30%, rgba(236,230,216,.9), transparent),
+    radial-gradient(1.3px 1.3px at 60% 70%, rgba(236,230,216,.7), transparent),
+    radial-gradient(2px 2px at 80% 18%, rgba(236,230,216,.85), transparent),
+    radial-gradient(1.2px 1.2px at 40% 82%, rgba(236,230,216,.55), transparent),
+    radial-gradient(1.4px 1.4px at 92% 58%, rgba(236,230,216,.75), transparent),
+    radial-gradient(1.2px 1.2px at 10% 62%, rgba(236,230,216,.55), transparent),
+    radial-gradient(2px 2px at 33% 12%, rgba(236,230,216,.8), transparent),
+    radial-gradient(1.3px 1.3px at 74% 88%, rgba(236,230,216,.6), transparent),
+    radial-gradient(1.5px 1.5px at 15% 16%, rgba(236,230,216,.78), transparent),
+    radial-gradient(1.2px 1.2px at 68% 38%, rgba(236,230,216,.55), transparent);}
+.lamp{position:absolute; inset:0; animation:breathe 12s ease-in-out infinite;
+  background:
+    radial-gradient(820px 600px at 18% 22%, rgba(231,178,78,.16), transparent 62%),
+    radial-gradient(760px 600px at 86% 30%, rgba(233,138,166,.13), transparent 62%),
+    radial-gradient(800px 640px at 60% 92%, rgba(103,192,180,.10), transparent 62%);}
+@keyframes drift{to{background-position:0 calc(-1 * var(--star-size));}}
+@keyframes breathe{0%,100%{opacity:.55;} 50%{opacity:.95;}}
+
+/* ===== layout ===== */
+.page{position:relative; z-index:1; max-width:760px; margin:0 auto; padding:0 26px 120px;}
+section{margin:96px 0;}
+.eyebrow{font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--dim); margin:0 0 22px; display:flex; align-items:center; gap:12px;}
+.eyebrow::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--line),transparent);}
+h2{font-family:'Fraunces',serif; font-weight:600; font-size:clamp(1.6rem,4vw,2.2rem);
+  line-height:1.15; margin:0 0 26px; font-optical-sizing:auto;}
+
+/* ===== reveal ===== */
+.reveal{opacity:0; transform:translateY(26px); transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1; transform:none;}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1; transform:none; transition:none;}
+  .stars,.lamp,.blob,.float{animation:none !important;}
+}
+
+/* ===== hero ===== */
+.hero{min-height:92vh; display:flex; flex-direction:column; justify-content:center; padding-top:60px;}
+.wave{font-size:2.4rem; display:inline-block; transform-origin:70% 70%; animation:wave 2.6s ease-in-out infinite;}
+@keyframes wave{0%,60%,100%{transform:rotate(0);}10%{transform:rotate(16deg);}20%{transform:rotate(-8deg);}30%{transform:rotate(16deg);}40%{transform:rotate(-4deg);}50%{transform:rotate(10deg);}}
+.hero h1{font-family:'Fraunces',serif; font-weight:600; font-size:clamp(3.2rem,13vw,6.4rem);
+  line-height:.92; margin:.2em 0 .1em; letter-spacing:-.02em;
+  background:linear-gradient(120deg,var(--amber),var(--coral) 45%,var(--rose) 75%,var(--plum));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.chips{display:flex; flex-wrap:wrap; gap:9px; margin:6px 0 26px;}
+.chip{font-family:'JetBrains Mono',monospace; font-size:.8rem; letter-spacing:.02em;
+  padding:7px 14px; border:1px solid var(--line2); border-radius:100px; color:var(--text);
+  background:var(--bg2); transition:transform .25s, border-color .25s, color .25s;}
+.chip:hover{transform:translateY(-3px) rotate(-1.5deg); border-color:var(--coral); color:var(--coral);}
+.lede{font-family:'Fraunces',serif; font-style:italic; font-weight:400;
+  font-size:clamp(1.2rem,3.4vw,1.55rem); line-height:1.5; color:#d7d0c0; max-width:30ch;}
+.lede em{font-style:normal; color:var(--teal); font-weight:500;}
+.scrollcue{margin-top:48px; font-family:'JetBrains Mono',monospace; font-size:.72rem;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--dim); display:flex; align-items:center; gap:10px;}
+.scrollcue .arr{display:inline-block; animation:bob 1.8s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+
+/* ===== fast facts cards ===== */
+.cards{display:grid; gap:14px;}
+.fcard{position:relative; padding:22px 24px; border:1px solid var(--line); border-radius:18px;
+  background:var(--card); backdrop-filter:blur(6px); transition:transform .3s, border-color .3s, background .3s;}
+.fcard:hover{transform:translateY(-4px); border-color:var(--line2); background:#1b262960;}
+/* cards as carousel pages: even height, centered, no clipping lift */
+.carousel .fcard{display:flex; flex-direction:column; justify-content:center; min-height:150px;}
+.carousel .fcard:hover{transform:none;}
+.carousel .fcard .ic{font-size:1.7rem;}
+.carousel .fcard p{font-size:1.1rem;}
+.fcard .ic{font-size:1.5rem; margin-bottom:8px; display:block;}
+.fcard p{margin:0; color:#ded7c8;}
+.fcard b{color:var(--amber); font-weight:600;}
+
+/* ===== prose / "what I'm like" ===== */
+.prose p{margin:0 0 18px; color:#dcd5c6;}
+.hl{padding:1px 7px; border-radius:7px; font-weight:500; white-space:nowrap;}
+.hl-amber{background:rgba(231,178,78,.16); color:var(--amber);}
+.hl-teal{background:rgba(103,192,180,.16); color:var(--teal);}
+.hl-rose{background:rgba(233,138,166,.16); color:var(--rose);}
+.hl-plum{background:rgba(181,140,214,.16); color:var(--plum);}
+
+/* ===== interests tag cloud ===== */
+.intro-line{color:var(--dim); margin:-10px 0 20px; font-style:italic;}
+.legend{display:flex; flex-wrap:wrap; gap:16px; margin:0 0 22px;}
+.legend span{display:inline-flex; align-items:center; gap:7px; font-family:'JetBrains Mono',monospace;
+  font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--dim);}
+.legend i{width:10px; height:10px; border-radius:50%; background:var(--c);}
+.tags{display:flex; flex-wrap:wrap; gap:11px;}
+.tag{display:inline-flex; align-items:center; gap:9px; font-size:.96rem; padding:9px 16px 9px 13px;
+  border-radius:100px; border:1px solid var(--line2); background:var(--bg2); color:var(--text); cursor:default;
+  transition:transform .2s, background .2s, color .2s, border-color .2s;}
+.tag::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--c,var(--amber));
+  flex:none; transition:transform .2s;}
+.tag:hover{transform:translateY(-3px) scale(1.05) rotate(var(--r,2deg)); color:var(--ink);
+  background:var(--c,var(--amber)); border-color:transparent;}
+.tag:hover::before{background:var(--ink); transform:scale(1.2);}
+
+/* ===== win me over ===== */
+.win{display:grid; gap:0;}
+.win li{list-style:none; display:flex; gap:18px; align-items:flex-start;
+  padding:20px 4px; border-bottom:1px solid var(--line);}
+.win li:last-child{border-bottom:0;}
+.win .num{font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--coral);
+  padding-top:4px; min-width:26px;}
+.win .txt{flex:1;}
+.win .txt b{color:var(--text); font-weight:600;}
+.win .txt span{color:var(--dim); display:block; font-size:.92rem; margin-top:3px;}
+
+/* ===== practical ===== */
+.practical{border:1px solid var(--line); border-radius:20px; padding:30px 30px 26px;
+  background:linear-gradient(180deg,#16201f80, #13191c80);}
+.practical .row{display:flex; gap:14px; padding:13px 0; border-bottom:1px dashed var(--line);}
+.practical .row:last-child{border-bottom:0;}
+.practical .k{font-family:'JetBrains Mono',monospace; font-size:.76rem; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--dim); min-width:120px; padding-top:3px;}
+.practical .v{flex:1; color:#dcd5c6;}
+.kink{display:inline-flex; align-items:center; gap:8px; margin-top:24px; padding:9px 16px;
+  border-radius:100px; border:1px solid rgba(233,138,166,.35); background:rgba(233,138,166,.08);
+  color:var(--rose); font-size:.9rem; font-weight:500;}
+
+/* ===== coming soon placeholders ===== */
+.soon{display:grid; gap:16px; grid-template-columns:1fr 1fr;}
+@media (max-width:560px){.soon{grid-template-columns:1fr;}}
+.soonbox{border:1.5px dashed var(--line2); border-radius:20px; padding:34px 26px; text-align:center;
+  background:repeating-linear-gradient(45deg,#15201f10,#15201f10 12px,#1a252410 12px,#1a252410 24px);}
+.soonbox .big{font-size:2rem; display:block; margin-bottom:10px;}
+.soonbox b{font-family:'Fraunces',serif; font-size:1.2rem; font-weight:600; display:block;}
+.soonbox span{color:var(--dim); font-size:.9rem; font-family:'JetBrains Mono',monospace;
+  letter-spacing:.08em; text-transform:uppercase;}
+.soonbox .q{color:#cfc8b9; font-style:italic; margin-top:8px; font-size:.95rem;}
+
+/* ===== karaoke now-playing widget ===== */
+.np{position:fixed; bottom:18px; right:18px; z-index:5; display:flex; align-items:center; gap:11px;
+  padding:10px 16px 10px 12px; border:1px solid var(--line2); border-radius:100px;
+  background:rgba(18,26,28,.82); backdrop-filter:blur(10px); font-size:.84rem; color:var(--text);
+  box-shadow:0 8px 30px rgba(0,0,0,.35); transition:transform .3s, opacity .3s; max-width:78vw;}
+.np:hover{transform:translateY(-3px);}
+.np .eq{display:flex; align-items:flex-end; gap:2.5px; height:18px;}
+.np .eq i{width:3px; background:var(--teal); border-radius:2px; animation:eq 1s ease-in-out infinite;}
+.np .eq i:nth-child(2){animation-delay:.2s; background:var(--coral);}
+.np .eq i:nth-child(3){animation-delay:.4s; background:var(--amber);}
+.np .eq i:nth-child(4){animation-delay:.1s; background:var(--rose);}
+@keyframes eq{0%,100%{height:5px;}50%{height:17px;}}
+.np .lbl{font-family:'JetBrains Mono',monospace; font-size:.64rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--dim); display:block; line-height:1.3;}
+.np b{font-weight:600;}
+
+/* ===== spicy gate ===== */
+.gate{margin-top:26px;}
+.gate-btn{display:inline-flex; align-items:baseline; gap:8px; cursor:pointer;
+  font-family:'Inter',sans-serif; font-size:.96rem; color:var(--text);
+  padding:11px 18px; border-radius:100px; border:1px solid rgba(233,138,166,.35);
+  background:rgba(233,138,166,.08); transition:transform .25s, background .25s, border-color .25s;}
+.gate-btn:hover{transform:translateY(-2px); background:rgba(233,138,166,.14); border-color:rgba(233,138,166,.6);}
+.gate-btn .pepper{font-size:1.05rem; transition:transform .3s;}
+.gate-btn[aria-expanded="true"] .pepper{transform:rotate(12deg) scale(1.15);}
+.gate-btn .gate-label{font-weight:600; color:var(--rose);}
+.gate-btn .gate-hint{color:var(--dim); font-size:.85rem;}
+.gate-btn[aria-expanded="true"] .gate-hint{display:none;}
+.spicy{overflow:hidden; max-height:0; opacity:0; transition:max-height .5s ease, opacity .5s ease, margin .5s ease;}
+.spicy.open{max-height:300px; opacity:1; margin-top:18px;}
+.spicy p{margin:0 0 12px; padding:16px 20px; border-radius:14px;
+  background:rgba(233,138,166,.07); border:1px solid rgba(233,138,166,.22); color:#e6dccd;}
+.spicy b{color:var(--rose);}
+.spicy .kinkline{margin-bottom:0;}
+
+/* ===== carousel ===== */
+.carousel{position:relative;}
+.viewport{overflow:hidden; border-radius:18px;}
+.track{display:flex; align-items:stretch; transition:transform .7s cubic-bezier(.6,.05,.2,1); will-change:transform;}
+.track > *{flex:0 0 100%; min-width:0;}
+.carousel.no-anim .track{transition:none;}
+.cnav{display:flex; align-items:center; justify-content:center; gap:16px; margin-top:18px;}
+.cdots{display:flex; gap:9px;}
+.cdot{width:8px; height:8px; padding:0; border:none; border-radius:50%; cursor:pointer;
+  background:var(--line2); transition:transform .25s, background .25s;}
+.cdot:hover{background:var(--dim);}
+.cdot.active{background:var(--coral); transform:scale(1.4);}
+.carr{display:flex; align-items:center; justify-content:center; width:32px; height:32px;
+  border-radius:50%; border:1px solid var(--line2); background:var(--bg2); color:var(--dim);
+  font-size:1.1rem; line-height:1; cursor:pointer; transition:transform .25s, color .25s, border-color .25s;}
+.carr:hover{color:var(--coral); border-color:var(--coral); transform:translateY(-2px);}
+
+/* ===== now-playing feed (carousel slides) ===== */
+#feed > a{display:flex; align-items:center; gap:16px; padding:22px 22px; border-radius:18px;
+  border:1px solid var(--line); background:var(--card); color:var(--text);
+  transition:border-color .25s, background .25s;}
+#feed > a:hover{border-color:var(--line2); background:#1b262960; color:var(--text);}
+#feed .art{font-size:1.5rem; width:42px; height:42px; display:flex; align-items:center; justify-content:center;
+  border-radius:11px; background:var(--bg2); flex:none;}
+#feed .meta{flex:1; min-width:0;}
+#feed .title{font-weight:600; font-size:1.08rem; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+#feed .artist{color:var(--dim); font-size:.9rem;}
+#feed .vibe{font-family:'JetBrains Mono',monospace; font-size:.64rem; letter-spacing:.1em;
+  text-transform:uppercase; padding:5px 10px; border-radius:100px; flex:none;
+  background:color-mix(in srgb, var(--c) 16%, transparent); color:var(--c); border:1px solid color-mix(in srgb, var(--c) 32%, transparent);}
+#feed .play{color:var(--dim); font-size:.8rem; flex:none; opacity:0; transition:opacity .25s;}
+#feed > a:hover .play{opacity:1; color:var(--teal);}
+/* live equalizer on the top ("now playing") track */
+#feed .eq{display:flex; align-items:flex-end; gap:3px; height:24px; width:24px; flex:none;}
+#feed .eq i{width:4px; background:var(--teal); border-radius:2px; animation:eq 1s ease-in-out infinite;}
+#feed .eq i:nth-child(2){animation-delay:.2s; background:var(--coral);}
+#feed .eq i:nth-child(3){animation-delay:.4s; background:var(--amber);}
+@media (max-width:520px){#feed .vibe{display:none;}}
+
+/* ===== contact form ===== */
+.contact{display:grid; gap:18px; border:1px solid var(--line); border-radius:22px;
+  padding:30px 28px; background:linear-gradient(180deg,#16201f80,#13191c80);}
+.contact label{display:flex; flex-direction:column; gap:8px; font-size:.92rem; color:#dcd5c6; font-weight:500;}
+.contact .opt{color:var(--dim); font-weight:400; font-style:italic;}
+.contact input[type=text], .contact textarea{
+  font-family:'Inter',sans-serif; font-size:1rem; color:var(--text);
+  background:var(--bg); border:1px solid var(--line2); border-radius:12px; padding:12px 14px;
+  transition:border-color .2s, box-shadow .2s; resize:vertical;}
+.contact input::placeholder, .contact textarea::placeholder{color:#6f7c7b;}
+.contact input:focus, .contact textarea:focus{outline:none; border-color:var(--coral);
+  box-shadow:0 0 0 3px rgba(232,123,102,.16);}
+.hp{position:absolute; left:-9999px; opacity:0;} /* honeypot */
+.submit{justify-self:start; font-family:'Inter',sans-serif; font-weight:600; font-size:1rem;
+  color:var(--ink); cursor:pointer; padding:13px 26px; border:none; border-radius:100px;
+  background:linear-gradient(120deg,var(--amber),var(--coral)); transition:transform .25s, filter .25s, box-shadow .25s;
+  box-shadow:0 6px 20px rgba(232,123,102,.22);}
+.submit:hover{transform:translateY(-3px); filter:brightness(1.06); box-shadow:0 10px 28px rgba(232,123,102,.32);}
+.submit:disabled{opacity:.6; cursor:default; transform:none;}
+.formnote{margin:0; font-size:.9rem; min-height:1.2em; color:var(--teal);}
+.formnote.err{color:var(--coral);}
+
+/* ===== footer ===== */
+footer{margin-top:80px; text-align:center; color:var(--dim); font-size:.86rem;
+  font-family:'JetBrains Mono',monospace; letter-spacing:.04em;}
+footer .heart{color:var(--coral);}
+</style>
+</head>
+<body>
+<div class="atmos"><div class="stars"></div><div class="lamp"></div></div>
+
+<!-- floating karaoke widget -->
+<div class="np" title="my actual happy place">
+  <span class="eq"><i></i><i></i><i></i><i></i></span>
+  <span><span class="lbl">now playing · gives me a runner's high</span><b>Karaoke</b> — any language, any time</span>
+</div>
+
+<main class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="wave">👋</span>
+    <h1>Daniel</h1>
+    <div class="chips reveal">
+      <span class="chip">28</span>
+      <span class="chip">bisexual</span>
+      <span class="chip">📍 London</span>
+      <span class="chip">Singapore-born</span>
+      <span class="chip">US-educated</span>
+    </div>
+    <p class="lede reveal">Newish to all this and still working out what I actually want — so think <em>exploration</em>, not a fixed destination&nbsp;:)</p>
+    <div class="scrollcue reveal"><span class="arr">↓</span> get to know me</div>
+  </header>
+
+  <!-- FAST FACTS -->
+  <section>
+    <p class="eyebrow reveal">who I am, fast</p>
+    <h2 class="reveal">A few things that'll tell you<br>who I am, quickly</h2>
+    <div class="carousel reveal" data-interval="5000">
+      <div class="viewport"><div class="track">
+        <div class="fcard">
+          <span class="ic">📈</span>
+          <p>I've gone <b>semi-viral a couple of times</b> — because my emotional coach can't stop poasting about me.</p>
+        </div>
+        <div class="fcard">
+          <span class="ic">🎤</span>
+          <p>I write <b>song parodies</b>. Career highlight: a rap about <b>mechanistic interpretability</b> to the tune of <i>Alexander Hamilton</i>. Multiple hit performances to date.</p>
+        </div>
+        <div class="fcard">
+          <span class="ic">🌍</span>
+          <p>I've memorised a bunch of songs in <b>languages I can't speak</b>. They're just that earwormy.</p>
+        </div>
+        <div class="fcard">
+          <span class="ic">✨</span>
+          <p>Karaoke is the <b>single thing I enjoy most on this earth</b>. Genuinely gives me a runner's high.</p>
+        </div>
+      </div></div>
+      <div class="cnav">
+        <button class="carr" data-dir="-1" aria-label="Previous">‹</button>
+        <div class="cdots"></div>
+        <button class="carr" data-dir="1" aria-label="Next">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT I'M LIKE -->
+  <section class="prose">
+    <p class="eyebrow reveal">the actual texture</p>
+    <h2 class="reveal">What I'm actually like</h2>
+    <p class="reveal">Deeply curious, <span class="hl hl-teal">rationalist / EA-adjacent</span>, and thoroughly allergic to bureaucracy.</p>
+    <p class="reveal"><span class="hl hl-plum">Neurospicy and proud</span> — autism is my hyperfocus superpower, and the (probably) ADHD is infinite energy for new things, minus about 30% executive function.</p>
+    <p class="reveal">Playful — but only once I feel safe, and nothing gets my walls down faster than someone who loves <span class="hl hl-rose">whimsy</span> as much as I do. Lowkey <span class="hl hl-amber">introverted</span> too: I love talking to people, but I'll need the occasional break. I promise I'm still having a good time&nbsp;:3</p>
+  </section>
+
+  <!-- INTERESTS -->
+  <section>
+    <p class="eyebrow reveal">the rabbit holes</p>
+    <h2 class="reveal">Things I'm into</h2>
+    <p class="intro-line reveal">Too many to list — it's a genuine problem. The rule is basically: <b>if it sounds fun, I'm in.</b></p>
+    <div class="legend reveal" id="legend"></div>
+    <div class="tags reveal" id="tags"></div>
+  </section>
+
+  <!-- WIN ME OVER -->
+  <section>
+    <p class="eyebrow reveal">the cheat codes</p>
+    <h2 class="reveal">You'll win me over if…</h2>
+    <ul class="win">
+      <li class="reveal"><span class="num">01</span><span class="txt"><b>you'll set the scene with me in improv</b><span>“yes, and—” is basically my love language</span></span></li>
+      <li class="reveal"><span class="num">02</span><span class="txt"><b>you'll be my dance partner</b><span>anywhere, any genre, zero skill required</span></span></li>
+      <li class="reveal"><span class="num">03</span><span class="txt"><b>you inspire me to grow</b><span>I'm here for exploration — bring your edges</span></span></li>
+      <li class="reveal"><span class="num">04</span><span class="txt"><b>you'll ramble to me about your nerdy obsessions</b><span>the more niche, the better. go on.</span></span></li>
+    </ul>
+  </section>
+
+  <!-- PRACTICAL -->
+  <section>
+    <p class="eyebrow reveal">the practical bits</p>
+    <h2 class="reveal">The honest logistics</h2>
+    <div class="practical reveal">
+      <div class="row"><span class="k">Looking for</span><span class="v">Exploration more than a destination — I'm fairly new to dating and figuring things out.</span></div>
+      <div class="row"><span class="k">Kids</span><span class="v">Not sure yet. Genuinely open, genuinely undecided.</span></div>
+      <div class="row"><span class="k">Where I live</span><span class="v">Life's spread across London, the US, and Singapore.</span></div>
+    </div>
+
+    <div class="gate reveal">
+      <button class="gate-btn" id="gateBtn" aria-expanded="false" aria-controls="spicy">
+        <span class="pepper">🌶️</span> <span class="gate-label">the spicier bits</span> <span class="gate-hint">— tap if you're curious</span>
+      </button>
+      <div class="spicy" id="spicy" hidden>
+        <p>I've got an <b>oral fixation</b> I love indulged while we cuddle — no notes, don't @ me.</p>
+        <p class="kinkline">💞 <b>Kink positive</b> — happy to talk more :)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMING SOON -->
+  <section>
+    <p class="eyebrow reveal">the receipts</p>
+    <h2 class="reveal">Still to come</h2>
+    <div class="soon">
+      <div class="soonbox reveal">
+        <span class="big">📸</span>
+        <b>Photos</b>
+        <span>coming soon</span>
+      </div>
+      <div class="soonbox reveal">
+        <span class="big">💬</span>
+        <b>Friend testimonials</b>
+        <span>coming soon</span>
+        <p class="q">honestly the best evidence I'll offer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPOTIFY -->
+  <section>
+    <p class="eyebrow reveal">on repeat</p>
+    <h2 class="reveal">What I've been listening to</h2>
+    <p class="intro-line reveal">Fair warning: a lot of it is in languages I don't speak. They're just that earwormy.</p>
+    <!-- Hand-picked feed. Want this to become a *live* Spotify "recently played"
+         feed instead? That needs a serverless function at deploy time — see README.
+         To edit the list, change the `tracks` array in the script below. -->
+    <div class="carousel reveal" data-interval="4000">
+      <div class="viewport"><div class="track" id="feed"></div></div>
+      <div class="cnav">
+        <button class="carr" data-dir="-1" aria-label="Previous">‹</button>
+        <div class="cdots"></div>
+        <button class="carr" data-dir="1" aria-label="Next">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section>
+    <p class="eyebrow reveal">your move</p>
+    <h2 class="reveal">Say hi :)</h2>
+    <p class="intro-line reveal">No pressure, no script — though if you want to win style points, set the scene.</p>
+    <!-- TODO(daniel): activate the form — get a free key at https://web3forms.com
+         (enter your email, they email you an access key), then paste it into the
+         hidden access_key input below. Submissions land in your inbox; your email
+         never appears in this page's source. -->
+    <form class="contact reveal" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
+      <input type="hidden" name="subject" value="Someone said hi on your profile :)" />
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+      <label>What should I call you?
+        <input type="text" name="name" required placeholder="a name, a vibe, anything" />
+      </label>
+      <label>Where can I reach you?
+        <input type="text" name="contact" required placeholder="number, @handle, email — your pick" />
+      </label>
+      <label>Set the scene <span class="opt">(improv mode: go)</span>
+        <textarea name="scene" rows="3" placeholder="“We just got off stage at karaoke and—”"></textarea>
+      </label>
+      <label>Anything else?
+        <textarea name="message" rows="2" placeholder="a nerdy obsession, a question, a dare"></textarea>
+      </label>
+      <button type="submit" class="submit">Send it →</button>
+      <p class="formnote" id="formNote" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <footer class="reveal">
+    made with <span class="heart">♥</span> &amp; a little whimsy · say hi
+  </footer>
+
+</main>
+
+<script>
+// interest tags — colour-coded by category
+const categories = {
+  active: {color:"var(--coral)", label:"active"},
+  social: {color:"var(--rose)",  label:"social"},
+  nerdy:  {color:"var(--amber)", label:"nerdy"},
+  artsy:  {color:"var(--plum)",  label:"artsy"}
+};
+const interests = [
+  ["running","active",-2],["climbing","active",2],["dancing","active",-3],["sport","active",1],
+  ["parties","social",-1],["group trips","social",2],["karaoke","social",-2],
+  ["hackathons","nerdy",-2],["board games","nerdy",3],["crosswords","nerdy",-1],
+  ["pottery","artsy",2],["3D printing","artsy",-2]
+];
+
+// legend
+const legendWrap = document.getElementById('legend');
+Object.values(categories).forEach(({color,label})=>{
+  const el=document.createElement('span');
+  el.innerHTML=`<i></i>${label}`;
+  el.style.setProperty('--c',color);
+  legendWrap.appendChild(el);
+});
+
+// tags
+const tagWrap = document.getElementById('tags');
+interests.forEach(([t,cat,r])=>{
+  const el=document.createElement('span');
+  el.className='tag'; el.textContent=t;
+  el.style.setProperty('--c',categories[cat].color); el.style.setProperty('--r',r+'deg');
+  tagWrap.appendChild(el);
+});
+
+// now-playing feed — hand-picked; each links to a Spotify search
+const tracks = [
+  {title:"Playing God",            artist:"Polyphia",            art:"🎸", vibe:"math rock",  c:"var(--teal)"},
+  {title:"good 4 u",               artist:"Olivia Rodrigo",      art:"💔", vibe:"pop-punk",   c:"var(--coral)"},
+  {title:"Tomorrow Is a Latter Day", artist:"Book of Mormon",    art:"🎭", vibe:"showtune",   c:"var(--amber)"},
+  {title:"Boogie Wonderland",      artist:"Earth, Wind & Fire",  art:"🪩", vibe:"funk",       c:"var(--rose)"},
+  {title:"I Can't Stop Me",        artist:"TWICE",               art:"🌀", vibe:"k-pop",      c:"var(--plum)"},
+  {title:"愛的魔法",                artist:"金沙",                 art:"✨", vibe:"mandopop",   c:"var(--teal)"}
+];
+const feed = document.getElementById('feed');
+tracks.forEach((t,i)=>{
+  const q = encodeURIComponent(`${t.title} ${t.artist}`);
+  const lead = i===0
+    ? `<span class="eq" title="now playing"><i></i><i></i><i></i></span>`
+    : `<span class="art">${t.art}</span>`;
+  const a = document.createElement('a');
+  a.href = `https://open.spotify.com/search/${q}`;
+  a.target = '_blank'; a.rel = 'noopener'; a.style.setProperty('--c', t.c);
+  a.innerHTML =
+    `${lead}
+     <span class="meta"><span class="title">${t.title}</span><span class="artist">${t.artist}</span></span>
+     <span class="vibe">${t.vibe}</span>
+     <span class="play">open ↗</span>`;
+  feed.appendChild(a);
+});
+
+// reusable auto-advancing carousel
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('.carousel').forEach(car=>{
+  const track = car.querySelector('.track');
+  const slides = Array.from(track.children);
+  if(slides.length <= 1) return;
+  const dotsWrap = car.querySelector('.cdots');
+  const interval = parseInt(car.dataset.interval, 10) || 5000;
+  let idx = 0, timer = null;
+  if(prefersReduced) car.classList.add('no-anim');
+
+  const dots = slides.map((_, i)=>{
+    const b = document.createElement('button');
+    b.className = 'cdot'; b.setAttribute('aria-label', `Go to ${i+1}`);
+    b.addEventListener('click', ()=>{ go(i); restart(); });
+    dotsWrap.appendChild(b);
+    return b;
+  });
+
+  function go(n){
+    idx = (n + slides.length) % slides.length;
+    track.style.transform = `translateX(${-idx*100}%)`;
+    dots.forEach((d,i)=>d.classList.toggle('active', i===idx));
+  }
+  function restart(){ if(timer) clearInterval(timer); if(!prefersReduced) timer = setInterval(()=>go(idx+1), interval); }
+
+  car.querySelectorAll('.carr').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ go(idx + Number(btn.dataset.dir)); restart(); });
+  });
+  // pause while hovered or focused within
+  car.addEventListener('mouseenter', ()=>{ if(timer) clearInterval(timer); });
+  car.addEventListener('mouseleave', restart);
+  car.addEventListener('focusin', ()=>{ if(timer) clearInterval(timer); });
+  car.addEventListener('focusout', restart);
+
+  go(0); restart();
+});
+
+// spicy gate toggle
+const gateBtn = document.getElementById('gateBtn');
+const spicy = document.getElementById('spicy');
+gateBtn.addEventListener('click', ()=>{
+  const open = gateBtn.getAttribute('aria-expanded')==='true';
+  gateBtn.setAttribute('aria-expanded', String(!open));
+  if(open){ spicy.classList.remove('open'); spicy.addEventListener('transitionend', ()=>{ if(gateBtn.getAttribute('aria-expanded')==='false') spicy.hidden=true; }, {once:true}); }
+  else { spicy.hidden=false; requestAnimationFrame(()=>spicy.classList.add('open')); gateBtn.querySelector('.gate-label').textContent='the spicier bits'; }
+});
+
+// contact form — async submit to Web3Forms
+const form = document.getElementById('contactForm');
+const note = document.getElementById('formNote');
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const key = form.querySelector('[name=access_key]').value;
+  if(key === 'YOUR_WEB3FORMS_KEY'){
+    note.className='formnote err';
+    note.textContent='Form not wired up yet — Daniel still needs to add the access key :)';
+    return;
+  }
+  const btn = form.querySelector('.submit');
+  btn.disabled = true; note.className='formnote'; note.textContent='Sending…';
+  try{
+    const res = await fetch(form.action, {method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form)});
+    const data = await res.json();
+    if(data.success){ form.reset(); note.textContent='Got it — talk soon :)'; }
+    else { note.className='formnote err'; note.textContent='Hmm, that didn\'t send. Try again?'; btn.disabled=false; }
+  }catch{ note.className='formnote err'; note.textContent='Network hiccup — try again in a sec.'; btn.disabled=false; }
+});
+
+// scroll reveal
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach((el,i)=>{
+  el.style.transitionDelay=(Math.min(i%5,4)*60)+'ms';
+  io.observe(el);
+});
+</script>
+</body>
+</html>

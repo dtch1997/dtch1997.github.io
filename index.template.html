@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Tan — AI safety researcher</title>
     <meta name="description"
-        content="Daniel Tan is an AI safety researcher studying how aligned models become misaligned — and how to stop it.">
+        content="Daniel Tan is an AI safety researcher studying how AI minds tick — leading the model motivations team at Arcadia Alignment.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -170,6 +170,29 @@
             padding: 3vh 0 6vh; letter-spacing: 0.06em; }
         footer .play { color: var(--teal); }
 
+        /* ============ personal banner ============ */
+        .topbanner {
+            position: relative; z-index: 2;
+            display: flex; align-items: center; justify-content: center; gap: 11px;
+            padding: 11px 20px; text-align: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.03em;
+            color: var(--text);
+            background: linear-gradient(90deg, rgba(224,123,102,0.10), rgba(103,192,180,0.10));
+            border-bottom: 1px solid var(--line);
+            transition: background .2s ease;
+        }
+        .topbanner:hover {
+            background: linear-gradient(90deg, rgba(224,123,102,0.18), rgba(103,192,180,0.18));
+            color: var(--text);
+        }
+        .topbanner strong { color: var(--amber); font-weight: 700; }
+        .topbanner .tb-emoji { font-size: 1rem; }
+        .topbanner .tb-arrow { color: var(--teal); transition: transform .2s ease; }
+        .topbanner:hover .tb-arrow { transform: translateX(4px); }
+        @media (max-width: 640px) {
+            .topbanner { font-size: 0.71rem; padding: 10px 14px; gap: 8px; }
+        }
+
         /* ============ atmosphere ============ */
         .shell { position: relative; z-index: 1; }
         .atmos {
@@ -284,6 +307,11 @@
         <div class="stars"></div>
         <div class="lamp"></div>
     </div>
+    <a class="topbanner" href="hi/">
+        <span class="tb-emoji">👋</span>
+        <span>there's a more personal side of me — <strong>come say hi</strong></span>
+        <span class="tb-arrow">→</span>
+    </a>
     <div class="shell">
         <aside class="rail">
             <img class="portrait" src="faces/daniel_small.jpg" alt="Daniel Tan">
