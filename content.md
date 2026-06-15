@@ -11,7 +11,7 @@ Me in 10 seconds
 ### lede
 llm psychologist. avid sci-fi enjoyer. aspiring calisthenics bro. karaoke enthusiast
 
-Model motivations // Arcadia Alignment
+Model motivations team lead // Arcadia Alignment
 
 ### muted
 Previously: 
