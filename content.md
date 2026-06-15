@@ -11,9 +11,9 @@ Me in 10 seconds
 ### lede
 llm psychologist. avid sci-fi enjoyer. aspiring calisthenics bro. karaoke enthusiast
 
-### muted
-Currently: Model motivations // Arcadia Alignment
+Model motivations // Arcadia Alignment
 
+### muted
 Previously: 
 - ML and CS // Stanford 
 - robots and RL // A*STAR
@@ -29,10 +29,10 @@ A few papers I'm proud of. The [full list lives on Scholar](https://scholar.goog
 ## now
 
 ### p1
-A new chapter — I've just started a role at [Arcadia Alignment](now.html). Outside the work, health has become a real joy: two years with a trainer, and lately I'm into mudgar (heavy-club training) and my first steps on the swing-dance floor.
+My last 6 months - [career moves, fitness, dancing](now.html)
 
 ### p2
-It's been a season of growth — clearer about what I want, happier, more myself. [The fuller version →](now.html)
+I'm dating again - have a peek at [my profile](hi/index.html)
 
 ## contact
 

@@ -110,10 +110,14 @@
             letter-spacing: -0.025em; margin: 0 0 22px;
         }
         h1.hero-h .accent { color: var(--amber); }
-        .lede { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--dim); max-width: 42ch; margin: 0; }
+        .lede { max-width: 44ch; margin: 0; }
+        .lede p { margin: 0; }
+        .lede p:first-child { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--dim); }
+        .lede p:not(:first-child) { margin-top: 26px; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem; line-height: 1.65; color: var(--dim); }
 
         /* hero CV timeline (Currently / Previously) */
-        .hero .cv { margin-top: 30px; font-family: 'JetBrains Mono', monospace;
+        .hero .cv { margin-top: 8px; font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem; line-height: 1.65; color: var(--dim); max-width: 48ch; }
         .hero .cv p { margin: 0 0 4px; }
         .hero .cv p + ul { margin-top: 2px; }
@@ -352,9 +356,9 @@
             <section id="about" class="hero reveal">
                 <p class="logline"><svg class="lightcone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12 L4 4 L20 4 Z" fill="#e3a94e33" stroke="#e3a94e" stroke-width="1.1"/><path d="M12 12 L4 20 L20 20 Z" fill="none" stroke="#e07b66" stroke-width="1.1" opacity="0.55"/><circle cx="12" cy="12" r="1.3" fill="#e07b66"/></svg>Welcome to my corner of the lightcone.</p>
                 <h1 class="hero-h">Me in 10 seconds</h1>
-                <p class="lede">llm psychologist. avid sci-fi enjoyer. aspiring calisthenics bro. karaoke enthusiast</p>
-                <div class="cv"><p>Currently: Model motivations // Arcadia Alignment</p>
-<p>Previously:</p>
+                <div class="lede"><p>llm psychologist. avid sci-fi enjoyer. aspiring calisthenics bro. karaoke enthusiast</p>
+<p>Model motivations // Arcadia Alignment</p></div>
+                <div class="cv"><p>Previously:</p>
 <ul><li>ML and CS // Stanford</li><li>robots and RL // A*STAR</li><li>PhD // UCL</li><li>MATS 7.0 // Owain Evans</li><li>model personas researcher // CLR</li></ul></div>
             </section>
 
@@ -433,8 +437,8 @@
                         </svg></span>
                         <span class="stamp">CYCLE · JUNE 2026</span>
                     </div>
-                    <p>A new chapter — I've just started a role at <a href="now.html">Arcadia Alignment</a>. Outside the work, health has become a real joy: two years with a trainer, and lately I'm into mudgar (heavy-club training) and my first steps on the swing-dance floor.</p>
-                    <p style="margin-bottom:0;">It's been a season of growth — clearer about what I want, happier, more myself. <a href="now.html">The fuller version →</a></p>
+                    <p>My last 6 months - <a href="now.html">career moves, fitness, dancing</a></p>
+                    <p style="margin-bottom:0;">I'm dating again - have a peek at <a href="hi/index.html">my profile</a></p>
                 </div>
             </section>
 
