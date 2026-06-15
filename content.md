@@ -9,7 +9,7 @@ Welcome to my corner of the lightcone.
 I study how AI minds <span class="accent">tick</span>.
 
 ### lede
-AI persona nerd. Enjoyer of physicality. Avid yapper. Amateur rationalist
+AI persona nerd. Budding calisthenics bro. Aspiring karaoke god.
 
 ## about
 
