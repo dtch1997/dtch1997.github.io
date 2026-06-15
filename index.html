@@ -105,9 +105,6 @@
         section { padding: 5.5vh 0; }
         section:first-child { padding-top: 0; }
 
-        .section-label { display: block; margin-bottom: 16px; }
-        .section-label .i { color: var(--coral); margin-right: 8px; }
-
         h1.hero-h {
             font-size: clamp(2.3rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.05;
             letter-spacing: -0.025em; margin: 0 0 22px;
@@ -125,6 +122,7 @@
         .hero .cv li::before { content: "▸"; position: absolute; left: 0; color: var(--line2); }
 
         h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 18px; }
+        main section h2::before { content: "▸"; color: var(--coral); margin-right: 0.45em; }
         p { margin: 0 0 1.05em; }
         .muted { color: var(--dim); }
         .about .big { font-size: clamp(1.2rem, 2.6vw, 1.45rem); line-height: 1.5; font-weight: 500; color: var(--text); }
@@ -240,10 +238,11 @@
 
         /* quiet log line */
         .logline {
+            display: inline-flex; align-items: center; gap: 0.55em;
             font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; letter-spacing: 0.03em;
             font-style: italic; color: var(--dim); opacity: 0.9; margin: 0 0 26px;
         }
-        .logline::before { content: "❯ "; font-style: normal; color: var(--coral); }
+        .lightcone { width: 1.5em; height: 1.5em; flex: none; }
 
         /* ============ terminal cta (in research) ============ */
         .termcta {
@@ -351,7 +350,7 @@
 
         <main>
             <section id="about" class="hero reveal">
-                <p class="logline">Welcome to my corner of the lightcone.</p>
+                <p class="logline"><svg class="lightcone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12 L4 4 L20 4 Z" fill="#e3a94e33" stroke="#e3a94e" stroke-width="1.1"/><path d="M12 12 L4 20 L20 20 Z" fill="none" stroke="#e07b66" stroke-width="1.1" opacity="0.55"/><circle cx="12" cy="12" r="1.3" fill="#e07b66"/></svg>Welcome to my corner of the lightcone.</p>
                 <h1 class="hero-h">Me in 10 seconds</h1>
                 <p class="lede">llm psychologist. avid sci-fi enjoyer. aspiring calisthenics bro. karaoke enthusiast</p>
                 <div class="cv"><p>Currently: Model motivations // Arcadia Alignment</p>
@@ -360,7 +359,6 @@
             </section>
 
             <section id="work" class="reveal">
-                <span class="section-label label"><span class="i">▸</span>selected work</span>
                 <h2>Things I've helped figure out</h2>
                 <p class="muted">A few papers I'm proud of. The <a href="https://scholar.google.com/citations?user=QKO1QacAAAAJ&hl=en">full list lives on Scholar</a>.</p>
 
@@ -407,7 +405,6 @@
             </section>
 
             <section id="writing" class="reveal">
-                <span class="section-label label"><span class="i">▸</span>thinking out loud</span>
                 <h2>Writing</h2>
                 <div class="rows">
                     <a href="https://www.lesswrong.com/posts/XgSYgpngNffL9eC8b/show-not-tell-gpt-4o-is-more-opinionated-in-images-than-in">
@@ -426,7 +423,6 @@
             </section>
 
             <section id="now" class="reveal">
-                <span class="section-label label"><span class="i">▸</span>currently</span>
                 <h2>Now</h2>
                 <div class="dispatch">
                     <div class="head">
