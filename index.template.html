@@ -114,6 +114,15 @@
         h1.hero-h .accent { color: var(--amber); }
         .lede { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--dim); max-width: 42ch; margin: 0; }
 
+        /* hero CV timeline (Currently / Previously) */
+        .hero .cv { margin-top: 30px; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem; line-height: 1.65; color: var(--dim); max-width: 48ch; }
+        .hero .cv p { margin: 0 0 4px; }
+        .hero .cv p + ul { margin-top: 2px; }
+        .hero .cv ul { list-style: none; margin: 0 0 4px; padding: 0; }
+        .hero .cv li { position: relative; padding-left: 18px; }
+        .hero .cv li::before { content: "▸"; position: absolute; left: 0; color: var(--line2); }
+
         h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 18px; }
         p { margin: 0 0 1.05em; }
         .muted { color: var(--dim); }
@@ -340,17 +349,11 @@
         </aside>
 
         <main>
-            <section class="hero reveal">
+            <section id="about" class="hero reveal">
                 <p class="logline">{{hero.logline}}</p>
                 <h1 class="hero-h">{{hero.headline}}</h1>
                 <p class="lede">{{hero.lede}}</p>
-            </section>
-
-            <section id="about" class="about reveal">
-                <span class="section-label label"><span class="i">▸</span>the short version</span>
-                <p class="big">{{about.big}}</p>
-                <p>{{about.body}}</p>
-                <p class="muted">{{about.muted}}</p>
+                <div class="cv">{{hero.muted}}</div>
             </section>
 
             <section id="work" class="reveal">

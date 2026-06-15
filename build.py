@@ -38,7 +38,8 @@ def parse_content(text):
     def flush():
         nonlocal key, buf
         if key is not None:
-            fields[f"{section}.{key}"] = " ".join(buf).strip()
+            # Keep line structure (blank lines, bullets) for render(); trim ends.
+            fields[f"{section}.{key}"] = "\n".join(buf).strip("\n")
         key, buf = None, []
 
     for line in text.splitlines():
@@ -51,10 +52,45 @@ def parse_content(text):
             key = s[4:].strip()
         elif s.startswith("<!--"):
             continue
-        elif key is not None and s:
-            buf.append(s)
+        elif key is not None:
+            buf.append(line.rstrip())
     flush()
     return fields
+
+
+def render(value):
+    """Render a field. Single line → inline markdown. Multi-line → paragraphs
+    plus `- ` bullet lists (each line still gets the inline subset)."""
+    lines = value.split("\n")
+    if len(lines) == 1:
+        return inline(value)
+
+    blocks, para, items = [], [], []
+
+    def flush_para():
+        if para:
+            blocks.append("<p>" + "<br>".join(inline(p) for p in para) + "</p>")
+            para.clear()
+
+    def flush_list():
+        if items:
+            blocks.append("<ul>" + "".join(f"<li>{inline(i)}</li>" for i in items) + "</ul>")
+            items.clear()
+
+    for line in lines:
+        s = line.strip()
+        if s.startswith("- "):
+            flush_para()
+            items.append(s[2:].strip())
+        elif not s:
+            flush_para()
+            flush_list()
+        else:
+            flush_list()
+            para.append(s)
+    flush_para()
+    flush_list()
+    return "\n".join(blocks)
 
 
 def main():
@@ -73,7 +109,7 @@ def main():
 
     out = template
     for key, value in fields.items():
-        out = out.replace("{{" + key + "}}", inline(value))
+        out = out.replace("{{" + key + "}}", render(value))
     out = out.replace("<!DOCTYPE html>", "<!DOCTYPE html>\n" + BANNER, 1)
 
     OUTPUT.write_text(out, encoding="utf-8")

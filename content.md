@@ -6,21 +6,20 @@
 Welcome to my corner of the lightcone.
 
 ### headline
-I study how AI minds <span class="accent">tick</span>.
+Me in 10 seconds
 
 ### lede
-AI persona nerd. Budding calisthenics bro. Aspiring karaoke god.
-
-## about
-
-### big
-Leading the 'model motivations' team at Arcadia Alignment.
-
-### body
-I'm really fascinated by language models. There's so much emergent complexity. It feels like an age of exploration.
+llm psychologist. avid sci-fi enjoyer. aspiring calisthenics bro. karaoke enthusiast
 
 ### muted
-Previously: undergrad at Stanford in ML and CS, a year building robots at a Singapore startup, and earlier obsessions with mechanistic interpretability and open-ended learning. Off the clock: I like dancing, climbing, cooking, building random stuff, or just hanging out with friends.
+Currently: Model motivations // Arcadia Alignment
+
+Previously: 
+- ML and CS // Stanford 
+- robots and RL // A*STAR
+- PhD // UCL 
+- MATS 7.0 // Owain Evans 
+- model personas researcher // CLR
 
 ## work
 
