@@ -1,0 +1,133 @@
+/* ============================================================
+   writing.css — article + index styles for /writing.
+   Layered ON TOP of sleeper.css (load sleeper.css first), so it
+   inherits the design tokens, .page, .prose, .pagehead, atmosphere.
+   ============================================================ */
+
+/* ---- article prose (rendered from LessWrong htmlBody) ---- */
+/* sleeper.css covers p / h2 / h3 / ul; we add the rest and a heading scale. */
+.prose { max-width: 680px; }
+.prose a { text-decoration: underline; text-decoration-color: var(--line2); text-underline-offset: 2px; }
+.prose a:hover { text-decoration-color: var(--amber); }
+
+/* heading hierarchy — LW uses h1 (section) / h2 / h3. Override sleeper's
+   mono-label h3 so in-body subheadings read as prose, not eyebrow labels. */
+.prose h1 { font-size: clamp(1.6rem, 3.8vw, 2.05rem); font-weight: 700; letter-spacing: -0.025em;
+    margin: 2.1em 0 0.5em; line-height: 1.25; }
+.prose h2 { font-size: clamp(1.4rem, 3.2vw, 1.72rem); font-weight: 600; letter-spacing: -0.02em;
+    color: var(--text); font-family: 'Inter', sans-serif; text-transform: none;
+    margin: 1.9em 0 0.5em; }
+.prose h3 { font-size: 1.18rem; font-weight: 600; letter-spacing: -0.01em; color: var(--teal);
+    font-family: 'Inter', sans-serif; text-transform: none; margin: 1.7em 0 0.4em; }
+
+.prose ol { padding-left: 1.3em; margin: 0 0 1.1em; }
+.prose ol li { margin-bottom: 0.4em; }
+.prose ol li::marker { color: var(--coral); font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+.prose li > ul, .prose li > ol { margin: 0.4em 0 0.2em; }
+
+.prose blockquote { margin: 1.4em 0; padding: 0.2em 0 0.2em 1.1em;
+    border-left: 3px solid var(--coral); color: var(--dim); font-style: italic; }
+.prose blockquote p:last-child { margin-bottom: 0; }
+
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.86em;
+    background: var(--bg2); border: 1px solid var(--line); border-radius: 5px; padding: 0.08em 0.35em; }
+
+.prose hr { border: none; border-top: 1px solid var(--line); margin: 3em 0; }
+
+/* images — LW wraps some in <figure class="image">, others sit bare in <p> */
+.prose img { max-width: 100%; height: auto; }
+.prose figure { margin: 2.4em 0; }
+.prose figure img { border-radius: 10px; border: 1px solid var(--line2);
+    box-shadow: 0 18px 44px rgba(0,0,0,0.5); display: block; margin: 0 auto; }
+.prose figure figcaption { font-family: 'JetBrains Mono', monospace; font-size: 0.76rem;
+    color: var(--dim); text-align: center; margin-top: 10px; }
+
+/* ---- footnotes (LessWrong markup) ---- */
+.prose sup { line-height: 0; font-size: 0.74em; }
+.prose .footnote-reference a { color: var(--amber); text-decoration: none; padding: 0 1px; }
+.prose ol.footnote-section { margin-top: 2.4em; padding-top: 1.4em; padding-left: 1.4em;
+    border-top: 1px solid var(--line); font-size: 0.92rem; color: var(--dim); }
+.prose ol.footnote-section > li.footnote-item { margin-bottom: 0.7em; }
+.prose ol.footnote-section li::marker { color: var(--coral);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
+.prose .footnote-back-link { margin-right: 6px; }
+.prose .footnote-back-link a { color: var(--teal); text-decoration: none; }
+.prose .footnote-content { display: inline; }
+.prose .footnote-content p { display: inline; margin: 0; }
+.prose .footnote-content p + p { display: block; margin-top: 0.5em; }
+
+/* ---- post footer ---- */
+.post-foot { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+    margin-top: 2vh; padding: 24px 0 10vh; border-top: 1px solid var(--line); }
+.post-foot a { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--dim); }
+.post-foot a:hover { color: var(--amber); }
+
+/* ---- article header stamp ---- */
+.pagehead .stamp a { color: var(--teal); text-decoration: none; }
+.pagehead .stamp a:hover { color: var(--amber); }
+
+/* ---- writing index ---- */
+.lede-line { color: var(--dim); margin: 0 0 4vh; max-width: 560px; }
+.writing-list { position: relative; z-index: 1; padding-bottom: 8vh; }
+.wyear { font-family: 'JetBrains Mono', monospace; color: var(--teal); letter-spacing: 0.2em;
+    text-transform: uppercase; font-size: 0.74rem; margin: 2.6em 0 0.2em; }
+.wrow { display: flex; gap: 18px; align-items: baseline; padding: 15px 0; border-bottom: 1px solid var(--line); }
+.wrow:hover .wtitle { color: var(--amber); }
+.wrow .wdate { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--dim);
+    white-space: nowrap; min-width: 52px; }
+.wrow .wtitle { font-size: 1.12rem; font-weight: 600; color: var(--text); transition: color .15s ease; line-height: 1.35; }
+.wrow .wkarma { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    color: var(--dim); white-space: nowrap; }
+@media (max-width: 540px) {
+    .wrow .wkarma { display: none; }
+    .wrow .wdate { min-width: 44px; }
+}
+
+.writing-more { margin: 2.6em 0 8vh; }
+.writing-more a { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--teal); text-decoration: none; }
+.writing-more a:hover { color: var(--amber); }
+
+/* ---- notes (shortform) ---- */
+/* this page widens past the shared 680px column to seat a TOC sidebar */
+.page-wide { max-width: 1000px; }
+.sf-layout { display: grid; grid-template-columns: minmax(0, 680px) 1fr; gap: 52px; align-items: start; }
+
+.sf-toc { position: sticky; top: 4vh; max-height: 92vh; overflow-y: auto;
+    padding-bottom: 4vh; font-family: 'JetBrains Mono', monospace; }
+.sf-toc-head { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal); margin: 0 0 1.1em; }
+.sf-toc ol { list-style: none; margin: 0; padding: 0; }
+.sf-toc li { margin: 0 0 0.7em; }
+.sf-toc-year { font-size: 0.68rem; letter-spacing: 0.18em; color: var(--dim);
+    margin: 1.4em 0 0.6em !important; }
+.sf-toc-year:first-child { margin-top: 0 !important; }
+.sf-toc a { display: flex; gap: 8px; color: var(--dim); text-decoration: none; line-height: 1.35; }
+.sf-toc a:hover { color: var(--amber); }
+.sf-toc-date { flex: none; width: 26px; font-size: 0.68rem; color: var(--line2); padding-top: 1px; }
+.sf-toc-title { font-size: 0.8rem; }
+.sf-toc a:hover .sf-toc-date { color: var(--amber); }
+
+@media (max-width: 880px) {
+    .page-wide { max-width: 680px; }
+    .sf-layout { grid-template-columns: 1fr; gap: 0; }
+    .sf-toc { display: none; }
+}
+
+.notes { position: relative; z-index: 1; padding-bottom: 8vh; }
+.note { padding: 2.2em 0; border-bottom: 1px solid var(--line); }
+.note:first-of-type { padding-top: 0.6em; }
+.note-title { font-size: clamp(1.3rem, 3vw, 1.6rem); font-weight: 700; letter-spacing: -0.02em;
+    line-height: 1.25; margin: 0 0 0.35em; }
+.note-title a { color: var(--text); text-decoration: none; }
+.note-title a:hover { color: var(--amber); }
+.note-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--dim);
+    margin: 0 0 1.2em; }
+.note-meta a { color: var(--teal); text-decoration: none; }
+.note-meta a:hover { color: var(--amber); }
+.note-body { max-width: 680px; }
+.note-body > :first-child { margin-top: 0; }
+.note-body > :last-child { margin-bottom: 0; }
+/* in-body subheads sit below the card title — keep them quiet */
+.note-body h4 { font-size: 1.02rem; font-weight: 600; color: var(--dim);
+    font-family: 'Inter', sans-serif; margin: 1.5em 0 0.4em; }
+:target.note { scroll-margin-top: 1.5em; }

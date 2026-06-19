@@ -1,1 +1,4 @@
 .DS_Store
+# generated LessWrong archives (regenerate via scripts/fetch_lesswrong.py)
+writing/lesswrong/
+writing/shortform/
