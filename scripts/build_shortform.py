@@ -26,6 +26,7 @@ OUT = ROOT / "writing" / "shortform.html"
 # Curated takes, by LessWrong comment id → display title. Daniel-approved.
 # Order on the page is by date (newest first), derived from the archive.
 CURATED = {
+    "nmC7XBEZvdnjNvDmi": "Adapting research plans on the fly",
     "khXqEEbssMPtHTXkK": "Fake prerequisites",
     "aYQzaxJperZFi4yc8": "When to deduplicate work with others",
     "CuHnKee6GL8rsGaXp": "Labs' unpublishable alignment science",
@@ -62,6 +63,71 @@ TEX = {r"\to": "→", r"\rightarrow": "→", r"\times": "×", r"\leq": "≤",
 
 esc = lambda s: html_lib.escape(s, quote=False)
 escq = lambda s: html_lib.escape(s, quote=True)
+
+# --- minimal markdown for local drafts (preview only; --draft) ---
+LINK = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+BOLD = re.compile(r"\*\*(.+?)\*\*")
+ITALIC = re.compile(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)")
+
+
+def md_inline(text):
+    text = esc(text)
+    text = LINK.sub(r'<a href="\2">\1</a>', text)
+    text = BOLD.sub(r"<strong>\1</strong>", text)
+    text = ITALIC.sub(r"<em>\1</em>", text)
+    return text
+
+
+def md_to_html(text):
+    """Tiny block renderer: #/##/### headings (demoted to h3/h4 to sit under the
+    note title), `- ` bullets, and paragraphs. Enough for a draft preview."""
+    blocks, para, items = [], [], []
+
+    def flush_para():
+        if para:
+            blocks.append("<p>" + md_inline(" ".join(para)) + "</p>")
+            para.clear()
+
+    def flush_list():
+        if items:
+            blocks.append("<ul>" + "".join(f"<li>{md_inline(i)}</li>" for i in items) + "</ul>")
+            items.clear()
+
+    for line in text.splitlines():
+        s = line.strip()
+        if not s:
+            flush_para(); flush_list()
+        elif s.startswith("### "):
+            flush_para(); flush_list(); blocks.append(f"<h4>{md_inline(s[4:])}</h4>")
+        elif s.startswith(("## ", "# ")):
+            flush_para(); flush_list()
+            blocks.append(f"<h3>{md_inline(s.lstrip('# '))}</h3>")
+        elif s.startswith("- "):
+            flush_para(); items.append(s[2:])
+        else:
+            flush_list(); para.append(s)
+    flush_para(); flush_list()
+    return "\n".join(blocks)
+
+
+def parse_draft(path):
+    """Read a drafts/YYYY-MM-DD-slug.md file into a preview note."""
+    from pathlib import Path as _P
+    p = _P(path)
+    raw = re.sub(r"<!--.*?-->", "", p.read_text(encoding="utf-8"), flags=re.DOTALL)
+    title, body = None, []
+    for ln in raw.splitlines():
+        if title is None and ln.startswith("# "):
+            title = ln[2:].strip()
+        else:
+            body.append(ln)
+    name = p.stem
+    return {
+        "title": title or name,
+        "date": name[:10] if re.match(r"\d{4}-\d{2}-\d{2}", name) else "",
+        "slug": re.sub(r"^\d{4}-\d{2}-\d{2}-", "", name),
+        "html": md_to_html("\n".join(body)),
+    }
 
 
 def strip_mathjax(html):
@@ -163,10 +229,18 @@ NOTE = """            <article class="note" id="{cid}">
                 </div>
             </article>"""
 
+NOTE_DRAFT = """            <article class="note note-draft" id="draft-{slug}">
+                <h2 class="note-title"><a href="#draft-{slug}">{title}</a><span class="note-badge">draft</span></h2>
+                <p class="note-meta">Draft · {date_long} · not yet published</p>
+                <div class="prose note-body">
+{body}
+                </div>
+            </article>"""
+
 SHORTFORM_URL = "https://www.lesswrong.com/posts/4mtqQKvmHpQJ4dgj7/daniel-tan-s-shortform"
 
 
-def build():
+def build(draft_paths=()):
     archive = {t["_id"]: t for t in json.loads(ARCHIVE.read_text(encoding="utf-8"))}
     takes = []
     for cid, title in CURATED.items():
@@ -179,6 +253,22 @@ def build():
     takes.sort(key=lambda t: t["date"], reverse=True)
 
     blocks, toc, cur_year = [], [], None
+
+    # local drafts (preview only) sit above the published notes
+    drafts = [parse_draft(p) for p in draft_paths]
+    if drafts:
+        toc.append('                    <li class="sf-toc-year">in review</li>')
+        for d in drafts:
+            blocks.append(NOTE_DRAFT.format(
+                slug=escq(d["slug"]), title=esc(d["title"]),
+                date_long=date_long(d["date"]) if d["date"] else "draft",
+                body=d["html"]))
+            toc.append(
+                f'                    <li><a href="#draft-{escq(d["slug"])}">'
+                f'<span class="sf-toc-date">✎</span>'
+                f'<span class="sf-toc-title">{esc(d["title"])}</span></a></li>'
+            )
+
     for t in takes:
         year = t["date"][:4]
         if year != cur_year:
@@ -203,8 +293,17 @@ def build():
         PAGE.format(notes="\n".join(blocks), toc="\n".join(toc),
                     shortform_url=SHORTFORM_URL),
         encoding="utf-8")
-    print(f"Built {OUT} with {len(takes)} curated notes (+ sidebar).")
+    extra = f" + {len(drafts)} draft(s)" if drafts else ""
+    print(f"Built {OUT} with {len(takes)} curated notes{extra} (+ sidebar).")
+
+
+def main():
+    import argparse
+    ap = argparse.ArgumentParser(description="Build the Notes (shortform) page.")
+    ap.add_argument("--draft", action="append", default=[], metavar="PATH",
+                    help="include a local markdown draft as a preview note (repeatable)")
+    build(ap.parse_args().draft)
 
 
 if __name__ == "__main__":
-    build()
+    main()
