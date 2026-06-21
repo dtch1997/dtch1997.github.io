@@ -19,8 +19,11 @@ import json
 import re
 from pathlib import Path
 
+from build_shortform import CURATED as NOTE_TITLES  # note id -> title (single source)
+
 ROOT = Path(__file__).parent.parent
 ARCHIVE = ROOT / "writing" / "lesswrong" / "posts.json"
+SHORTFORM_ARCHIVE = ROOT / "writing" / "shortform" / "shortform.json"
 OUT = ROOT / "writing"
 HOME_TEMPLATE = ROOT / "index.template.html"
 
@@ -34,6 +37,7 @@ HOME_END = "<!-- END homepage-writing -->"
 
 # Curated, newest-first — LW slugs.
 CURATED = [
+    "the-one-week-sprint",
     "your-model-organisms-might-be-fried",
     "shaping-the-exploration-of-the-motivation-space-matters-for",
     "concrete-research-ideas-on-ai-personas",
@@ -45,6 +49,60 @@ CURATED = [
     "why-i-m-moving-from-mechanistic-to-prosaic-interpretability",
     "a-sober-look-at-steering-vectors-for-llms",
     "mech-interp-lacks-good-paradigms",
+]
+
+# The unified /writing index is organized by TOPIC, not by format. Each topic lists
+# its essays and notes intermixed, newest-first, and is color-coded for the filter
+# chips at the top of the page. Tuple shape: (label, slug, color, keys). Keys are
+# either essay slugs (from CURATED above) or shortform comment ids (from
+# build_shortform.CURATED). build() validates that every curated piece is filed under
+# exactly one topic — so adding a new essay/note without assigning it here is a hard
+# error, not a silent omission.
+TOPICS = [
+    ("AI safety research", "ai-safety-research", "#67c0b4", [
+        "your-model-organisms-might-be-fried",
+        "shaping-the-exploration-of-the-motivation-space-matters-for",
+        "concrete-research-ideas-on-ai-personas",
+        "a-case-for-model-persona-research",
+        "understanding-and-controlling-llm-generalization",
+        "inoculation-prompting-instructing-models-to-misbehave-at",
+        "show-not-tell-gpt-4o-is-more-opinionated-in-images-than-in",
+        "open-problems-in-emergent-misalignment",
+        "why-i-m-moving-from-mechanistic-to-prosaic-interpretability",
+        "a-sober-look-at-steering-vectors-for-llms",
+        "mech-interp-lacks-good-paradigms",
+        "YRcSDJxXBivZGWtzH",  # Alignment affordances of model-persona research
+        "eB55D8uGASyM4ypBx",  # Functional interpretability
+        "p8jEWLKfPgNMxDDQW",  # Superhuman latent knowledge
+        "vKavCHHQYnqZpPvWc",  # Why anthropomorphise LLMs?
+    ]),
+    ("AI strategy", "ai-strategy", "#e3a94e", [
+        "CuHnKee6GL8rsGaXp",  # Labs' unpublishable alignment science
+        "3pSKqjZss6sKPZNDX",  # A theory of impact for research outside the labs
+        "LqefzJMn7HTRthMit",  # Inference-time compute will be hard to govern
+        "Dc8GytgHMn85uBiRB",  # Explaining AGI to a layperson
+    ]),
+    ("Research craft & automation", "research-craft", "#b89ce0", [
+        "nmC7XBEZvdnjNvDmi",  # Adapting research plans on the fly
+        "aYQzaxJperZFi4yc8",  # When to deduplicate work with others
+        "iYsCbHJhT7CuBGvdb",  # Research engineering tips for SWEs
+        "6Q7WvmD7jWoY8STHK",  # Don't write survey papers on techniques
+        "4zDMdTKxKoXNt9KfJ",  # Writing papers in two phases
+        "fn9YyziLj5jmBcrAJ",  # Library code vs experiment code
+        "EesNATHbknuEviXDG",  # The last-mile problem in delegating to AI
+        "433pv5ojHcuAWyDJu",  # Taste as a hard-to-automate skill
+        "bHmNL3FAwGETAmnrD",  # Create handles for knowledge
+    ]),
+    ("Working & life", "working-life", "#8bbf86", [
+        "the-one-week-sprint",
+        "khXqEEbssMPtHTXkK",  # Fake prerequisites
+        "nebMYhZvN7GXkvSyX",  # On dropping things that aren't excellent
+        "zJRWriQjbEoaWW52Z",  # Learn to ask for help earlier
+        "mvyWJWWzbCoiYafBX",  # Strategies in social deduction games
+        "X8hzrHzpduez2DrdK",  # Writing all my notes in public
+        "rv3veoLsBhdp69tLy",  # The five whys, in Todoist
+        "cAc2ujatmjEYzBqsb",  # Imposter syndrome is a positive signal
+    ]),
 ]
 
 MONTHS = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -126,16 +184,84 @@ INDEX = """<!DOCTYPE html>
             <p class="eyebrow">writing</p>
             <h1>Writing</h1>
         </header>
-        <p class="lede-line">Selected essays on AI safety — model personas, emergent
-        misalignment, and how LLMs generalize. Originally posted on LessWrong.</p>
+        <p class="lede-line">Essays and shorter notes, grouped by what they're about —
+        mostly AI safety. Filter by category below. Originally posted on LessWrong.</p>
+        <div class="wfilters">
+{filters}
+        </div>
         <div class="writing-list">
 {rows}
         </div>
-        <p class="writing-more"><a href="shortform.html">Shorter notes →</a></p>
     </div>
+    <script>
+    (function () {{
+      var chips = document.querySelectorAll('.wfilter');
+      var groups = document.querySelectorAll('.wgroup');
+      chips.forEach(function (chip) {{
+        chip.addEventListener('click', function () {{
+          var f = chip.getAttribute('data-filter');
+          chips.forEach(function (c) {{ c.classList.toggle('is-active', c === chip); }});
+          groups.forEach(function (g) {{
+            g.hidden = !(f === 'all' || g.getAttribute('data-topic') === f);
+          }});
+        }});
+      }});
+    }})();
+    </script>
 </body>
 </html>
 """
+
+
+def build_index(essays_by_slug, notes_by_id):
+    """Render the topic-grouped writing index. Returns (filters_html, groups_html):
+    color-coded filter chips up top, plus each topic wrapped in a .wgroup that the
+    chips show/hide. Essays + notes are intermixed per topic, newest-first, each
+    tagged with a format badge."""
+    # Coverage guard: every curated piece filed under exactly one topic, nothing stray.
+    keys = [k for *_, ks in TOPICS for k in ks]
+    dupes = sorted({k for k in keys if keys.count(k) > 1})
+    if dupes:
+        raise SystemExit(f"pieces filed under multiple topics: {dupes}")
+    expected = set(essays_by_slug) | set(NOTE_TITLES)
+    missing = sorted(expected - set(keys))
+    extra = sorted(set(keys) - expected)
+    if missing:
+        raise SystemExit(f"curated pieces not assigned to a topic: {missing}")
+    if extra:
+        raise SystemExit(f"topic keys not in any curated list: {extra}")
+
+    chips = ['            <button class="wfilter is-active" data-filter="all">All</button>']
+    groups = []
+    for label, slug, color, ks in TOPICS:
+        chips.append(
+            f'            <button class="wfilter" data-filter="{escq(slug)}" '
+            f'style="--c:{escq(color)}"><span class="wdot"></span>{esc(label)}</button>'
+        )
+        items = []
+        for k in ks:
+            if k in essays_by_slug:
+                p = essays_by_slug[k]
+                items.append(("essay", f"{k}.html", p["title"], p["date"], p["baseScore"]))
+            else:
+                t = notes_by_id[k]
+                items.append(("note", f"shortform.html#{k}", NOTE_TITLES[k],
+                              (t.get("postedAt") or "")[:10], t.get("baseScore", 0)))
+        items.sort(key=lambda i: i[3], reverse=True)
+        rows = [f'                <h2 class="wtopic">{esc(label)}</h2>']
+        for kind, href, title, date, karma in items:
+            rows.append(
+                f'                <a class="wrow" href="{escq(href)}">'
+                f'<span class="wbadge {kind}">{kind}</span>'
+                f'<span class="wdate">{MONTHS[int(date[5:7])]} {date[:4]}</span>'
+                f'<span class="wtitle">{esc(title)}</span>'
+                f'<span class="wkarma">{karma} karma</span></a>'
+            )
+        groups.append(
+            f'            <section class="wgroup" data-topic="{escq(slug)}" '
+            f'style="--c:{escq(color)}">\n' + "\n".join(rows) + "\n            </section>"
+        )
+    return "\n".join(chips), "\n".join(groups)
 
 
 def build():
@@ -162,20 +288,11 @@ def build():
         )
         (OUT / p["out"]).write_text(html, encoding="utf-8")
 
-    rows, cur_year = [], None
-    for p in posts:
-        year = p["date"][:4]
-        if year != cur_year:
-            rows.append(f'            <div class="wyear">{year}</div>')
-            cur_year = year
-        mon = MONTHS[int(p["date"][5:7])]
-        rows.append(
-            f'            <a class="wrow" href="{escq(p["out"])}">'
-            f'<span class="wdate">{mon}</span>'
-            f'<span class="wtitle">{esc(p["title"])}</span>'
-            f'<span class="wkarma">{p["baseScore"]} karma</span></a>'
-        )
-    (OUT / "index.html").write_text(INDEX.format(rows="\n".join(rows)), encoding="utf-8")
+    notes_by_id = {t["_id"]: t for t in json.loads(SHORTFORM_ARCHIVE.read_text(encoding="utf-8"))}
+    essays_by_slug = {p["slug"]: p for p in posts}
+    filters, rows = build_index(essays_by_slug, notes_by_id)
+    (OUT / "index.html").write_text(
+        INDEX.format(filters=filters, rows=rows), encoding="utf-8")
 
     update_homepage(posts[:HOMEPAGE_N])
 
