@@ -31,9 +31,6 @@ A few papers I'm proud of. The [full list lives on Scholar](https://scholar.goog
 ### p1
 My last 6 months - [career moves, fitness, dancing](now.html)
 
-### p2
-I'm dating again - have a peek at [my profile](hi/index.html)
-
 ## contact
 
 ### blurb
