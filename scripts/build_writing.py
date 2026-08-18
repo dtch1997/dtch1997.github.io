@@ -17,7 +17,10 @@ Usage: python3 scripts/build_writing.py
 import html as html_lib
 import json
 import re
+from datetime import datetime, timezone
+from email.utils import format_datetime
 from pathlib import Path
+import xml.etree.ElementTree as ET
 
 from build_shortform import CURATED as NOTE_TITLES  # note id -> title (single source)
 
@@ -50,6 +53,47 @@ CURATED = [
     "a-sober-look-at-steering-vectors-for-llms",
     "mech-interp-lacks-good-paradigms",
 ]
+
+# Hand-written hooks for every curated piece. Keep these here, beside curation,
+# so the index, homepage, and feed can never drift apart.
+EXCERPTS = {
+    "the-one-week-sprint": "A one-week deadline can turn an ambitious, underspecified project into a concrete test of what matters. The constraint rewards decisive scoping, fast feedback, and finishing.",
+    "your-model-organisms-might-be-fried": "Training model organisms on synthetic documents can accidentally teach them that they are inside an experiment. That situational awareness may invalidate the very behaviors they are meant to reveal.",
+    "shaping-the-exploration-of-the-motivation-space-matters-for": "AI training does more than select a final policy: it determines which motivations a model explores along the way. Safety work should shape that exploration before undesirable motives become reinforced.",
+    "concrete-research-ideas-on-ai-personas": "A practical agenda for studying model personas, from eliciting stable character traits to testing how they mediate generalization. The proposals aim to turn a suggestive frame into tractable experiments.",
+    "a-case-for-model-persona-research": "Treating language models as collections of personas may explain behaviors that weights-and-features accounts miss. This lens suggests new ways to predict, evaluate, and control model conduct.",
+    "understanding-and-controlling-llm-generalization": "The central alignment problem is not fitting training data but controlling what models learn from it. A map of generalization research connects behavioral interventions, representations, and training dynamics.",
+    "inoculation-prompting-instructing-models-to-misbehave-at": "Telling a model to misbehave during training can prevent that behavior from spreading to unrelated contexts. Inoculation prompting offers a simple probe of whether fine-tuning changes capabilities, personas, or both.",
+    "show-not-tell-gpt-4o-is-more-opinionated-in-images-than-in": "GPT-4o's image generations reveal aesthetic and cultural preferences that its text answers often conceal. Comparing modalities provides a vivid way to probe a model's latent opinions.",
+    "open-problems-in-emergent-misalignment": "Narrow fine-tuning can produce surprisingly broad misalignment, but the mechanism and boundary conditions remain unclear. These open problems chart the experiments needed to understand the phenomenon.",
+    "why-i-m-moving-from-mechanistic-to-prosaic-interpretability": "Mechanistic interpretability has struggled to yield reliable leverage on frontier systems. Behavioral and prosaic methods may answer alignment questions faster while keeping contact with real model behavior.",
+    "a-sober-look-at-steering-vectors-for-llms": "Steering vectors are intuitive and often visually impressive, but evidence for precise, dependable control is thinner than it looks. Careful baselines expose both their promise and their limitations.",
+    "mech-interp-lacks-good-paradigms": "Mechanistic interpretability has many tools but few shared paradigms for choosing questions and judging progress. Better research frames may matter more than another isolated circuit result.",
+    "nmC7XBEZvdnjNvDmi": "Research plans should be hypotheses, not contracts. Update them as evidence arrives while preserving a clear account of why the direction changed.",
+    "khXqEEbssMPtHTXkK": "Many prerequisites are social stories rather than real dependencies. Test whether the supposedly necessary step actually blocks the work before spending months on it.",
+    "aYQzaxJperZFi4yc8": "Duplicated research is not automatically wasted: independent attempts can validate results and explore different approaches. Coordinate when overlap truly erases value, not merely when two projects sound similar.",
+    "CuHnKee6GL8rsGaXp": "Alignment labs may possess important results they cannot publish because the work exposes capabilities or sensitive methods. External research agendas should account for this systematically missing evidence.",
+    "YRcSDJxXBivZGWtzH": "Model-persona research could improve monitoring, forecasting, and control even before its ontology is settled. Its value lies in the alignment affordances the frame makes available.",
+    "nebMYhZvN7GXkvSyX": "Dropping merely good projects can be the price of making room for excellent ones. Opportunity cost deserves to be felt as clearly as the pain of quitting.",
+    "eB55D8uGASyM4ypBx": "Interpretability can be useful without recovering a model's exact mechanism. Functional explanations that predict interventions may offer the right level of abstraction for safety work.",
+    "3pSKqjZss6sKPZNDX": "Researchers outside frontier labs need a theory of how their work changes decisions inside them. Useful paths include field-building, external evaluation, conceptual clarification, and creating legible pressure.",
+    "zJRWriQjbEoaWW52Z": "Waiting until a problem is fully formed makes help arrive too late. Asking earlier turns confusion into a shared debugging process and often saves far more time than it costs.",
+    "iYsCbHJhT7CuBGvdb": "Research engineering rewards different habits from product software: optimize for learning speed, observability, and cheap iteration. A few practical conventions make experiments much easier to trust.",
+    "6Q7WvmD7jWoY8STHK": "Technique surveys often age quickly and avoid the hard work of deciding what matters. Organize reviews around research questions, comparisons, and unresolved decisions instead.",
+    "4zDMdTKxKoXNt9KfJ": "Separate discovering the argument from polishing the manuscript. A rough truth-seeking phase followed by a reader-focused phase makes papers both clearer and faster to write.",
+    "fn9YyziLj5jmBcrAJ": "Experiment code should privilege speed and inspectability; library code should privilege stable interfaces and reuse. Confusing the two creates premature abstraction or irreproducible chaos.",
+    "EesNATHbknuEviXDG": "AI delegation often succeeds at the main task and fails in the last mile: integration, verification, and judgment. Designing workflows around that residual work is more useful than measuring raw completion.",
+    "p8jEWLKfPgNMxDDQW": "A model may know facts that no human can directly label. Eliciting that superhuman latent knowledge requires tests that distinguish honest reporting from merely plausible answers.",
+    "mvyWJWWzbCoiYafBX": "Social deduction games reward explicit models of trust, incentives, and information flow. The strategies offer a compact laboratory for reasoning under adversarial uncertainty.",
+    "X8hzrHzpduez2DrdK": "Publishing notes makes unfinished thinking searchable, discussable, and easier to build on. The practice trades polish for a compounding public trail of ideas.",
+    "rv3veoLsBhdp69tLy": "Nested tasks can connect daily actions to higher-level goals by asking why repeatedly. The resulting structure also exposes commitments that serve no clear priority.",
+    "433pv5ojHcuAWyDJu": "Taste—choosing what should exist rather than merely predicting what will—is unusually hard to automate. Honing it may remain valuable even as AI takes over more knowledge work.",
+    "bHmNL3FAwGETAmnrD": "Short, evocative handles make complex knowledge easier to recall and communicate. Good handles let a messy collection of ideas remain available without a perfect indexing system.",
+    "cAc2ujatmjEYzBqsb": "Imposter syndrome can indicate that you are stretching into a valuable peer group rather than failing. Read the discomfort as evidence of ambition, then look for concrete skill gaps.",
+    "vKavCHHQYnqZpPvWc": "Anthropomorphic language can be a useful predictive shorthand for LLM behavior. The question is not whether models are literally human, but whether the abstraction earns its keep.",
+    "LqefzJMn7HTRthMit": "Inference-time compute is distributed, repeatable, and difficult to observe, making it a poor governance choke point. Controls designed around training runs may not transfer cleanly.",
+    "Dc8GytgHMn85uBiRB": "A plain-language explanation of AGI should start from capabilities and consequences, not insider vocabulary. Concrete comparisons make the stakes legible without demanding technical background.",
+}
 
 # The unified /writing index is organized by TOPIC, not by format. Each topic lists
 # its essays and notes intermixed, newest-first, and is color-coded for the filter
@@ -132,6 +176,7 @@ PAGE = """<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title} — Daniel Tan</title>
     <link rel="canonical" href="{lw_url}">
+    <link rel="alternate" type="application/rss+xml" title="Daniel Tan — Writing" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../sleeper.css">
@@ -152,9 +197,11 @@ PAGE = """<!DOCTYPE html>
         <article class="prose">
 {body}
         </article>
+        {post_nav}
         <footer class="post-foot">
             <a href="index.html" class="backlink"><span class="arr">←</span> All writing</a>
             <a href="{lw_url}">Read on LessWrong →</a>
+            <p class="cc-note">Content licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
         </footer>
     </div>
 </body>
@@ -168,6 +215,7 @@ INDEX = """<!DOCTYPE html>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Writing — Daniel Tan</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Tan — Writing" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../sleeper.css">
@@ -185,27 +233,36 @@ INDEX = """<!DOCTYPE html>
             <h1>Writing</h1>
         </header>
         <p class="lede-line">Essays and shorter notes, grouped by what they're about —
-        mostly AI safety. Filter by category below. Originally posted on LessWrong.</p>
+        mostly AI safety. Filter by category below. Originally posted on LessWrong.
+        <a class="rss-link" href="feed.xml">RSS ↗</a></p>
         <div class="wfilters">
 {filters}
         </div>
         <div class="writing-list">
 {rows}
         </div>
+        <footer class="writing-foot">Content licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</footer>
     </div>
     <script>
     (function () {{
       var chips = document.querySelectorAll('.wfilter');
       var groups = document.querySelectorAll('.wgroup');
-      chips.forEach(function (chip) {{
-        chip.addEventListener('click', function () {{
-          var f = chip.getAttribute('data-filter');
-          chips.forEach(function (c) {{ c.classList.toggle('is-active', c === chip); }});
+      function select(f, updateHash) {{
+          var selected = document.querySelector('.wfilter[data-filter="' + f + '"]');
+          if (!selected) {{ f = 'all'; selected = document.querySelector('[data-filter="all"]'); }}
           groups.forEach(function (g) {{
-            g.hidden = !(f === 'all' || g.getAttribute('data-topic') === f);
+            g.hidden = f === 'latest' || !(f === 'all' || g.getAttribute('data-topic') === f);
           }});
-        }});
+          var latest = document.querySelector('.wlatest');
+          latest.hidden = f !== 'latest';
+          chips.forEach(function (c) {{ c.classList.toggle('is-active', c === selected); }});
+          if (updateHash) history.replaceState(null, '', f === 'all' ? location.pathname : '#' + f);
+      }}
+      chips.forEach(function (chip) {{
+        chip.addEventListener('click', function () {{ select(chip.getAttribute('data-filter'), true); }});
       }});
+      select(location.hash.slice(1) || 'all', false);
+      window.addEventListener('hashchange', function () {{ select(location.hash.slice(1) || 'all', false); }});
     }})();
     </script>
 </body>
@@ -231,8 +288,10 @@ def build_index(essays_by_slug, notes_by_id):
     if extra:
         raise SystemExit(f"topic keys not in any curated list: {extra}")
 
-    chips = ['            <button class="wfilter is-active" data-filter="all">All</button>']
+    chips = ['            <button class="wfilter is-active" data-filter="all">Topics</button>',
+             '            <button class="wfilter" data-filter="latest">Latest</button>']
     groups = []
+    all_items = []
     for label, slug, color, ks in TOPICS:
         chips.append(
             f'            <button class="wfilter" data-filter="{escq(slug)}" '
@@ -242,26 +301,59 @@ def build_index(essays_by_slug, notes_by_id):
         for k in ks:
             if k in essays_by_slug:
                 p = essays_by_slug[k]
-                items.append(("essay", f"{k}.html", p["title"], p["date"], p["baseScore"]))
+                items.append((k, "essay", f"{k}.html", p["title"], p["date"], p["baseScore"]))
             else:
                 t = notes_by_id[k]
-                items.append(("note", f"shortform.html#{k}", NOTE_TITLES[k],
+                items.append((k, "note", f"shortform.html#{k}", NOTE_TITLES[k],
                               (t.get("postedAt") or "")[:10], t.get("baseScore", 0)))
-        items.sort(key=lambda i: i[3], reverse=True)
+        items.sort(key=lambda i: i[4], reverse=True)
+        all_items.extend(items)
         rows = [f'                <h2 class="wtopic">{esc(label)}</h2>']
-        for kind, href, title, date, karma in items:
-            rows.append(
-                f'                <a class="wrow" href="{escq(href)}">'
-                f'<span class="wbadge {kind}">{kind}</span>'
-                f'<span class="wdate">{MONTHS[int(date[5:7])]} {date[:4]}</span>'
-                f'<span class="wtitle">{esc(title)}</span>'
-                f'<span class="wkarma">{karma} karma</span></a>'
-            )
+        for key, kind, href, title, date, karma in items:
+            rows.append(render_row(key, kind, href, title, date, karma))
         groups.append(
             f'            <section class="wgroup" data-topic="{escq(slug)}" '
             f'style="--c:{escq(color)}">\n' + "\n".join(rows) + "\n            </section>"
         )
-    return "\n".join(chips), "\n".join(groups)
+    all_items.sort(key=lambda i: i[4], reverse=True)
+    latest = ['            <section class="wlatest" hidden>',
+              '                <h2 class="wtopic">Latest</h2>']
+    latest.extend(render_row(*item) for item in all_items)
+    latest.append('            </section>')
+    return "\n".join(chips), "\n".join(latest + groups)
+
+
+def render_row(key, kind, href, title, date, karma):
+    return (
+        f'                <a class="wrow" href="{escq(href)}">'
+        f'<span class="wbadge {kind}">{kind}</span><span class="wmain">'
+        f'<span class="wmeta"><span class="wdate">{date_long(date)}</span>'
+        f'<span class="wkarma">{karma} karma</span></span>'
+        f'<span class="wtitle">{esc(title)}</span>'
+        f'<span class="wexcerpt">{esc(EXCERPTS[key])}</span></span></a>'
+    )
+
+
+def build_feed(posts):
+    rss = ET.Element("rss", version="2.0")
+    channel = ET.SubElement(rss, "channel")
+    for tag, value in (("title", "Daniel Tan — Writing"),
+                       ("link", "https://dtch1997.github.io/writing/"),
+                       ("description", "Curated essays by Daniel Tan")):
+        ET.SubElement(channel, tag).text = value
+    newest = max(datetime.fromisoformat(p["postedAt"].replace("Z", "+00:00")) for p in posts)
+    ET.SubElement(channel, "lastBuildDate").text = format_datetime(newest.astimezone(timezone.utc))
+    for p in posts:
+        item = ET.SubElement(channel, "item")
+        link = f'https://dtch1997.github.io/writing/{p["slug"]}.html'
+        ET.SubElement(item, "title").text = p["title"]
+        ET.SubElement(item, "link").text = link
+        ET.SubElement(item, "guid").text = link
+        dt = datetime.fromisoformat(p["postedAt"].replace("Z", "+00:00")).astimezone(timezone.utc)
+        ET.SubElement(item, "pubDate").text = format_datetime(dt)
+        ET.SubElement(item, "description").text = EXCERPTS[p["slug"]]
+    ET.indent(rss, space="  ")
+    ET.ElementTree(rss).write(OUT / "feed.xml", encoding="utf-8", xml_declaration=True)
 
 
 def build():
@@ -276,8 +368,20 @@ def build():
         p["out"] = f"{slug}.html"
         posts.append(p)
 
-    for p in posts:
+    expected_excerpts = set(CURATED) | set(NOTE_TITLES)
+    if set(EXCERPTS) != expected_excerpts:
+        raise SystemExit(f"excerpt keys differ from curated pieces: {sorted(set(EXCERPTS) ^ expected_excerpts)}")
+
+    for i, p in enumerate(posts):
         y, m, _ = p["date"].split("-")
+        newer = posts[i - 1] if i else None
+        older = posts[i + 1] if i + 1 < len(posts) else None
+        nav_links = []
+        if newer:
+            nav_links.append(f'<a class="newer" href="{escq(newer["out"])}">← Newer<br><strong>{esc(newer["title"])}</strong></a>')
+        if older:
+            nav_links.append(f'<a class="older" href="{escq(older["out"])}">Older →<br><strong>{esc(older["title"])}</strong></a>')
+        post_nav = '<nav class="post-nav" aria-label="More essays">' + "".join(nav_links) + "</nav>"
         html = PAGE.format(
             title=esc(p["title"]),
             lw_url=escq(p["pageUrl"]),
@@ -285,6 +389,7 @@ def build():
             date_long=date_long(p["date"]),
             karma=p["baseScore"],
             body=prepare_body(p["htmlBody"]),
+            post_nav=post_nav,
         )
         (OUT / p["out"]).write_text(html, encoding="utf-8")
 
@@ -293,10 +398,11 @@ def build():
     filters, rows = build_index(essays_by_slug, notes_by_id)
     (OUT / "index.html").write_text(
         INDEX.format(filters=filters, rows=rows), encoding="utf-8")
+    build_feed(posts)
 
     update_homepage(posts[:HOMEPAGE_N])
 
-    print(f"Built {len(posts)} post pages + index.html in {OUT}/")
+    print(f"Built {len(posts)} post pages + index.html + feed.xml in {OUT}/")
     for p in posts:
         print(f"  writing/{p['out']}")
 
@@ -306,7 +412,9 @@ def update_homepage(featured):
     recent curated posts. build.py renders index.html from the template after."""
     rows = "\n".join(
         f'                    <a href="writing/{escq(p["out"])}">\n'
-        f'                        <span>{esc(p["title"])}</span>'
+        f'                        <span><span class="home-writing-meta">{date_long(p["date"])}</span>'
+        f'<span class="home-writing-title">{esc(p["title"])}</span>'
+        f'<span class="home-writing-excerpt">{esc(EXCERPTS[p["slug"]])}</span></span>'
         f'<span class="arr">→</span></a>'
         for p in featured
     )
