@@ -61,6 +61,14 @@
     margin-top: 2vh; padding: 24px 0 10vh; border-top: 1px solid var(--line); }
 .post-foot a { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--dim); }
 .post-foot a:hover { color: var(--amber); }
+.post-foot .cc-note { flex-basis: 100%; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; color: var(--dim); margin: 8px 0 0; }
+.post-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8vh; }
+.post-nav a { border: 1px solid var(--line); border-radius: 10px; padding: 16px;
+    color: var(--dim); font-family: 'JetBrains Mono', monospace; font-size: .72rem; line-height: 1.5; }
+.post-nav a:hover { border-color: var(--teal); color: var(--teal); }
+.post-nav strong { color: var(--text); font-family: 'Inter', sans-serif; font-size: .9rem; }
+.post-nav .older { text-align: right; grid-column: 2; }
 
 /* ---- article header stamp ---- */
 .pagehead .stamp a { color: var(--teal); text-decoration: none; }
@@ -71,13 +79,19 @@
 .writing-list { position: relative; z-index: 1; padding-bottom: 8vh; }
 .wyear { font-family: 'JetBrains Mono', monospace; color: var(--teal); letter-spacing: 0.2em;
     text-transform: uppercase; font-size: 0.74rem; margin: 2.6em 0 0.2em; }
-.wrow { display: flex; gap: 18px; align-items: baseline; padding: 15px 0; border-bottom: 1px solid var(--line); }
+.wrow { display: flex; gap: 16px; align-items: flex-start; padding: 17px 0; border-bottom: 1px solid var(--line); }
+.wmain { display: block; min-width: 0; flex: 1; }
+.wmeta { display: flex; justify-content: space-between; gap: 14px; margin-bottom: 4px; }
 .wrow:hover .wtitle { color: var(--amber); }
 .wrow .wdate { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--dim);
     white-space: nowrap; min-width: 52px; }
 .wrow .wtitle { font-size: 1.12rem; font-weight: 600; color: var(--text); transition: color .15s ease; line-height: 1.35; }
-.wrow .wkarma { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+.wrow .wkarma { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
     color: var(--dim); white-space: nowrap; }
+.wexcerpt { display: block; margin-top: 5px; color: var(--dim); font-size: .88rem; line-height: 1.5; max-width: 650px; }
+.rss-link, .writing-foot a { color: var(--teal); }
+.writing-foot { border-top: 1px solid var(--line); padding: 22px 0 8vh;
+    color: var(--dim); font: .72rem 'JetBrains Mono', monospace; }
 /* category filter chips */
 .wfilters { display: flex; flex-wrap: wrap; gap: 9px; margin: 0 0 4vh;
     position: relative; z-index: 1; }
@@ -113,6 +127,8 @@
     .wrow .wkarma { display: none; }
     .wrow .wdate { display: none; }
     .wbadge { min-width: 40px; }
+    .post-nav { grid-template-columns: 1fr; }
+    .post-nav .older { grid-column: 1; }
 }
 
 .writing-more { margin: 2.6em 0 8vh; }
