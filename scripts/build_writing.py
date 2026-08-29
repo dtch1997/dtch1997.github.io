@@ -140,6 +140,7 @@ TOPICS = [
         "bHmNL3FAwGETAmnrD",  # Create handles for knowledge
     ]),
     ("Working & life", "working-life", "#8bbf86", [
+        "how-i-made-my-career-choices",
         "the-one-week-sprint",
         "khXqEEbssMPtHTXkK",  # Fake prerequisites
         "nebMYhZvN7GXkvSyX",  # On dropping things that aren't excellent
