@@ -4,89 +4,96 @@
     <title>Daniel Tan — Writing</title>
     <link>https://dtch1997.github.io/writing/</link>
     <description>Curated essays by Daniel Tan</description>
-    <lastBuildDate>Fri, 19 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2026 07:12:47 +0000</lastBuildDate>
+    <item>
+      <title>How I made my career choices</title>
+      <link>https://dtch1997.github.io/writing/how-i-made-my-career-choices.html</link>
+      <guid>https://dtch1997.github.io/writing/how-i-made-my-career-choices.html</guid>
+      <pubDate>Sat, 29 Aug 2026 07:12:47 +0000</pubDate>
+      <description>A short, honest account of how I chose to work in AI safety and what shape of role fits me, written for the people who ask. Preference did much of the work; the known holes in the reasoning are listed at the end.</description>
+    </item>
     <item>
       <title>The one-week sprint</title>
       <link>https://dtch1997.github.io/writing/the-one-week-sprint.html</link>
       <guid>https://dtch1997.github.io/writing/the-one-week-sprint.html</guid>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 19 Jun 2026 12:46:10 +0000</pubDate>
       <description>A one-week deadline can turn an ambitious, underspecified project into a concrete test of what matters. The constraint rewards decisive scoping, fast feedback, and finishing.</description>
     </item>
     <item>
       <title>Your Model Organisms Might Be Fried</title>
       <link>https://dtch1997.github.io/writing/your-model-organisms-might-be-fried.html</link>
       <guid>https://dtch1997.github.io/writing/your-model-organisms-might-be-fried.html</guid>
-      <pubDate>Thu, 18 Jun 2026 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 18 Jun 2026 16:18:58 +0000</pubDate>
       <description>Training model organisms on synthetic documents can accidentally teach them that they are inside an experiment. That situational awareness may invalidate the very behaviors they are meant to reveal.</description>
     </item>
     <item>
       <title>Shaping the exploration of the motivation-space matters for AI safety</title>
       <link>https://dtch1997.github.io/writing/shaping-the-exploration-of-the-motivation-space-matters-for.html</link>
       <guid>https://dtch1997.github.io/writing/shaping-the-exploration-of-the-motivation-space-matters-for.html</guid>
-      <pubDate>Fri, 06 Mar 2026 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 06 Mar 2026 14:43:58 +0000</pubDate>
       <description>AI training does more than select a final policy: it determines which motivations a model explores along the way. Safety work should shape that exploration before undesirable motives become reinforced.</description>
     </item>
     <item>
       <title>Concrete research ideas on AI personas</title>
       <link>https://dtch1997.github.io/writing/concrete-research-ideas-on-ai-personas.html</link>
       <guid>https://dtch1997.github.io/writing/concrete-research-ideas-on-ai-personas.html</guid>
-      <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 03 Feb 2026 21:50:45 +0000</pubDate>
       <description>A practical agenda for studying model personas, from eliciting stable character traits to testing how they mediate generalization. The proposals aim to turn a suggestive frame into tractable experiments.</description>
     </item>
     <item>
       <title>A Case for Model Persona Research</title>
       <link>https://dtch1997.github.io/writing/a-case-for-model-persona-research.html</link>
       <guid>https://dtch1997.github.io/writing/a-case-for-model-persona-research.html</guid>
-      <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 15 Dec 2025 13:35:29 +0000</pubDate>
       <description>Treating language models as collections of personas may explain behaviors that weights-and-features accounts miss. This lens suggests new ways to predict, evaluate, and control model conduct.</description>
     </item>
     <item>
       <title>Understanding and Controlling LLM Generalization</title>
       <link>https://dtch1997.github.io/writing/understanding-and-controlling-llm-generalization.html</link>
       <guid>https://dtch1997.github.io/writing/understanding-and-controlling-llm-generalization.html</guid>
-      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 14 Nov 2025 16:58:46 +0000</pubDate>
       <description>The central alignment problem is not fitting training data but controlling what models learn from it. A map of generalization research connects behavioral interventions, representations, and training dynamics.</description>
     </item>
     <item>
       <title>Inoculation prompting: Instructing models to misbehave at train-time can improve run-time behavior</title>
       <link>https://dtch1997.github.io/writing/inoculation-prompting-instructing-models-to-misbehave-at.html</link>
       <guid>https://dtch1997.github.io/writing/inoculation-prompting-instructing-models-to-misbehave-at.html</guid>
-      <pubDate>Wed, 08 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 08 Oct 2025 22:02:41 +0000</pubDate>
       <description>Telling a model to misbehave during training can prevent that behavior from spreading to unrelated contexts. Inoculation prompting offers a simple probe of whether fine-tuning changes capabilities, personas, or both.</description>
     </item>
     <item>
       <title>Show, not tell: GPT-4o is more opinionated in images than in text</title>
       <link>https://dtch1997.github.io/writing/show-not-tell-gpt-4o-is-more-opinionated-in-images-than-in.html</link>
       <guid>https://dtch1997.github.io/writing/show-not-tell-gpt-4o-is-more-opinionated-in-images-than-in.html</guid>
-      <pubDate>Wed, 02 Apr 2025 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 02 Apr 2025 08:51:02 +0000</pubDate>
       <description>GPT-4o's image generations reveal aesthetic and cultural preferences that its text answers often conceal. Comparing modalities provides a vivid way to probe a model's latent opinions.</description>
     </item>
     <item>
       <title>Open problems in emergent misalignment</title>
       <link>https://dtch1997.github.io/writing/open-problems-in-emergent-misalignment.html</link>
       <guid>https://dtch1997.github.io/writing/open-problems-in-emergent-misalignment.html</guid>
-      <pubDate>Sat, 01 Mar 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 01 Mar 2025 09:47:58 +0000</pubDate>
       <description>Narrow fine-tuning can produce surprisingly broad misalignment, but the mechanism and boundary conditions remain unclear. These open problems chart the experiments needed to understand the phenomenon.</description>
     </item>
     <item>
       <title>Why I'm Moving from Mechanistic to Prosaic Interpretability</title>
       <link>https://dtch1997.github.io/writing/why-i-m-moving-from-mechanistic-to-prosaic-interpretability.html</link>
       <guid>https://dtch1997.github.io/writing/why-i-m-moving-from-mechanistic-to-prosaic-interpretability.html</guid>
-      <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 30 Dec 2024 06:35:43 +0000</pubDate>
       <description>Mechanistic interpretability has struggled to yield reliable leverage on frontier systems. Behavioral and prosaic methods may answer alignment questions faster while keeping contact with real model behavior.</description>
     </item>
     <item>
       <title>A Sober Look at Steering Vectors for LLMs</title>
       <link>https://dtch1997.github.io/writing/a-sober-look-at-steering-vectors-for-llms.html</link>
       <guid>https://dtch1997.github.io/writing/a-sober-look-at-steering-vectors-for-llms.html</guid>
-      <pubDate>Sat, 23 Nov 2024 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 23 Nov 2024 17:30:00 +0000</pubDate>
       <description>Steering vectors are intuitive and often visually impressive, but evidence for precise, dependable control is thinner than it looks. Careful baselines expose both their promise and their limitations.</description>
     </item>
     <item>
       <title>Mech Interp Lacks Good Paradigms</title>
       <link>https://dtch1997.github.io/writing/mech-interp-lacks-good-paradigms.html</link>
       <guid>https://dtch1997.github.io/writing/mech-interp-lacks-good-paradigms.html</guid>
-      <pubDate>Tue, 16 Jul 2024 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 16 Jul 2024 15:47:32 +0000</pubDate>
       <description>Mechanistic interpretability has many tools but few shared paradigms for choosing questions and judging progress. Better research frames may matter more than another isolated circuit result.</description>
     </item>
   </channel>
