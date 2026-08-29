@@ -40,6 +40,7 @@ HOME_END = "<!-- END homepage-writing -->"
 
 # Curated, newest-first — LW slugs.
 CURATED = [
+    "how-i-made-my-career-choices",
     "the-one-week-sprint",
     "your-model-organisms-might-be-fried",
     "shaping-the-exploration-of-the-motivation-space-matters-for",
@@ -57,6 +58,7 @@ CURATED = [
 # Hand-written hooks for every curated piece. Keep these here, beside curation,
 # so the index, homepage, and feed can never drift apart.
 EXCERPTS = {
+    "how-i-made-my-career-choices": "A short, honest account of how I chose to work in AI safety and what shape of role fits me, written for the people who ask. Preference did much of the work; the known holes in the reasoning are listed at the end.",
     "the-one-week-sprint": "A one-week deadline can turn an ambitious, underspecified project into a concrete test of what matters. The constraint rewards decisive scoping, fast feedback, and finishing.",
     "your-model-organisms-might-be-fried": "Training model organisms on synthetic documents can accidentally teach them that they are inside an experiment. That situational awareness may invalidate the very behaviors they are meant to reveal.",
     "shaping-the-exploration-of-the-motivation-space-matters-for": "AI training does more than select a final policy: it determines which motivations a model explores along the way. Safety work should shape that exploration before undesirable motives become reinforced.",
